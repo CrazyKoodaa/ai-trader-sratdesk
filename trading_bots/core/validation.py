@@ -59,6 +59,31 @@ def _param_combinations(param_grid: dict) -> list[dict]:
     return [dict(zip(keys, combo)) for combo in itertools.product(*(param_grid[k] for k in keys))]
 
 
+def _select_best_params(combos: list[dict], pfs: list[float], selection: str) -> tuple[dict, float]:
+    """Waehlt die IS-Parameter fuer einen Fold. ``selection="pf"`` (Default,
+    rueckwaertskompatibel): reines Arg-Max ueber die IS-PF-Spalte.
+    ``selection="plateau"``: ``plateau_select`` (SPEC §4.9, "Plateau-Selektion
+    statt Max-PF") -- bevorzugt eine Zelle mit stabiler Nachbarschaft
+    (>=60% Nachbarzellen mit positiver Metrik) vor dem globalen Maximum,
+    um Overfitting auf eine einzelne rauschende IS-Spitze zu vermeiden
+    (die PBO/CSCV explizit bestraft). Faellt bei <2 Kombos oder <2 endlichen
+    PFs auf reines Max-PF zurueck (plateau_select braucht >=2 Zeilen)."""
+    if selection == "plateau" and len(combos) >= 2:
+        finite = [(c, p) for c, p in zip(combos, pfs) if np.isfinite(p)]
+        if len(finite) >= 2:
+            df = pd.DataFrame([c for c, _ in finite])
+            df["metric"] = [p for _, p in finite]
+            res = plateau_select(df)
+            return dict(res["selected"]), float(res["metric"])
+    best_params, best_pf = None, -np.inf
+    for params, pf in zip(combos, pfs):
+        if np.isfinite(pf) and pf > best_pf:
+            best_pf, best_params = pf, params
+        elif best_params is None:
+            best_params, best_pf = params, pf
+    return best_params, best_pf
+
+
 def _expand_dotted(params: dict) -> dict:
     """'vp_filter.enabled' -> {'vp_filter': {'enabled': ...}} (verschachtelt).
 
@@ -138,7 +163,9 @@ def walk_forward(
     """Walk-Forward-Analyse: rolling (Default) oder anchored Fenster.
 
     ``data``: {tf: OHLCV-DataFrame}. ``cfg`` dient als Template; start/end
-    werden je Fold gesetzt. Selektion im IS: max Profit Factor (Default).
+    werden je Fold gesetzt. Selektion im IS: ``selection="pf"`` (Default,
+    rueckwaertskompatibel) = max Profit Factor; ``selection="plateau"`` =
+    ``plateau_select`` (SPEC §4.9) -- s. ``_select_best_params``.
     ``workers`` > 1 parallelisiert den IS-Grid-Search ueber Prozesse
     (fork; Ergebnis identisch zur sequenziellen Ausfuehrung).
 
@@ -183,12 +210,7 @@ def walk_forward(
                 strat = strategy_cls(_expand_dotted({**base_params, **params}))
                 fold_cfg = BacktestConfig(**{**cfg.__dict__, "start": is_start, "end": is_end})
                 pfs.append(Backtester(strat, fold_cfg, data).run().metrics["pf"])
-        best_params, best_pf = None, -np.inf
-        for params, pf in zip(combos, pfs):
-            if np.isfinite(pf) and pf > best_pf:
-                best_pf, best_params = pf, params
-            elif best_params is None:
-                best_params, best_pf = params, pf
+        best_params, best_pf = _select_best_params(combos, pfs, selection)
         log.info("Fold %d: IS fertig (%.0fs), best PF=%.3f params=%s",
                  k, time.monotonic() - t0, best_pf, best_params)
 

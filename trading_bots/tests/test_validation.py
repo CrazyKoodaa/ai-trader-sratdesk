@@ -184,6 +184,41 @@ class TestPropSimulation:
 # ---------------------------------------------------------------------------
 # Plateau-Selektion
 # ---------------------------------------------------------------------------
+class TestSelectBestParams:
+    """``walk_forward``'s Fold-Selektor (``selection="pf"|"plateau"``,
+    SPEC §4.9 "Plateau-Selektion statt Max-PF"). Nutzt dieselbe Spitze/
+    Plateau-Konstellation wie TestPlateauSelect, aber ueber die
+    combos/pfs-Schnittstelle, wie walk_forward sie tatsaechlich aufruft."""
+
+    def _combos_pfs(self):
+        metrics = {
+            (1, 1): 9.0, (1, 2): -1.0, (1, 3): -1.0,
+            (2, 1): 0.5, (2, 2): 2.0, (2, 3): 1.8,
+            (3, 1): -1.0, (3, 2): 1.5, (3, 3): 1.2,
+        }
+        combos = [{"a": a, "b": b} for (a, b) in metrics]
+        pfs = list(metrics.values())
+        return combos, pfs
+
+    def test_pf_selection_picks_global_max(self):
+        combos, pfs = self._combos_pfs()
+        params, pf = validation_module._select_best_params(combos, pfs, "pf")
+        assert params == {"a": 1, "b": 1}
+        assert pf == pytest.approx(9.0)
+
+    def test_plateau_selection_avoids_spike(self):
+        combos, pfs = self._combos_pfs()
+        params, pf = validation_module._select_best_params(combos, pfs, "plateau")
+        assert params == {"a": 2, "b": 2}
+        assert pf == pytest.approx(2.0)
+
+    def test_plateau_falls_back_to_pf_for_single_combo(self):
+        params, pf = validation_module._select_best_params(
+            [{"a": 1}], [3.0], "plateau")
+        assert params == {"a": 1}
+        assert pf == pytest.approx(3.0)
+
+
 class TestPlateauSelect:
     def _grid(self):
         # 2D-Grid a x b; Plateau um (2,2)/(2,3)/(3,2)/(3,3) mit positiven

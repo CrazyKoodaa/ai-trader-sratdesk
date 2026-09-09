@@ -115,7 +115,7 @@ def run_wfa(config_path: str | Path, symbol: str, data_dir: str | Path,
     wfo = cfg.get("wfo") or {}
     # Drei Config-Varianten akzeptieren (rueckwaertskompatibel):
     # a) wfo.param_space (S3/S4), b) wfo_space (S5), c) Listen direkt in wfo (S1/S2)
-    reserved = {"is_months", "oos_months", "anchored"}
+    reserved = {"is_months", "oos_months", "anchored", "selection"}
     param_grid = (wfo.get("param_space") or cfg.get("wfo_space")
                   or {k: v for k, v in wfo.items()
                       if isinstance(v, list) and k not in reserved})
@@ -139,6 +139,7 @@ def run_wfa(config_path: str | Path, symbol: str, data_dir: str | Path,
         is_months=int(wfo.get("is_months", 24)),
         oos_months=int(wfo.get("oos_months", 6)),
         anchored=bool(wfo.get("anchored", False)),
+        selection=str(wfo.get("selection", "pf")),
         workers=workers,
         base_params=cfg.get("params") or {},
     )
