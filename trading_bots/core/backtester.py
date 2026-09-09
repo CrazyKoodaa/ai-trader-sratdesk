@@ -250,6 +250,7 @@ class Backtester:
         lots = self.risk.calc_lots(
             balance, fill, sl, self.config.point_value,
             self.config.volume_step, self.config.volume_min, self.config.volume_max,
+            signal_risk_pct=risk_pct,
         )
         risk_money = abs(fill - sl) * lots * self.config.point_value * self.config.account_ccy_rate
         if lots <= 0 or risk_money <= 0:

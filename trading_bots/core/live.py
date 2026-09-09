@@ -402,6 +402,7 @@ class LiveRunner:
             point_value=point_value,
             volume_step=spec["volume_step"], volume_min=spec["volume_min"],
             volume_max=spec["volume_max"],
+            signal_risk_pct=signal.risk_pct,
         )
         if signal.entry_type == "limit" and signal.entry_price is not None:
             result = self.connector.send_limit(symbol, signal.direction, lots,

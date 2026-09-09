@@ -346,8 +346,23 @@ class RiskManager:
         volume_step: float = 0.01,
         volume_min: float = 0.01,
         volume_max: float = 100.0,
+        signal_risk_pct: float | None = None,
     ) -> float:
-        risk_amount = balance * self.config.risk_per_trade_pct / 100.0
+        """``signal_risk_pct`` (optional): das strategie-/signal-seitige
+        ``Signal.risk_pct`` (Fraktion, z.B. 0.005 = 0.5 %). Vorher wurde
+        dieser Wert an allen Aufrufstellen (core/backtester.py,
+        core/live.py) entgegengenommen, aber NIE hierher durchgereicht --
+        Sizing lief faktisch immer nur ueber ``self.config.risk_per_trade_pct``
+        (Account-/Config-Ebene), egal was eine Strategie in ihrem Signal
+        anforderte. Wenn gesetzt, wird das MINIMUM aus Signal-Anforderung
+        und Config-Obergrenze verwendet -- eine Strategie kann also gezielt
+        WENIGER Risiko pro Trade anfordern (z. B. S21, das bewusst mehrere
+        Positionen gleichzeitig haelt und daher pro Trade weniger riskieren
+        will), aber nie mehr als die Account-/Prop-Policy (config) erlaubt.
+        ``None`` (Default) erhaelt das alte Verhalten exakt (nur Config)."""
+        risk_pct_cap = self.config.risk_per_trade_pct / 100.0
+        risk_pct = min(signal_risk_pct, risk_pct_cap) if signal_risk_pct else risk_pct_cap
+        risk_amount = balance * risk_pct
         sl_points = abs(entry_price - stop_loss)
         return calc_lots(risk_amount, sl_points, point_value, volume_step, volume_min, volume_max)
 

@@ -47,6 +47,43 @@ class TestCalcLots:
         lots = rm.calc_lots(10_000, entry_price=100.0, stop_loss=75.0, point_value=2.0)
         assert lots == 1.0
 
+    def test_manager_sizing_ignores_signal_risk_pct_when_omitted(self):
+        """Rueckwaertskompatibilitaet: ohne signal_risk_pct exakt das alte
+        Verhalten (nur config.risk_per_trade_pct zaehlt)."""
+        rm = RiskManager(RiskConfig(risk_per_trade_pct=0.5), initial_balance=10_000)
+        lots = rm.calc_lots(10_000, entry_price=100.0, stop_loss=75.0, point_value=2.0,
+                            signal_risk_pct=None)
+        assert lots == 1.0
+
+    def test_manager_sizing_signal_risk_pct_below_cap_wins(self):
+        """Strategie fordert WENIGER Risiko an als die Config-Obergrenze
+        (z. B. S21, das bewusst mehrere Positionen gleichzeitig haelt) ->
+        das niedrigere Signal-Risiko gilt, nicht die Config-Obergrenze."""
+        rm = RiskManager(RiskConfig(risk_per_trade_pct=0.5), initial_balance=10_000)
+        # signal will nur 0.25% statt der 0.5%-Obergrenze:
+        # risk_amount = 10_000*0.0025=25; 25/(25*2) = 0.5 (statt 1.0 bei 0.5%)
+        lots = rm.calc_lots(10_000, entry_price=100.0, stop_loss=75.0, point_value=2.0,
+                            signal_risk_pct=0.0025)
+        assert lots == pytest.approx(0.5)
+
+    def test_manager_sizing_signal_risk_pct_above_cap_is_clamped(self):
+        """Ein Signal darf die Config-Obergrenze NIE ueberschreiten (Account-/
+        Prop-Policy hat Vorrang) -- min(signal, config), nicht das Signal
+        direkt uebernehmen."""
+        rm = RiskManager(RiskConfig(risk_per_trade_pct=0.5), initial_balance=10_000)
+        lots = rm.calc_lots(10_000, entry_price=100.0, stop_loss=75.0, point_value=2.0,
+                            signal_risk_pct=5.0)  # absurd hoch angefordert
+        assert lots == 1.0  # bleibt bei der 0.5%-Config-Obergrenze
+
+    def test_manager_sizing_zero_signal_risk_pct_falls_back_to_cap(self):
+        """signal_risk_pct=0.0 (z.B. nicht gesetztes Signal-Feld, Default 0.0)
+        darf nicht zu lots=0 fuehren -- faellt auf die Config-Obergrenze
+        zurueck statt versehentlich alle Trades zu nullen."""
+        rm = RiskManager(RiskConfig(risk_per_trade_pct=0.5), initial_balance=10_000)
+        lots = rm.calc_lots(10_000, entry_price=100.0, stop_loss=75.0, point_value=2.0,
+                            signal_risk_pct=0.0)
+        assert lots == 1.0
+
 
 # ---------------------------------------------------------------------------
 # Prop-Profile (YAML)
