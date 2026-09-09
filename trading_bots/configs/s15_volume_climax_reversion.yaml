@@ -1,0 +1,40 @@
+# S15 — Volumen-Klimax-Erschoepfungs-Reversal (XAUUSD, "3. Weg", Variante B)
+# Order-Flow-Muster: Volumen-Klimax-Bar + ueberdurchschnittliche Range +
+# Schluss am Extrem gegen das juengste Momentum -> Reversal-Wette. Erste
+# Strategie in diesem Projekt, die Volumen als PRIMAERE Eintritts-
+# Bedingung nutzt (nicht nur VWAP-Gewichtung). Siehe strategies/s15_*.py.
+strategy: s15_volume_climax_reversion
+symbols:
+  - XAUUSD
+timeframes: [H4]
+
+risk:
+  risk_per_trade_pct: 0.5
+  daily_loss_halt_pct: 0.0
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+params:
+  primary_tf: H4
+  atr_len: 14
+  vol_len: 20
+  vol_mult: 2.0
+  range_mult: 1.8
+  mom_len: 5
+  close_extreme_frac: 0.30
+  sl_atr_mult: 1.5
+  trail_atr_mult: 2.5
+  min_rr: 2.0
+  risk_pct: 0.005
+
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    vol_mult: [1.5, 2.0, 2.5]
+    range_mult: [1.4, 1.8, 2.2]
+    sl_atr_mult: [1.25, 1.5, 2.0]
+    trail_atr_mult: [2.0, 3.0]

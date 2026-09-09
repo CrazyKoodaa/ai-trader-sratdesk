@@ -1,0 +1,62 @@
+# S17b — David V2 (XAUUSD H4/D1), LIVE-Config — s. configs/
+# s17_david_v2_trend_pullback.yaml fuer die WFA-Herleitung (nur XAUUSD
+# positiv in der Triage, PF=1.147 bei n=149 — kleine Stichprobe, volle
+# WFA-Gate-Tabelle s. reports/wfa_s17_david_v2_xauusd.log).
+#
+# Zweck: David V2 komplett von /home/crazyneo/Desktop/tagebuch/
+# David-V2-Ben/ geloest, laueft ab hier vollstaendig ueber core/live.py
+# wie jede andere Strategie dieses Projekts (Start/Stop/Diagnose/Gates
+# im Dashboard, keine externe bot.py mehr fuer diesen Markt noetig).
+strategy: s17_david_v2_trend_pullback
+symbols:
+  - XAUUSD
+timeframes: [H4, D1]
+
+risk:
+  risk_per_trade_pct: 0.25       # reduziert -- kleine Stichprobe (n=149), Gates noch offen
+  daily_loss_halt_pct: 0.0
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+params:
+  primary_tf: H4
+  higher_tf: D1
+  trend_len: 200
+  rsi_len: 14
+  rsi_oversold: 40.0
+  trend_buffer_atr: 0.30
+  atr_len: 14
+  atr_stop_mult: 1.5
+  rr_ratio: 2.0
+  adx_filter: true
+  adx_len: 14
+  adx_min: 15.0
+  mtf_confirm: true
+  mtf_trend_len: 50
+  atr_vol_filter: true
+  atr_vol_lookback: 100
+  atr_vol_min_percentile: 0.10
+  risk_pct: 0.0025
+
+# --- Live (pymt5linux) ---
+# Registry: ... S8=20260913 S10=20260910 S21b=20260911 S4-XAU=20260912
+#           S17-David-V2=20260914 (neu)
+# Bruecke: WINEPREFIX=~/.mt5 wine "C:\Python313\python.exe" -m pymt5linux
+#          --host localhost --port 8001 "C:\Python313\python.exe" (siehe AGENTS.md)
+live:
+  host: localhost
+  port: 8001
+  magic: 20260914
+  poll_seconds: 30              # H4-Strategie, kein Grund fuer straffer
+  health_interval_seconds: 45
+  heartbeat_seconds: 1800
+  history_bars: 800             # > trend_len*2=400 + Puffer
+  logs_dir: logs
+  deviation: 20
+  flatten_on_stop: false
+  # SICHERHEITSSCHALTER: der Bot verweigert den Start auf einem Echtgeldkonto,
+  # solange dies nicht explizit auf true gesetzt wird (core/live.py: _enforce_account_safety).
+  allow_real_account: false

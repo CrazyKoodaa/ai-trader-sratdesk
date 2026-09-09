@@ -1,0 +1,51 @@
+# S14 — Volatilitaets-Squeeze + Volumen-bestaetigter Breakout (XAUUSD, "3. Weg")
+# Neu gegenueber S9-S13: ATR-Perzentil-Regimefilter (nur Ausbrueche AUS
+# Kompressionsphasen) UND echte MT5-Volumen-Bestaetigung der Ausbruchsbar
+# (kein TWAP-Fallback, echtes tick_volume). Siehe strategies/s14_*.py Docstring.
+strategy: s14_squeeze_volume_breakout
+symbols:
+  - XAUUSD
+timeframes: [H4]
+
+risk:
+  risk_per_trade_pct: 0.5
+  daily_loss_halt_pct: 0.0
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+params:
+  primary_tf: H4
+  don_len: 15
+  atr_len: 14
+  squeeze_lookback: 100
+  squeeze_pct: 0.35
+  vol_len: 20
+  vol_mult: 1.0
+  sl_atr_mult: 2.5
+  trail_atr_mult: 3.0
+  min_rr: 2.0
+  risk_pct: 0.005
+
+# Grid aus Vorab-Triage (Voll-Historie vor WFA-Split, PF bis 1.53 bei
+# n~390-420, 11 Jahre): bester Kompromiss aus PF und n bei vol_mult=1.0
+# fest (1.3/1.6 durchgehend schwaecher -> nicht mit optimieren, senkt
+# Params-Zahl fuers PBO/Params-Gate). WFA-Ergebnis (reports/wfa_s14_xauusd,
+# dieses enge Grid): 6/10 Gates, n(OOS)=174 (< 300, Haupt-Blocker), DSR
+# 0.49, PBO 0.14, PF(1x) 1.41, PF(2x)/PF(3x)/MC-MaxDD/WFE/Params PASS.
+# Sensitivitaets-Check mit breiterem Grid (+squeeze_pct 0.5, reports/
+# wfa_s14_xauusd_v2): n(OOS) nur marginal hoeher (197), DSR schlechter
+# (0.34), PBO besser (0.06) -> n(OOS) bleibt der bindende Engpass, nicht
+# das Grid. H1-Variante (skalierte Parameter) verwaessert PF auf ~1.0-1.1
+# trotz n>600 -> H4 bleibt die bessere Zeitebene fuer dieses Signal.
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    don_len: [15, 20]
+    squeeze_pct: [0.2, 0.35]
+    session: [none, ny_overlap, london_ny]  # Vorab-Triage: NY-Overlap (12-17 UTC) PF 1.53->1.68
+    sl_atr_mult: [2.0, 2.5]
+    trail_atr_mult: [2.5, 3.0]

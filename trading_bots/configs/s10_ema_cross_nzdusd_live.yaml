@@ -1,0 +1,62 @@
+# S10 — EMA-Cross-Trendfolge — LIVE-TEST-Config (NZDUSD, H4)
+#
+# Bestes Einzelergebnis aus der breiten Trendfolge-Suche (S9-S13, 21 Symbole,
+# siehe reports/wfa_s10_nzdusd_live.log): 7 von 10 Gates bestanden (PF 1.45
+# OOS, PF 1.36/1.27 bei 2x/3x-Kostenstress, PBO 0.0, WFE 0.80). NICHT alle
+# Gates bestanden (n(OOS)=213 < 300, PF(1x) 1.45 < 1.5, DSR 0.435 < 0.95) —
+# das ist bewusst ein LIVE-DEMO-TEST zur Beobachtung, keine volle Freigabe.
+# Risiko deshalb auf 0.25% statt der sonst ueblichen 0.5% reduziert.
+#
+# Parameter = Fold 16 (juengster, aktuellster IS-Fit: 2024-02..2026-02),
+# IS-PF 2.14 -> OOS-PF 1.70 — Standard-Praxis bei WFA-basiertem Live-Deploy:
+# die zuletzt gewaehlten Best-Params nehmen, nicht global über alle Folds
+# gemittelt.
+strategy: s10_ema_cross_trend
+symbols:
+  - NZDUSD
+timeframes: [H4]
+
+risk:
+  risk_per_trade_pct: 0.25       # reduziert fuer Testbetrieb (Gates nicht vollstaendig bestanden)
+  daily_loss_halt_pct: 0.0       # kein Daily-Halt - Trendfolge haelt bewusst ueber Tage
+  eod_flat: false                # KEIN EOD-Flat - Positionen laufen ueber Tage/Wochen
+  friday_flat: false
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+costs:
+  NZDUSD:
+    spread_points: 16            # wie configs/common.yaml
+    commission_per_lot_rt: 0.0
+    slippage_multiplier: 1.0
+
+params:
+  primary_tf: H4
+  ema_fast: 10
+  ema_slow: 40
+  atr_len: 14
+  sl_atr_mult: 2.5
+  trail_atr_mult: 4.0
+  min_rr: 2.0                    # Mindest-RR 1:2, danach Move-to-Trail (core/backtester.py)
+  risk_pct: 0.0025               # 0.25% (siehe risk.risk_per_trade_pct oben)
+
+# --- Live (pymt5linux) ---
+# Registry: S1=20260901 S2=20260902 S3=20260903 S4=20260904 S5=20260905
+#           S4-XAU=20260906 S8=20260907 S10-NZDUSD=20260910 (neu)
+# Bruecke: WINEPREFIX=~/.mt5 wine "C:\Python313\python.exe" -m pymt5linux
+#          --host localhost --port 8001 "C:\Python313\python.exe" (siehe AGENTS.md)
+live:
+  host: localhost
+  port: 8001
+  magic: 20260910
+  poll_seconds: 30                # H4-Strategie, kein Grund fuer straffer
+  health_interval_seconds: 45
+  heartbeat_seconds: 1800          # 30 Min, "Bot laeuft"-Zeile im Traderbook-Log
+  history_bars: 500                # > ema_slow*3=120 + Puffer
+  logs_dir: logs
+  deviation: 20
+  flatten_on_stop: false           # SIGINT/SIGTERM schliesst NICHT automatisch (SL/Trail bleiben serverseitig aktiv)
+  # SICHERHEITSSCHALTER: der Bot verweigert den Start auf einem Echtgeldkonto,
+  # solange dies nicht explizit auf true gesetzt wird (core/live.py: _enforce_account_safety).
+  allow_real_account: false

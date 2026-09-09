@@ -1,0 +1,109 @@
+# S4 — LondonBreakout (XAUUSD, H1) — Variante von s4_london_breakout.yaml (USDJPY)
+# NICHT VALIDIERT: WFO-Parameter unten sind erstmal auf Gold-Preisskala umgerechnet,
+# nicht auf XAUUSD optimiert (Original-Defaults stammen aus SPEC §5/S4 fuer USDJPY).
+# Vor Live-Einsatz: run_wfa.py laufen lassen und OOS-Kennzahlen pruefen (siehe S6 =
+# Praezedenzfall fuer "durch WFA verworfen").
+strategy: s4_london_breakout
+symbols:
+  - XAUUSD
+timeframes: [H1, H4, D1, M5]
+# Intrabar-Aufloesung: Retest-Limit-Fills + SL/TP werden ueber M5 chronologisch
+# aufgeloest statt bei Limit+SL-Kollision in der groben H1-Bar zu raten
+# (core/backtester.py). Grund: enge retest_sl_pips relativ zu XAUUSDs H1-Bar-
+# Volatilitaet fuehrten zu PF=inf-Artefakten im ersten WFA-Lauf (Kollisionen
+# wurden verworfen statt als Verlust gezaehlt) — s. reports/wfa_s4_xau_full.log.
+intrabar: m5
+
+# Risiko (SPEC §0/§4.3: 0.5 % pro Trade) — identisch zur USDJPY-Variante
+risk:
+  risk_per_trade_pct: 0.5
+  min_rr: 1.5                   # TP 1.5R–2R (Param tp_r)
+  daily_loss_halt_pct: 1.5
+  eod_flat: true                # EOD-Flat 21:00 UTC (Fix vs. Trade-Desk)
+  eod_flat_time_utc: "21:00"
+  friday_flat: true
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+# Kostenmodell (SPEC §1: immer aktiv) — Werte wie S1/S3/S5 (configs/common.yaml)
+costs:
+  XAUUSD:
+    spread_points: 35            # ~0.35 USD, wie S1/S3/S5
+    commission_per_lot_rt: 0.0
+    slippage_multiplier: 1.0
+
+# Strategie-Parameter — auf Gold-Preisskala umgerechnet (Faktor point->pip x10,
+# analog USDJPY point=0.001 -> pip_size=0.01). XAUUSD point=0.01 -> pip_size=0.1.
+# range_min_pips/retest_sl_pips sind daher NICHT 1:1 von USDJPY uebernehmbar und
+# unten im wfo.param_space bewusst breiter angesetzt statt nur uebernommen.
+params:
+  range_start: "00:00"          # Range 00:00–06:59 UTC (H1)
+  range_end: "07:00"            # exklusiv
+  entry_start: "07:00"          # Entry-Fenster 07:00–16:59 UTC
+  entry_end: "17:00"            # exklusiv
+  require_full_range: true
+  eod_flat_utc: "21:00"
+  tp_r: 2.0                     # TP 1.5R–2R (WFO) — R-Multiple ist skalenunabhaengig
+  entry_mode: close             # close | retest (Archetyp B: Limit an Range-Grenze)
+  retest_sl_pips: 30            # 30 x 0.1 = 3.0 USD Puffer (Startwert, s. wfo.param_space)
+  retest_expiry_bars: 6
+  pip_size: 0.1                 # XAUUSD (point 0.01 x10, s.o.)
+  # Filter-Layer (einzeln schaltbar, SPEC §5/S4)
+  atr_filter: on                # (a) ATR14(D1) > 20d-Median
+  atr_len: 14
+  atr_med_len: 20
+  ema_filter: on                # (b) H4-EMA200-Alignment
+  ema_len: 200
+  range_band: on                # (c) range_min_pips <= Range <= range_max_adr x ADR20
+  range_min_pips: 30            # 30 x 0.1 = 3.0 USD Mindest-Range (Startwert)
+  range_max_adr: 0.5            # Verhaeltnis zu ADR20 — skalenunabhaengig, unveraendert
+  adr_len: 20
+  skip_monday: on               # (d) Skip Montag (UTC)
+  risk_pct: 0.005
+
+# Meta-Layer (SPEC §6)
+meta_layer:
+  news_filter: on               # (e) Pflicht-Default on
+  regime_filter: off
+  cot_bias: off                 # nur Forex — fuer XAUUSD ohne Wirkung
+
+# WFO-Raeume — range_min_pips/retest_sl_pips bewusst breiter als USDJPY-Config,
+# da pip_size(XAUUSD)=0.1 nicht dieselbe Marktmikrostruktur wie pip_size(USDJPY)=0.01
+# abbildet und die Werte hier erstmalig fuer Gold kalibriert werden.
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    tp_r: [1.5, 2.0]
+    range_min_pips: [20, 30, 50, 80]
+    range_max_adr: [0.4, 0.5, 0.6]
+    retest_sl_pips: [20, 30, 50]
+    atr_filter: [off, on]
+    ema_filter: [off, on]
+    entry_mode: [close, retest]
+
+# --- Live (pymt5linux) — NUR VORBEREITUNG, NICHT STARTEN vor WFA-Freigabe ---
+# Magic Number: eindeutig pro Bot -> Trade-Trennung in MT5-Statistiken/Historie
+# Registry: S1=20260901 S2=20260902 S3=20260903 S4=20260904 S5=20260905
+#           S6=20260906 S7=20260907 S10=20260910 S21b=20260911 S4-XAU=20260912
+#           (2026-09-08 korrigiert: war 20260906, kollidierte mit S6 — beide
+#           Werte waren unabhaengig als "naechste freie Magic" vergeben worden,
+#           s. dashboard.py LIVE_CONFIGS-Kommentar)
+# Bruecke: WINEPREFIX=~/.mt5 wine "C:\Python313\python.exe" -m pymt5linux
+#          --host localhost --port 8001 "C:\Python313\python.exe" (siehe AGENTS.md)
+# Andere Bots auf demselben Konto: S4-USDJPY Magic 20260904, David V2 Magic 100042.
+live:
+  host: localhost
+  port: 8001
+  magic: 20260912
+  poll_seconds: 15                # Sekunden zwischen zwei Polls (H1-Strategie, kein Grund fuer straffer)
+  health_interval_seconds: 45
+  heartbeat_seconds: 300           # "Bot laeuft"-Zeile im Traderbook-Log (Dashboard-Equity-Kurve)
+  history_bars: 800
+  logs_dir: logs                  # jsonl + Traderbook-Log (.log) + Journal (trades_*.csv)
+  deviation: 20                   # max. Slippage in Punkten
+  flatten_on_stop: false          # SIGINT/SIGTERM schliesst NICHT automatisch (SL/TP bleiben serverseitig aktiv)
+  # SICHERHEITSSCHALTER: der Bot verweigert den Start auf einem Echtgeldkonto,
+  # solange dies nicht explizit auf true gesetzt wird (core/live.py: _enforce_account_safety).
+  allow_real_account: false

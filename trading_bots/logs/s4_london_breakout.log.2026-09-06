@@ -1,0 +1,105 @@
+2026-09-06 19:14:54,794 [INFO] Live-Loop startet (dry_run=True, Symbole=['USDJPY'])
+2026-09-06 19:14:54,880 [INFO] Kontotyp bestaetigt: DEMO (Konto 111885336, MetaQuotes-Demo)
+2026-09-06 19:14:54,880 [INFO] Verbunden: localhost:8001 (Magic 20260904, dry_run=True)
+2026-09-06 19:14:54,969 [INFO] KEIN EINSTIEG: USDJPY | Range 156.08-156.58 (50.5 Pips) | blockiert: inside_range
+2026-09-06 19:15:09,953 [INFO] KEIN EINSTIEG: USDJPY | Range 156.08-156.58 (50.5 Pips) | blockiert: inside_range
+2026-09-06 19:15:20,969 [INFO] Shutdown angefordert
+2026-09-06 19:15:21,469 [INFO] Shutdown angefordert
+2026-09-06 19:15:21,783 [INFO] Shutdown angefordert
+2026-09-06 19:15:24,887 [INFO] Live-Loop beendet
+2026-09-06 19:15:39,389 [INFO] Live-Loop startet (dry_run=False, Symbole=['USDJPY'])
+2026-09-06 19:15:39,466 [INFO] Kontotyp bestaetigt: DEMO (Konto 111885336, MetaQuotes-Demo)
+2026-09-06 19:15:39,466 [INFO] Verbunden: localhost:8001 (Magic 20260904, dry_run=False)
+2026-09-06 19:15:39,589 [INFO] KEIN EINSTIEG: USDJPY | Range 156.08-156.58 (50.5 Pips) | blockiert: inside_range
+2026-09-06 19:22:12,746 [INFO] Shutdown angefordert
+2026-09-06 19:22:24,474 [INFO] Live-Loop beendet
+2026-09-06 19:22:26,516 [INFO] Live-Loop startet (dry_run=False, Symbole=['USDJPY'])
+2026-09-06 19:22:26,596 [INFO] Kontotyp bestaetigt: DEMO (Konto 111885336, MetaQuotes-Demo)
+2026-09-06 19:22:26,596 [INFO] Verbunden: localhost:8001 (Magic 20260904, dry_run=False)
+2026-09-06 19:22:26,703 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 19:22:26,732 [INFO] KEIN EINSTIEG: USDJPY | Range 156.08-156.58 (50.5 Pips) | blockiert: inside_range
+2026-09-06 19:27:26,655 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 19:30:11,695 [INFO] KEIN EINSTIEG: USDJPY | Range 156.08-156.58 (50.5 Pips) | blockiert: inside_range
+2026-09-06 19:32:26,674 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 19:37:26,742 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 19:42:26,682 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 19:45:11,713 [INFO] KEIN EINSTIEG: USDJPY | Range 156.08-156.58 (50.5 Pips) | blockiert: inside_range
+2026-09-06 19:47:26,690 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 19:52:26,777 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 19:57:26,697 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 20:00:11,700 [INFO] KEIN EINSTIEG: USDJPY | Range 156.03-156.58 (55.0 Pips) | blockiert: inside_range
+2026-09-06 20:02:26,684 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 20:07:26,763 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 20:12:26,705 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 20:15:11,735 [INFO] KEIN EINSTIEG: USDJPY | Range 156.03-156.58 (55.0 Pips) | blockiert: inside_range
+2026-09-06 20:17:26,707 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 20:22:26,764 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 20:27:26,711 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 20:30:11,744 [INFO] KEIN EINSTIEG: USDJPY | Range 156.03-156.58 (55.0 Pips) | blockiert: inside_range
+2026-09-06 20:32:26,722 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 20:37:26,782 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 20:42:26,726 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 20:45:11,755 [INFO] KEIN EINSTIEG: USDJPY | Range 156.03-156.58 (55.0 Pips) | blockiert: inside_range
+2026-09-06 20:47:26,726 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 20:52:26,769 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 20:57:26,720 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 21:02:26,721 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 21:07:26,770 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 21:12:26,725 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 21:17:26,724 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 21:22:26,774 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 21:27:26,728 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 21:32:26,743 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 21:37:26,806 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 21:42:26,749 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 21:47:26,748 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 21:52:26,817 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 21:57:26,762 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 22:02:26,767 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 22:07:26,830 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 22:12:26,774 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 22:17:26,766 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 22:22:26,818 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 22:27:26,769 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 22:32:26,770 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 22:37:26,822 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 22:42:26,774 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 22:47:26,773 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 22:52:26,827 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 22:57:26,778 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 23:02:26,778 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 23:07:26,830 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 23:12:26,782 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 23:17:26,782 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 23:22:26,838 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 23:27:26,787 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 23:32:26,786 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 23:37:26,839 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 23:42:26,789 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 23:47:26,792 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 23:52:26,840 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-06 23:57:26,794 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 00:02:26,796 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 00:07:26,846 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 00:12:26,798 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 00:17:26,800 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 00:22:26,851 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 00:27:26,805 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 00:32:26,804 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 00:37:26,857 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 00:42:26,806 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 00:47:26,807 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 00:52:26,859 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 00:57:26,811 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 01:02:26,811 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 01:07:26,863 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 01:12:26,814 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 01:17:26,817 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 01:22:26,867 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 01:27:26,818 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 01:32:26,821 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 01:37:26,873 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 01:42:26,821 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 01:47:26,823 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 01:52:26,875 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 01:57:26,826 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.

@@ -1,0 +1,71 @@
+{
+  "metrics": {
+    "n_oos": 2028,
+    "oos_pf": 1.1132548541960443,
+    "wfe_median": 0.7075695648878142,
+    "wfe_folds_ge_05": 1.0,
+    "mc_p95_dd_pct": 22.516096366220598,
+    "dsr": 0.11699128296951994,
+    "pbo": null,
+    "n_params": 18,
+    "oos_pf_2x": 1.0743745643003835,
+    "oos_pf_3x": 1.0380560439893691,
+    "n_folds": 12,
+    "n_legs": 5,
+    "risk_scale": 0.2
+  },
+  "legs": [
+    "XAUUSD",
+    "NAS100",
+    "USDJPY",
+    "USDCAD",
+    "NZDUSD"
+  ],
+  "checks": [
+    [
+      "n(OOS) >= 300",
+      true,
+      "n=2028"
+    ],
+    [
+      "WFE-Median >= 0.5",
+      true,
+      "wfe=0.708"
+    ],
+    [
+      ">= 60% Folds WFE>=0.5",
+      true,
+      "frac=1.00"
+    ],
+    [
+      "PF(1x) >= 1.5",
+      false,
+      "pf=1.113"
+    ],
+    [
+      "PF(2x, OOS, WFA-Params) >= 1.2",
+      false,
+      "pf=1.074"
+    ],
+    [
+      "PF(3x, OOS, WFA-Params) >= 1.0",
+      true,
+      "pf=1.038"
+    ],
+    [
+      "DSR >= 0.95",
+      false,
+      "dsr=0.117"
+    ],
+    [
+      "Params (18) <= 67 (1 je 30 OOS-Trades)",
+      true,
+      "18 params bei n=2028"
+    ],
+    [
+      "MC p95-MaxDD <= 8.0%",
+      false,
+      "p95=22.52%"
+    ]
+  ]
+}

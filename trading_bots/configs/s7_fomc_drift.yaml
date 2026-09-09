@@ -1,0 +1,85 @@
+# S7 — FomcDrift (EURUSD, H1) — NEW strategy, not yet part of SPEC.md §5.
+#
+# Evidence base: Lucca & Moench (2015) "The Pre-FOMC Announcement Drift"
+# (Journal of Finance) + FX-specific follow-on work finding an analogous
+# EUR/USD pre-FOMC drift. Deliberately SAME-DAY-ONLY: this portfolio's
+# eod_flat/friday_flat rules (SPEC §4.3) forbid overnight holds, so this
+# captures only the intraday slice of the published multi-day effect — do
+# not expect the full academic effect size out of this config.
+#
+# FOMC date source (Phase-1 finding, see strategies/s7_fomc_drift.py module
+# docstring for the full writeup): core/news_filter.py (SPEC §4.7) only
+# ever holds the ForexFactory *rolling weekly* feed — no multi-year
+# historical archive exists anywhere in this repo. This strategy therefore
+# loads a NEW, one-time, hand-curated static file created for it:
+#   data/fomc_dates.csv
+# 63 regularly-scheduled FOMC decision dates/times, 2019-01 .. 2026-12,
+# America/New_York local (converted DST-safely via zoneinfo at load time).
+# Sourced from federalreserve.gov (fomccalendars.htm + fomchistorical20YY.htm
+# + per-meeting fomcpresconf<date>.htm pages) — see that file's header
+# comment for exact URLs and the cross-verification method. This is
+# INTENTIONALLY independent of core/news_filter.py's live/cache lifecycle
+# (SPEC §4.7's cache is for weekly blackout gating, not a fixed historical
+# backtest calendar) — loaded directly by strategies/s7_fomc_drift.py's
+# ``load_fomc_decisions()``.
+
+strategy: s7_fomc_drift
+symbols:
+  - EURUSD
+timeframes: [H1]
+
+# Risiko (SPEC §0/§4.3: 0.5 % pro Trade, dieses Projekts Standard)
+risk:
+  risk_per_trade_pct: 0.5
+  min_rr: 0                     # kein festes TP (Time/Structure-Exit, SPEC §4.1)
+  daily_loss_halt_pct: 1.5
+  eod_flat: true                # Same-day-only: nie Overnight (siehe Docstring)
+  eod_flat_time_ny: "16:55"
+  friday_flat: true
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+# Kostenmodell (SPEC §1: immer aktiv) — EURUSD-Werte aus configs/common.yaml
+costs:
+  EURUSD:
+    spread_points: 8             # ~0.8 Pip (common.yaml)
+    commission_per_lot_rt: 7.0
+    slippage_multiplier: 1.0
+
+# Strategie-Parameter — genau 4 WFO-Parameter, Rest fixiert lt. Regelwerk
+params:
+  symbol: EURUSD
+  risk_pct: 0.005
+  fomc_dates_file: data/fomc_dates.csv
+  # Die 4 Parameter (Ranges lt. Aufgabenstellung):
+  entry_check_hour: 4            # 2-6h vor Decision; Check-Bar-Zeitpunkt
+  min_momentum: 0.5              # 0.3-1.0 x ATR(H1,10)
+  stop_mult: 0.4                 # 0.3-0.6 x ATR(H1,10)
+  exit_buffer_min: 15            # 10-20 Min vor Decision, hartes Flatten
+
+# WFO-Raeume (nur die 4 spezifizierten Parameter)
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    entry_check_hour: [2, 3, 4, 5, 6]
+    min_momentum: [0.3, 0.5, 0.7, 1.0]
+    stop_mult: [0.3, 0.4, 0.5, 0.6]
+    exit_buffer_min: [10, 15, 20]
+
+# Meta-Layer (SPEC §6) — news_filter/regime_filter sind hier bewusst NICHT
+# das FOMC-Timing selbst (das kommt aus data/fomc_dates.csv), sondern nur
+# der uebliche Blackout-Layer fuer ANDERE High-Impact-Events waehrend der
+# Haltedauer (z.B. ueberlappende NFP/CPI-Releases).
+meta_layer:
+  news_filter: on
+  regime_filter: off
+  cot_bias: off
+
+# --- Live (pymt5linux) ---
+# Magic Number: eindeutig pro Bot -> Trade-Trennung in MT5-Statistiken.
+# Registry: S1=20260901 S2=20260902 S3=20260903 S4=20260904 S5=20260905
+# S6=20260906 (paralleler Agent) S7=20260907 (dieser Bot)
+live:
+  magic: 20260907

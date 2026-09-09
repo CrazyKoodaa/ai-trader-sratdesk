@@ -1,0 +1,70 @@
+{
+  "metrics": {
+    "n_oos": 775,
+    "oos_pf": 0.956803086391846,
+    "wfe_median": 0.7087009368852297,
+    "wfe_folds_ge_05": 0.8947368421052632,
+    "mc_p95_dd_pct": 28.648066537367544,
+    "dsr": 0.0007807452505022854,
+    "pbo": null,
+    "n_params": 20,
+    "oos_pf_2x": 0.8538762187838219,
+    "oos_pf_3x": 0.709604651382775,
+    "n_folds": 19,
+    "n_legs": 4,
+    "risk_scale": 0.25
+  },
+  "legs": [
+    "XAUUSD",
+    "XAGUSD",
+    "XPTUSD",
+    "XPDUSD"
+  ],
+  "checks": [
+    [
+      "n(OOS) >= 300",
+      true,
+      "n=775"
+    ],
+    [
+      "WFE-Median >= 0.5",
+      true,
+      "wfe=0.709"
+    ],
+    [
+      ">= 60% Folds WFE>=0.5",
+      true,
+      "frac=0.89"
+    ],
+    [
+      "PF(1x) >= 1.5",
+      false,
+      "pf=0.957"
+    ],
+    [
+      "PF(2x, OOS, WFA-Params) >= 1.2",
+      false,
+      "pf=0.854"
+    ],
+    [
+      "PF(3x, OOS, WFA-Params) >= 1.0",
+      false,
+      "pf=0.710"
+    ],
+    [
+      "DSR >= 0.95",
+      false,
+      "dsr=0.001"
+    ],
+    [
+      "Params (20) <= 25 (1 je 30 OOS-Trades)",
+      true,
+      "20 params bei n=775"
+    ],
+    [
+      "MC p95-MaxDD <= 8.0%",
+      false,
+      "p95=28.65%"
+    ]
+  ]
+}

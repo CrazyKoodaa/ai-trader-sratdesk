@@ -1,0 +1,28 @@
+2026-09-07 16:05:42,085 [INFO] Live-Loop startet (dry_run=True, Symbole=['NZDUSD'])
+2026-09-07 16:05:42,159 [INFO] Kontotyp bestaetigt: DEMO (Konto 111885336, MetaQuotes-Demo)
+2026-09-07 16:05:42,159 [INFO] Verbunden: localhost:8001 (Magic 20260910, dry_run=True)
+2026-09-07 16:05:42,266 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 16:05:42,284 [INFO] Live-Loop beendet
+2026-09-07 16:09:04,466 [INFO] Live-Loop startet (dry_run=False, Symbole=['NZDUSD'])
+2026-09-07 16:09:04,543 [INFO] Kontotyp bestaetigt: DEMO (Konto 111885336, MetaQuotes-Demo)
+2026-09-07 16:09:04,543 [INFO] Verbunden: localhost:8001 (Magic 20260910, dry_run=False)
+2026-09-07 16:09:04,648 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 16:39:04,651 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 17:09:04,656 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 17:39:04,661 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 18:09:04,663 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 18:39:04,670 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 19:09:04,672 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 19:39:04,677 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 20:09:04,683 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 20:39:04,689 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 21:09:04,690 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 21:39:04,696 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 22:09:04,697 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 22:39:04,701 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 23:09:04,705 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-07 23:39:04,711 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 00:09:04,716 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 00:39:04,717 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 01:09:04,725 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 01:39:04,731 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.

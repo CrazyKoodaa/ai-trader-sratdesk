@@ -1,0 +1,75 @@
+# S2 — VWAPPullback (US100, M5; nur 9:45–11:30 America/New_York) — SPEC §5/S2
+# Session-VWAP ab 9:30 ET, Pullback + RSI(2), TP PDH/PDL (Fallback 2×ATR,
+# Gate RR>=2), harter Time-Exit 11:30 ET, max 1 Long + 1 Short/Tag, kein Trailing.
+
+strategy: strategies.s2_vwap_pullback.VWAPPullback
+name: s2_vwap_pullback
+symbols: [US100]              # NAS100-Äquivalent, Broker-Bezeichnung US100
+timeframes: [M5]
+
+params:
+  symbol: US100
+  risk_pct: 0.005             # 0.5 % Risiko/Trade (SPEC §0)
+  min_rr: 2.0
+
+  # --- Session/Fenster (America/New_York, DST-sicher via zoneinfo) ---
+  vwap_start: "09:30"
+  context_start: "09:45"
+  entry_start: "09:45"
+  last_trigger: "11:25"       # letzter Trigger-Bar → Entry <= 11:30 ET
+  time_exit: "11:30"          # hart (Engine erzwingt)
+  eod_flat: "16:55"           # Engine (RiskConfig)
+
+  # --- Kontext/Setup ---
+  min_closes: 3               # >=3 M5-Closes über/unter VWAP seit 9:45
+  trend_buffer_pct: 0.0
+  rsi_len: 2
+  rsi_th: 25.0                # Long <25, Short >75
+  atr_len: 14
+  atr_mult: 1.5               # SL = atr_mult × ATR14(M5)
+
+  # --- Exits ---
+  tp_mode: pdh                # pdh | 2atr | 3atr; pdh→Fallback 2×ATR
+  tp_fallback_atr: 2.0
+  max_trades_per_side: 1      # max 1 Long + 1 Short/Tag; kein Trailing
+
+  # --- Filter-Layer (A/B, einzeln abschaltbar, SPEC §6) ---
+  filters:
+    news_filter: true         # Engine-seitig (USD), Default on (Pflicht)
+    spread_guard: true
+    max_spread_points: 2.0    # US100 Spread-Guard
+    friday_short_bias: false  # WFO-Variante: freitags nur Shorts
+    friday_flat: true
+
+# WFO-Param-Räume (SPEC §5/S2)
+wfo:
+  rsi_th: [15, 20, 25, 30, 35]
+  atr_mult: [1.0, 1.5, 2.0, 2.5]
+  trend_buffer_pct: [0, 0.2, 0.4, 0.6]
+  tp_mode: [pdh, 2atr, 3atr]
+
+risk:
+  risk_per_trade_pct: 0.5
+  min_rr: 2.0
+  daily_loss_halt_pct: 1.5
+  eod_flat: true
+  eod_flat_time_ny: "16:55"
+  friday_flat: true
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+costs:                        # Kostenmodell IMMER aktiv (SPEC §1)
+  US100:
+    spread_points: 120
+    commission_per_lot_rt: 0.0
+    slippage_multiplier: 1.0  # Stress: 0.5/1/2/3
+    swap_long_pts: 0.0
+    swap_short_pts: 0.0
+    triple_swap_weekday: 2
+
+# --- Live (pymt5linux) ---
+# Magic Number: eindeutig pro Bot → Trade-Trennung in MT5-Statistiken/Historie
+# Registry: S1=20260901 S2=20260902 S3=20260903 S4=20260904 S5=20260905
+live:
+  magic: 20260902

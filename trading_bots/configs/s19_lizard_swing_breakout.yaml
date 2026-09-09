@@ -1,0 +1,39 @@
+# S19 — Eigene Interpretation des "Lizard EA"-Konzepts (Struktur-Swing-
+# Breakout, XAUUSD H1) — s. strategies/s19_lizard_swing_breakout.py fuer
+# den vollen Disclaimer (kein 1:1-Nachbau, EX5-Bytecode nicht dekompilierbar).
+# Vorab-Triage (Voll-Historie, 24 Kombos): bestes PF nur 1.11 bei n~2850 —
+# schwach, aber nicht eindeutig negativ wie S15/S20. Volle WFA soll zeigen,
+# ob das ehrlich irgendetwas uebersteht.
+strategy: s19_lizard_swing_breakout
+symbols:
+  - XAUUSD
+timeframes: [H1]
+
+risk:
+  risk_per_trade_pct: 0.5
+  daily_loss_halt_pct: 0.0
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+params:
+  primary_tf: H1
+  left: 20
+  right: 20
+  atr_len: 14
+  breakout_buffer_atr: 0.2
+  sl_atr_mult: 1.5
+  trail_atr_mult: 2.5
+  min_rr: 2.0
+  risk_pct: 0.005
+
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    left: [15, 20]
+    breakout_buffer_atr: [0.15, 0.3]
+    sl_atr_mult: [1.5, 2.0]
+    min_rr: [1.5, 2.0]

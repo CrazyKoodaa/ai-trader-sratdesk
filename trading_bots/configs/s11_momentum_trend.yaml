@@ -1,0 +1,36 @@
+# S11 — Time-Series-Momentum-Trendfolge (symbol-agnostisch, H4)
+# Vorzeichen der lookback-Rendite, periodisch geprueft (rebalance_bars) statt
+# jede Bar, + ATR-Trailing-Stop, kein festes TP. Symbol via --symbol,
+# Kostenmodell faellt auf configs/common.yaml zurueck.
+strategy: s11_momentum_trend
+symbols:
+  - XAUUSD
+timeframes: [H4]
+
+risk:
+  risk_per_trade_pct: 0.5
+  daily_loss_halt_pct: 0.0
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+params:
+  primary_tf: H4
+  lookback: 60
+  rebalance_bars: 5
+  atr_len: 14
+  sl_atr_mult: 2.0
+  trail_atr_mult: 3.0
+  min_rr: 2.0                # Mindest-RR; TP wird bei Beruehrung zur Trail-Aktivierung (Move-to-Trail)
+  risk_pct: 0.005
+
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    lookback: [40, 60, 90]
+    rebalance_bars: [3, 5, 10]
+    sl_atr_mult: [1.5, 2.0, 2.5]
+    trail_atr_mult: [2.0, 3.0, 4.0]

@@ -1,0 +1,93 @@
+# analyze_a3d5ea031833 — Portierung "XAU Velocity External Validation F7"
+# (extern eingereichtes, VOLLSTAENDIGES MT5-EA-Snippet — dieselbe EA-Familie
+# wie configs/analyze_2166fb052559.yaml, dort brach das Snippet ab).
+# s. strategies/analyze_a3d5ea031833.py fuer Annahmen/Vereinfachungen,
+# reports/analyze_a3d5ea031833.md fuer den Review inkl. Triage-Ergebnis.
+# Symbol/TF direkt aus dem Original: SYMBOL_NAME="XAUUSD". TF_SETUP=M15
+# uebernimmt hier zusaetzlich die Rolle von TF_ENTRY=M5 (Performance +
+# Intrabar-Tick-Grenze des Bar-Close-Engines, s. Docstring Punkt 1).
+strategy: analyze_a3d5ea031833
+symbols:
+  - XAUUSD
+timeframes: [M15, H1, H4]
+
+risk:
+  risk_per_trade_pct: 0.7   # Original: RiskPct=0.7
+  daily_loss_halt_pct: 0.0
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 1         # Original: MAX_POSITIONS=1
+  streak_limiter: 0
+  prop_profile: none        # Original: ChallengeMode=false fuer diesen Build
+
+params:
+  tf_setup: M15
+  tf_trend: H1
+  tf_context: H4
+  ema_fast: 20
+  ema_mid: 50
+  ema_slow: 200
+  adx_len: 14
+  atr_len: 14
+  min_trend_adx: 20.0
+  strong_trend_adx: 27.0
+  very_strong_trend_adx: 34.0
+  min_h1_ema_separation_atr: 0.16
+  strong_h1_ema_separation_atr: 0.25
+  h4_slope_bars: 2
+  min_h4_slope_atr: 0.03
+  strong_h4_slope_atr: 0.08
+  expansion_lookback: 8
+  detect_min_expansion_mult: 1.35
+  detect_min_body_pct: 0.60
+  quality_expansion_mult: 1.50
+  strong_expansion_mult: 1.80
+  elite_expansion_mult: 2.20
+  quality_body_pct: 0.68
+  strong_body_pct: 0.75
+  elite_body_pct: 0.82
+  retrace_min_pct: 0.12
+  retrace_max_pct: 0.62
+  retrace_acceptable_min: 0.18
+  retrace_acceptable_max: 0.55
+  retrace_ideal_min: 0.25
+  retrace_ideal_max: 0.48
+  retrace_elite_min: 0.32
+  retrace_elite_max: 0.42
+  retrace_max_bars: 1
+  delayed_setup_from_bar: 1
+  setup_invalidation_atr: 0.12
+  score_absolute_min: 72
+  score_standard_min: 84
+  score_strong_min: 78
+  score_elite_min: 72
+  score_exceptional: 92
+  delayed_setup_min_score: 88
+  delayed_setup_min_expansion: 1.60
+  delayed_setup_min_body: 0.70
+  trade_asia: true
+  trade_london: true
+  trade_newyork: false
+  asia_score_bonus: 9
+  london_score_bonus: 6
+  newyork_score_bonus: 2
+  london_min_score: 76
+  london_min_expansion: 1.45
+  friday_stop_hour: 20
+  sell_quality_bonus: 2
+  buy_quality_bonus: 0
+  allow_longs: true
+  allow_shorts: true
+  sl_buffer_atr: 0.10        # Original: nackter Literal 0.10 (nicht SETUP_INVALIDATION_ATR!)
+  lock_trigger_r: 3.25       # Original: Lock-Trigger bei +3.25R -> hier TP-Trail-Trigger (s. Docstring Punkt 2)
+  trail_atr_mult: 2.5
+  min_minutes_between_entries: 15
+  risk_pct: 0.007
+
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    quality_expansion_mult: [1.35, 1.50, 1.80]
+    score_standard_min: [78, 84, 90]
+    trail_atr_mult: [1.5, 2.5, 3.5]

@@ -1,0 +1,46 @@
+# analyze_e241bb189fa2 — Portierung "XAUUSD_TrendPullback_ATR.mq5"
+# (extern eingereichtes, vollstaendiges MT5/MQL5-EA-Snippet, keine
+# Profile/Presets im Original, s. Quick-Check Abschnitt 2).
+# s. strategies/analyze_e241bb189fa2.py fuer Annahmen/Vereinfachungen,
+# reports/analyze_e241bb189fa2.md fuer den Review inkl. Triage-Ergebnis.
+# Symbol/TF direkt aus dem Original: kein SYMBOL_NAME-Input, aber der
+# Skriptname/-Kommentar nennt XAUUSD explizit; TF_TREND=H4 (InpTrendTimeframe
+# Default), TF_ENTRY=M15 (InpEntryTimeframe Default).
+strategy: analyze_e241bb189fa2
+symbols:
+  - XAUUSD
+timeframes: [M15, H4]
+
+risk:
+  risk_per_trade_pct: 0.50   # Original: InpRiskPerTradePct=0.50
+  daily_loss_halt_pct: 0.0   # Original: kein Kapitalschutz ausserhalb Risk/Trade
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 1          # Original: InpOnePositionOnly=true
+  streak_limiter: 0
+  prop_profile: none
+
+params:
+  tf_entry: M15
+  tf_trend: H4
+  trend_ema_period: 50
+  fast_ema_period: 20
+  atr_period: 14
+  sl_atr_mult: 1.50
+  risk_reward: 2.00
+  structure_buffer_atr: 0.20
+  min_atr_price: 1.00        # s. Docstring Punkt 3 (InpMinATRPoints=100 * Point 0.01)
+  use_session_filter: true
+  start_hour: 8               # Original InpStartHour (als UTC interpretiert, s. Docstring Punkt 4)
+  end_hour: 22                 # Original InpEndHour
+  allow_long: true
+  allow_short: true
+  risk_pct: 0.50
+
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    sl_atr_mult: [1.0, 1.5, 2.0]
+    risk_reward: [1.5, 2.0, 3.0]
+    min_atr_price: [0.5, 1.0, 1.5]

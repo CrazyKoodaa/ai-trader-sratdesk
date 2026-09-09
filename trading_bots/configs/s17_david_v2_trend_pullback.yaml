@@ -1,0 +1,53 @@
+# S17 — Portierung von "David V2" (externer Live-Bot, /home/crazyneo/
+# Desktop/tagebuch/David-V2-Ben/) in core/live.py-Interface, s. strategies/
+# s17_david_v2_trend_pullback.py fuer volle Herleitung + Annahmen.
+#
+# Vorab-Triage (Vollhistorie, echte Original-Default-Parameter aus
+# config.py, alle 10 lokal verfuegbaren der 12 echten Live-Maerkte,
+# USDCNH/USDSEK fehlen lokal): 9 von 10 klar PF<1.0 (EURUSD 0.83,
+# GBPUSD 0.92, USDCHF 0.84, AUDUSD 0.95, NZDUSD 0.99, USDJPY 0.94,
+# GBPJPY 0.92, EURJPY 0.89, USTEC 0.96) — NUR XAUUSD positiv:
+# PF=1.147, n=149, WR=36.2%, avgR=+0.101. Deshalb WFA nur fuer XAUUSD;
+# die anderen 9 sind zu eindeutig negativ fuer eine volle WFA (wie
+# S15/S20 zuvor in dieser Session).
+strategy: s17_david_v2_trend_pullback
+symbols:
+  - XAUUSD
+timeframes: [H4, D1]
+
+risk:
+  risk_per_trade_pct: 0.5
+  daily_loss_halt_pct: 0.0
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+params:
+  primary_tf: H4
+  higher_tf: D1
+  trend_len: 200
+  rsi_len: 14
+  rsi_oversold: 40.0
+  trend_buffer_atr: 0.30
+  atr_len: 14
+  atr_stop_mult: 1.5
+  rr_ratio: 2.0
+  adx_filter: true
+  adx_len: 14
+  adx_min: 15.0
+  mtf_confirm: true
+  mtf_trend_len: 50
+  atr_vol_filter: true
+  atr_vol_lookback: 100
+  atr_vol_min_percentile: 0.10
+  risk_pct: 0.005
+
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    rsi_oversold: [35.0, 40.0, 45.0]
+    atr_stop_mult: [1.5, 2.0]
+    rr_ratio: [1.5, 2.0]

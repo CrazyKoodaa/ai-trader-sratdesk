@@ -1,0 +1,328 @@
+2026-09-08 09:20:29,655 [INFO] Live-Loop startet (dry_run=False, Symbole=['XAUUSD'])
+2026-09-08 09:20:29,735 [INFO] Kontotyp bestaetigt: DEMO (Konto 111885336, MetaQuotes-Demo)
+2026-09-08 09:20:29,735 [INFO] Verbunden: localhost:8001 (Magic 20260911, dry_run=False)
+2026-09-08 09:20:29,841 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 09:25:29,793 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 09:30:29,796 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 09:35:29,845 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 09:40:29,797 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 09:45:29,797 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 09:50:29,851 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 09:55:29,800 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 10:00:29,803 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 10:05:29,854 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 10:10:29,806 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 10:15:29,807 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 10:20:29,857 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 10:25:29,807 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 10:30:29,810 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 10:35:29,862 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 10:40:29,812 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 10:45:29,813 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 10:50:29,863 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 10:55:29,816 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 11:00:29,818 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 11:05:29,868 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 11:10:29,822 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 11:15:29,822 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 11:20:29,873 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 11:25:29,824 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 11:30:29,826 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 11:35:29,879 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 11:37:23,143 [INFO] Shutdown angefordert
+2026-09-08 11:37:29,776 [INFO] Live-Loop beendet
+2026-09-08 11:37:47,645 [INFO] Live-Loop startet (dry_run=False, Symbole=['XAUUSD'])
+2026-09-08 11:37:47,727 [INFO] Kontotyp bestaetigt: DEMO (Konto 111885336, MetaQuotes-Demo)
+2026-09-08 11:37:47,727 [INFO] Verbunden: localhost:8001 (Magic 20260911, dry_run=False)
+2026-09-08 11:37:47,835 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 11:37:48,217 [INFO] KEIN EINSTIEG [s21_goldreaper_momentum_stack]: XAUUSD: Trend ↓ | RSI 40 | SHORT-Setup | FILTER: kein frischer RSI-Cross
+2026-09-08 11:42:47,786 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 11:47:47,786 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 11:52:47,837 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 11:57:47,789 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 12:00:02,800 [INFO] KEIN EINSTIEG [s21_goldreaper_momentum_stack]: XAUUSD: Trend ↓ | RSI 41 | SHORT-Setup | FILTER: kein frischer RSI-Cross
+2026-09-08 12:02:47,789 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 12:07:47,842 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 12:12:47,794 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 12:17:47,794 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 12:22:47,844 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 12:27:47,798 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 12:32:47,799 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 12:37:47,851 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 12:42:47,801 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 12:47:47,802 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 12:52:47,854 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 12:57:47,806 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 13:00:02,815 [INFO] KEIN EINSTIEG [s21_goldreaper_momentum_stack]: XAUUSD: Trend ↓ | RSI 45 | SHORT-Setup | FILTER: kein frischer RSI-Cross
+2026-09-08 13:02:47,806 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 13:07:47,858 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 13:12:47,809 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 13:17:47,810 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 13:22:47,863 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 13:27:47,814 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 13:32:47,815 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 13:37:47,864 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 13:42:47,817 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 13:47:47,819 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 13:52:47,872 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 13:57:47,821 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 14:00:02,832 [INFO] KEIN EINSTIEG [s21_goldreaper_momentum_stack]: XAUUSD: Trend ↓ | RSI 42 | SHORT-Setup | FILTER: kein frischer RSI-Cross
+2026-09-08 14:02:47,823 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 14:07:47,871 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 14:12:47,826 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 14:17:47,826 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 14:22:47,878 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 14:27:47,829 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 14:32:47,849 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 14:37:47,910 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 14:42:47,852 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 14:47:47,843 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 14:52:47,902 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 14:57:47,843 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 15:00:02,852 [INFO] KEIN EINSTIEG [s21_goldreaper_momentum_stack]: XAUUSD: Trend ↓ | RSI 47 | SHORT-Setup | RSI muss noch 2 Punkte fallen | FILTER: RSI ueber Schwelle
+2026-09-08 15:02:47,825 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 15:07:47,920 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 15:12:47,851 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 15:17:47,852 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 15:22:47,901 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 15:27:47,854 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 15:32:47,857 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 15:37:47,907 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 15:42:47,862 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 15:47:47,874 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 15:52:47,920 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 15:57:47,878 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 16:00:02,893 [INFO] KEIN EINSTIEG [s21_goldreaper_momentum_stack]: XAUUSD: Trend ↓ | RSI 50 | SHORT-Setup | RSI muss noch 5 Punkte fallen | FILTER: RSI ueber Schwelle
+2026-09-08 16:02:47,881 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 16:07:47,934 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 16:12:47,883 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 16:17:47,884 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 16:21:47,834 [ERROR] Loop-Fehler XAUUSD: Kein Tick fuer XAUUSD (Markt geschlossen/Symbol fehlt?)
+Traceback (most recent call last):
+  File "/home/crazyneo/projects/dev/ai-trader/trading_bots/core/live.py", line 579, in run
+    log.exception("Risiko-Update %s fehlgeschlagen: %s", symbol, exc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/crazyneo/projects/dev/ai-trader/trading_bots/core/live.py", line 298, in _fetch_bars
+    """Laedt die letzten ``history_bars`` je TF; verwirft unfertige Bar."""
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/crazyneo/projects/dev/ai-trader/trading_bots/core/connector.py", line 351, in fetch_ohlcv
+    offset = self.server_offset(symbol)
+  File "/home/crazyneo/projects/dev/ai-trader/trading_bots/core/connector.py", line 313, in server_offset
+    raise RuntimeError(f"Kein Tick fuer {symbol} (Markt geschlossen/Symbol fehlt?)")
+RuntimeError: Kein Tick fuer XAUUSD (Markt geschlossen/Symbol fehlt?)
+2026-09-08 16:22:47,952 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 16:23:32,834 [WARNING] Health-Check fehlgeschlagen — Reconnect
+2026-09-08 16:23:32,925 [INFO] Kontotyp bestaetigt: DEMO (Konto 111885336, MetaQuotes-Demo)
+2026-09-08 16:23:32,925 [INFO] Verbunden: localhost:8001 (Magic 20260911, dry_run=False)
+2026-09-08 16:27:47,989 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 16:32:47,981 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 16:37:48,032 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 16:40:32,930 [ERROR] Risiko-Update XAUUSD fehlgeschlagen: connection closed by peer
+Traceback (most recent call last):
+  File "/home/crazyneo/projects/dev/ai-trader/trading_bots/core/live.py", line 564, in run
+    last_health = 0.0
+    
+  File "/home/crazyneo/projects/dev/ai-trader/trading_bots/core/connector.py", line 416, in account_info
+    info = self._as_dict(mt5.account_info())
+                         ~~~~~~~~~~~~~~~~^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/pymt5linux/__init__.py", line 301, in account_info
+    return self.__conn.eval(code)
+           ~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/netref.py", line 239, in __call__
+    return syncreq(_self, consts.HANDLE_CALL, args, kwargs)
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/netref.py", line 63, in syncreq
+    return conn.sync_request(handler, proxy, *args)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/protocol.py", line 744, in sync_request
+    return _async_res.value
+           ^^^^^^^^^^^^^^^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/async_.py", line 109, in value
+    self.wait()
+    ~~~~~~~~~^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/async_.py", line 51, in wait
+    self._conn.serve(self._ttl, waiting=self._waiting)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/protocol.py", line 464, in serve
+    data = self._channel.poll(timeout) and self._channel.recv()
+                                           ~~~~~~~~~~~~~~~~~~^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/channel.py", line 55, in recv
+    header = self.stream.read(self.FRAME_HEADER.size)
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/stream.py", line 280, in read
+    raise EOFError("connection closed by peer")
+EOFError: connection closed by peer
+2026-09-08 16:40:32,932 [ERROR] Loop-Fehler XAUUSD: stream has been closed
+Traceback (most recent call last):
+  File "/home/crazyneo/projects/dev/ai-trader/trading_bots/core/live.py", line 579, in run
+    # Herzschlag: Equity + offene Positionen (Dashboard liest dies aus
+  File "/home/crazyneo/projects/dev/ai-trader/trading_bots/core/live.py", line 298, in _fetch_bars
+    self.risk = RiskManager(risk_cfg, prop_profile=prop_profile,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/crazyneo/projects/dev/ai-trader/trading_bots/core/connector.py", line 351, in fetch_ohlcv
+    offset = self.server_offset(symbol)
+  File "/home/crazyneo/projects/dev/ai-trader/trading_bots/core/connector.py", line 311, in server_offset
+    tick = mt5.symbol_info_tick(symbol)
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/pymt5linux/__init__.py", line 321, in symbol_info_tick
+    return self.__conn.eval(code)
+           ~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/netref.py", line 239, in __call__
+    return syncreq(_self, consts.HANDLE_CALL, args, kwargs)
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/netref.py", line 63, in syncreq
+    return conn.sync_request(handler, proxy, *args)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/protocol.py", line 741, in sync_request
+    _async_res = self.async_request(handler, *args, timeout=timeout)
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/protocol.py", line 768, in async_request
+    self._async_request(handler, args, res)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/protocol.py", line 750, in _async_request
+    self._send(consts.MSG_REQUEST, seq, (handler, self._box(args)))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/protocol.py", line 308, in _send
+    self._channel.send(data)
+    ~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/channel.py", line 78, in send
+    self.stream.write(header + data + self.FLUSHER)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/stream.py", line 288, in write
+    count = self.sock.send(data[:self.MAX_IO_CHUNK])
+            ^^^^^^^^^^^^^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/stream.py", line 96, in __getattr__
+    raise EOFError("stream has been closed")
+EOFError: stream has been closed
+2026-09-08 16:40:47,930 [WARNING] Health-Check fehlgeschlagen — Reconnect
+2026-09-08 16:40:47,999 [INFO] Kontotyp bestaetigt: DEMO (Konto 111885336, MetaQuotes-Demo)
+2026-09-08 16:40:48,000 [INFO] Verbunden: localhost:8001 (Magic 20260911, dry_run=False)
+2026-09-08 16:42:48,052 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 16:47:48,054 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 16:52:48,105 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 16:57:48,056 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 17:00:03,065 [INFO] KEIN EINSTIEG [s21_goldreaper_momentum_stack]: XAUUSD: Trend ↓ | RSI 43 | SHORT-Setup | FILTER: kein frischer RSI-Cross
+2026-09-08 17:02:48,060 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 17:07:48,111 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 17:12:48,060 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 17:17:48,062 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 17:22:48,113 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 17:27:48,064 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 17:32:48,067 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 17:37:48,115 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 17:42:48,068 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 17:47:48,069 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 17:52:48,121 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 17:57:48,073 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 18:00:03,081 [INFO] KEIN EINSTIEG [s21_goldreaper_momentum_stack]: XAUUSD: Trend ↓ | RSI 45 | SHORT-Setup | FILTER: kein frischer RSI-Cross
+2026-09-08 18:02:48,072 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 18:07:48,124 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 18:12:48,076 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 18:17:48,077 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 18:22:48,129 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 18:27:48,080 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 18:32:33,039 [WARNING] Health-Check fehlgeschlagen — Reconnect
+2026-09-08 18:32:33,213 [INFO] Kontotyp bestaetigt: DEMO (Konto 111885336, MetaQuotes-Demo)
+2026-09-08 18:32:33,213 [INFO] Verbunden: localhost:8001 (Magic 20260911, dry_run=False)
+2026-09-08 18:32:48,269 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 18:37:48,321 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 18:39:18,224 [WARNING] Health-Check fehlgeschlagen — Reconnect
+2026-09-08 18:39:18,600 [INFO] Kontotyp bestaetigt: DEMO (Konto 111885336, MetaQuotes-Demo)
+2026-09-08 18:39:18,600 [INFO] Verbunden: localhost:8001 (Magic 20260911, dry_run=False)
+2026-09-08 18:41:33,611 [WARNING] Health-Check fehlgeschlagen — Reconnect
+2026-09-08 18:41:37,210 [INFO] Kontotyp bestaetigt: DEMO (Konto 111885336, MetaQuotes-Demo)
+2026-09-08 18:41:37,210 [INFO] Verbunden: localhost:8001 (Magic 20260911, dry_run=False)
+2026-09-08 18:42:52,263 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 18:47:52,265 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 18:52:52,315 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 18:57:52,266 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 19:00:07,278 [INFO] KEIN EINSTIEG [s21_goldreaper_momentum_stack]: XAUUSD: Trend ↓ | RSI 43 | SHORT-Setup | FILTER: kein frischer RSI-Cross
+2026-09-08 19:02:52,269 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 19:07:52,319 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 19:12:52,273 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 19:17:52,276 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 19:22:52,324 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 19:27:52,275 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 19:32:52,276 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 19:37:52,325 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 19:42:52,281 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 19:47:52,282 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 19:52:52,329 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 19:57:52,283 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 20:00:07,291 [INFO] KEIN EINSTIEG [s21_goldreaper_momentum_stack]: XAUUSD: Trend ↓ | RSI 43 | SHORT-Setup | FILTER: kein frischer RSI-Cross
+2026-09-08 20:02:52,282 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 20:07:52,334 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 20:12:52,286 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 20:17:52,288 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 20:22:52,340 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 20:27:52,289 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 20:32:52,290 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 20:37:52,342 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 20:42:52,294 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 20:47:52,296 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 20:52:52,347 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 20:57:52,298 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 21:00:07,308 [INFO] KEIN EINSTIEG [s21_goldreaper_momentum_stack]: XAUUSD: Trend ↓ | RSI 41 | SHORT-Setup | FILTER: kein frischer RSI-Cross
+2026-09-08 21:02:52,299 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 21:07:52,351 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 21:12:52,301 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 21:17:52,302 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 21:22:52,354 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 21:27:52,305 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 21:32:52,306 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 21:37:52,359 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 21:42:52,309 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 21:47:52,311 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 21:52:52,362 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 21:57:52,314 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 22:00:07,322 [INFO] KEIN EINSTIEG [s21_goldreaper_momentum_stack]: XAUUSD: Trend ↓ | RSI 36 | SHORT-Setup | FILTER: kein frischer RSI-Cross
+2026-09-08 22:02:52,315 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 22:07:52,366 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 22:12:52,318 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 22:15:07,328 [INFO] KEIN EINSTIEG [s21_goldreaper_momentum_stack]: XAUUSD: Trend ↓ | RSI 36 | SHORT-Setup | FILTER: kein frischer RSI-Cross
+2026-09-08 22:17:52,318 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 22:22:52,375 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 22:27:52,322 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 22:30:07,331 [INFO] KEIN EINSTIEG [s21_goldreaper_momentum_stack]: XAUUSD: Trend ↓ | RSI 36 | SHORT-Setup | FILTER: kein frischer RSI-Cross
+2026-09-08 22:32:52,323 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 22:37:52,374 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 22:42:52,326 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 22:45:07,334 [INFO] KEIN EINSTIEG [s21_goldreaper_momentum_stack]: XAUUSD: Trend ↓ | RSI 36 | SHORT-Setup | FILTER: kein frischer RSI-Cross
+2026-09-08 22:47:52,327 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 22:52:52,378 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 22:57:52,330 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 23:00:07,339 [INFO] KEIN EINSTIEG [s21_goldreaper_momentum_stack]: XAUUSD: Trend ↓ | RSI 36 | SHORT-Setup | FILTER: kein frischer RSI-Cross
+2026-09-08 23:02:52,332 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 23:07:52,388 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 23:12:52,335 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 23:15:07,343 [INFO] KEIN EINSTIEG [s21_goldreaper_momentum_stack]: XAUUSD: Trend ↓ | RSI 36 | SHORT-Setup | FILTER: kein frischer RSI-Cross
+2026-09-08 23:17:52,336 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 23:22:52,386 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 23:27:52,337 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 23:30:07,347 [INFO] KEIN EINSTIEG [s21_goldreaper_momentum_stack]: XAUUSD: Trend ↓ | RSI 36 | SHORT-Setup | FILTER: kein frischer RSI-Cross
+2026-09-08 23:32:52,339 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 23:37:52,389 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 23:42:52,343 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 23:45:07,352 [INFO] KEIN EINSTIEG [s21_goldreaper_momentum_stack]: XAUUSD: Trend ↓ | RSI 36 | SHORT-Setup | FILTER: kein frischer RSI-Cross
+2026-09-08 23:47:52,346 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 23:52:52,397 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 23:57:52,347 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 00:02:52,348 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 00:07:52,399 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 00:12:52,351 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 00:17:52,352 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 00:22:52,404 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 00:27:52,354 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 00:32:52,355 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 00:37:52,410 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 00:42:52,359 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 00:47:52,360 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 00:52:52,412 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 00:57:52,365 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 01:02:52,364 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 01:07:52,416 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 01:12:52,368 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 01:17:52,369 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 01:22:52,422 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 01:27:52,377 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 01:32:52,374 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 01:37:52,423 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 01:42:52,375 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 01:47:52,377 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 01:52:52,429 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 01:57:52,381 [INFO] ♥ [s21_goldreaper_momentum_stack] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.

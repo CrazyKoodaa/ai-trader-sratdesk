@@ -1,0 +1,20 @@
+pandas
+numpy
+scipy
+scikit-learn
+hmmlearn
+xgboost
+pyyaml
+requests
+matplotlib
+tabulate
+pyarrow
+threadpoolctl       # pinnt BLAS-Threads je Backtest-Worker-Prozess (Oversubscription-Fix)
+histdata            # optionale Datenquelle --source histdata (scripts/fetch_data.py)
+# Live-/Fetch-Pfad: pymt5linux (braucht Python >= 3.13) + rpyc.
+# rpyc-Version muss beidseitig (Linux-Client UND Wine-Server) identisch sein
+# (Major-Versionen sind wire-inkompatibel). Stand 2026-09-04: beidseitig 6.0.2,
+# numpy 2.x beidseitig — gegen pymt5linux-Server verifiziert.
+rpyc==6.0.2
+pymt5linux; python_version >= "3.13"
+pytest

@@ -1,0 +1,84 @@
+2026-09-08 02:09:04,730 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 02:39:04,736 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 03:09:04,740 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 03:39:04,743 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 04:09:04,750 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 04:39:04,749 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 05:09:04,755 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 05:39:04,758 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 06:09:04,762 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 06:39:04,767 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 07:09:04,770 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 07:39:04,776 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 08:09:04,778 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 08:39:04,787 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 09:09:04,788 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 09:39:04,789 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 10:09:04,795 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 10:39:04,798 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 11:09:04,801 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 11:37:34,706 [ERROR] Loop-Fehler NZDUSD: Kein Tick fuer NZDUSD (Markt geschlossen/Symbol fehlt?)
+Traceback (most recent call last):
+  File "/home/crazyneo/projects/dev/ai-trader/trading_bots/core/live.py", line 526, in run
+    try:
+    
+  File "/home/crazyneo/projects/dev/ai-trader/trading_bots/core/live.py", line 245, in _fetch_bars
+    self._trail_state: dict[int, dict] = {}
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/crazyneo/projects/dev/ai-trader/trading_bots/core/connector.py", line 351, in fetch_ohlcv
+    offset = self.server_offset(symbol)
+  File "/home/crazyneo/projects/dev/ai-trader/trading_bots/core/connector.py", line 313, in server_offset
+    raise RuntimeError(f"Kein Tick fuer {symbol} (Markt geschlossen/Symbol fehlt?)")
+RuntimeError: Kein Tick fuer NZDUSD (Markt geschlossen/Symbol fehlt?)
+2026-09-08 11:39:04,809 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 12:09:04,810 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 12:39:04,815 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 13:09:04,820 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 13:39:04,823 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 14:09:04,826 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 14:39:04,855 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 15:20:39,099 [INFO] Live-Loop startet (dry_run=False, Symbole=['NZDUSD'])
+2026-09-08 15:20:39,178 [INFO] Kontotyp bestaetigt: DEMO (Konto 111885336, MetaQuotes-Demo)
+2026-09-08 15:20:39,178 [INFO] Verbunden: localhost:8001 (Magic 20260910, dry_run=False)
+2026-09-08 15:20:39,285 [INFO] ♥ [s10_ema_cross_trend] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 15:50:39,290 [INFO] ♥ [s10_ema_cross_trend] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 16:20:39,299 [INFO] ♥ [s10_ema_cross_trend] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 16:34:25,621 [INFO] Shutdown angefordert
+2026-09-08 16:34:39,197 [INFO] Live-Loop beendet
+2026-09-08 16:34:46,493 [INFO] Live-Loop startet (dry_run=False, Symbole=['NZDUSD'])
+2026-09-08 16:34:46,570 [INFO] Kontotyp bestaetigt: DEMO (Konto 111885336, MetaQuotes-Demo)
+2026-09-08 16:34:46,570 [INFO] Verbunden: localhost:8001 (Magic 20260910, dry_run=False)
+2026-09-08 16:34:46,675 [INFO] ♥ [s10_ema_cross_trend] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 16:34:46,692 [INFO] KEIN EINSTIEG [s10_ema_cross_trend]: NZDUSD: EMA-Trend ↓ | EMA 0.58662/0.58836 | Abstand 0.30% | FILTER: kein frischer Kreuzungspunkt
+2026-09-08 16:40:46,576 [WARNING] Health-Check fehlgeschlagen — Reconnect
+2026-09-08 16:40:46,648 [INFO] Kontotyp bestaetigt: DEMO (Konto 111885336, MetaQuotes-Demo)
+2026-09-08 16:40:46,648 [INFO] Verbunden: localhost:8001 (Magic 20260910, dry_run=False)
+2026-09-08 17:04:46,754 [INFO] ♥ [s10_ema_cross_trend] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 17:34:46,757 [INFO] ♥ [s10_ema_cross_trend] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 18:04:46,764 [INFO] ♥ [s10_ema_cross_trend] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 18:34:46,767 [INFO] ♥ [s10_ema_cross_trend] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 18:36:46,674 [WARNING] Health-Check fehlgeschlagen — Reconnect
+2026-09-08 18:36:46,851 [INFO] Kontotyp bestaetigt: DEMO (Konto 111885336, MetaQuotes-Demo)
+2026-09-08 18:36:46,852 [INFO] Verbunden: localhost:8001 (Magic 20260910, dry_run=False)
+2026-09-08 18:38:46,862 [WARNING] Health-Check fehlgeschlagen — Reconnect
+2026-09-08 18:38:47,743 [INFO] Kontotyp bestaetigt: DEMO (Konto 111885336, MetaQuotes-Demo)
+2026-09-08 18:38:47,743 [INFO] Verbunden: localhost:8001 (Magic 20260910, dry_run=False)
+2026-09-08 19:00:17,804 [INFO] KEIN EINSTIEG [s10_ema_cross_trend]: NZDUSD: EMA-Trend ↓ | EMA 0.58639/0.58821 | Abstand 0.31% | FILTER: kein frischer Kreuzungspunkt
+2026-09-08 19:04:47,848 [INFO] ♥ [s10_ema_cross_trend] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 19:23:47,750 [WARNING] Health-Check fehlgeschlagen — Reconnect
+2026-09-08 19:23:47,819 [INFO] Kontotyp bestaetigt: DEMO (Konto 111885336, MetaQuotes-Demo)
+2026-09-08 19:23:47,819 [INFO] Verbunden: localhost:8001 (Magic 20260910, dry_run=False)
+2026-09-08 19:34:47,924 [INFO] ♥ [s10_ema_cross_trend] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 20:04:47,927 [INFO] ♥ [s10_ema_cross_trend] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 20:34:47,931 [INFO] ♥ [s10_ema_cross_trend] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 21:04:47,934 [INFO] ♥ [s10_ema_cross_trend] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 21:34:47,938 [INFO] ♥ [s10_ema_cross_trend] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 22:04:47,946 [INFO] ♥ [s10_ema_cross_trend] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 22:34:47,946 [INFO] ♥ [s10_ema_cross_trend] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 23:00:17,907 [INFO] KEIN EINSTIEG [s10_ema_cross_trend]: NZDUSD: EMA-Trend ↓ | EMA 0.58617/0.58807 | Abstand 0.32% | FILTER: kein frischer Kreuzungspunkt
+2026-09-08 23:04:47,949 [INFO] ♥ [s10_ema_cross_trend] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 23:34:47,953 [INFO] ♥ [s10_ema_cross_trend] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 00:04:47,959 [INFO] ♥ [s10_ema_cross_trend] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 00:34:47,964 [INFO] ♥ [s10_ema_cross_trend] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 01:04:47,966 [INFO] ♥ [s10_ema_cross_trend] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 01:34:47,970 [INFO] ♥ [s10_ema_cross_trend] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.

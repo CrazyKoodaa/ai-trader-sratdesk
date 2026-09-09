@@ -1,0 +1,10 @@
+# configs/prop_ftmo_2step.yaml — FTMO 2-Step Challenge (SPEC §4.3 Prop-Profil)
+# Schluessel exakt per SPEC §4.3 (werden von core.risk.load_prop_profile gelesen).
+daily_loss_pct: 5.0
+daily_loss_basis: prev_day_balance
+overall_loss_pct: 10.0
+profit_target_pct: 10.0
+best_day_consistency_pct: 0          # FTMO 2-Step: keine Best-Day-Regel
+news_blackout_min_before: 2
+news_blackout_min_after: 2
+leverage: 100

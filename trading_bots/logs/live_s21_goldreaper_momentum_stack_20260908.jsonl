@@ -1,0 +1,394 @@
+{"ts": "2026-09-08T07:20:29.655315+00:00", "event": "startup", "config": "configs/s21b_goldreaper_momentum_stack_live.yaml", "dry_run": false, "symbols": ["XAUUSD"], "timeframes": ["H1"]}
+{"ts": "2026-09-08T07:20:29.735193+00:00", "event": "connected", "host": "localhost", "port": 8001}
+{"ts": "2026-09-08T07:20:29.841378+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T07:20:29.858647+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-08 05:00:00+00:00"}
+{"ts": "2026-09-08T07:25:29.793316+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T07:30:29.796385+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T07:35:29.845325+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T07:40:29.797398+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T07:45:29.797319+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T07:50:29.851351+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T07:55:29.800400+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T08:00:14.867880+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-08 06:00:00+00:00"}
+{"ts": "2026-09-08T08:00:29.803381+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T08:05:29.854321+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T08:10:29.806293+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T08:15:29.807225+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T08:20:29.857406+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T08:25:29.807773+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T08:30:29.810303+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T08:35:29.862376+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T08:40:29.812381+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T08:45:29.813267+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T08:50:29.863269+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T08:55:29.816285+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T09:00:14.873736+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-08 07:00:00+00:00"}
+{"ts": "2026-09-08T09:00:29.818297+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T09:05:29.868312+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T09:10:29.822327+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T09:15:29.822272+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T09:20:29.873370+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T09:25:29.824302+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T09:30:29.826357+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T09:35:29.879264+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T09:37:29.776323+00:00", "event": "shutdown"}
+{"ts": "2026-09-08T09:37:47.645160+00:00", "event": "startup", "config": "configs/s21b_goldreaper_momentum_stack_live.yaml", "dry_run": false, "symbols": ["XAUUSD"], "timeframes": ["H1"]}
+{"ts": "2026-09-08T09:37:47.727361+00:00", "event": "connected", "host": "localhost", "port": 8001}
+{"ts": "2026-09-08T09:37:47.835273+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T09:37:47.852380+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-08 07:00:00+00:00"}
+{"ts": "2026-09-08T09:42:47.786311+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T09:47:47.786275+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T09:52:47.837365+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T09:57:47.789314+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T10:00:02.796963+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-08 08:00:00+00:00"}
+{"ts": "2026-09-08T10:02:47.789311+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T10:07:47.842301+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T10:12:47.794351+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T10:17:47.794275+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T10:22:47.844397+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T10:27:47.798286+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T10:32:47.799290+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T10:37:47.851298+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T10:42:47.801371+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T10:47:47.802307+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T10:52:47.854286+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T10:57:47.806356+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T11:00:02.812720+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-08 09:00:00+00:00"}
+{"ts": "2026-09-08T11:02:47.806436+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T11:07:47.858306+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T11:12:47.809302+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T11:17:47.810293+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T11:22:47.863355+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T11:27:47.814343+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T11:32:47.815363+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T11:37:47.864345+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T11:42:47.817324+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T11:47:47.819430+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T11:52:47.872290+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T11:57:47.821288+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T12:00:02.829743+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-08 10:00:00+00:00"}
+{"ts": "2026-09-08T12:02:47.823313+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T12:07:47.871284+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T12:12:47.826389+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T12:17:47.826388+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T12:22:47.878296+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T12:27:47.829315+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T12:32:47.849378+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T12:37:47.910365+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T12:42:47.852422+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T12:47:47.843390+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T12:52:47.902328+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T12:57:47.843347+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T13:00:02.849649+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-08 11:00:00+00:00"}
+{"ts": "2026-09-08T13:02:47.825899+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T13:07:47.920315+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T13:12:47.851271+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T13:17:47.852304+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T13:22:47.901373+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T13:27:47.854300+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T13:32:47.857300+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T13:37:47.907307+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T13:42:47.862413+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T13:47:47.874446+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T13:52:47.920903+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T13:57:47.878446+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T14:00:02.890860+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-08 12:00:00+00:00"}
+{"ts": "2026-09-08T14:02:47.881375+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T14:07:47.934351+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T14:12:47.883311+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T14:17:47.884292+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T14:21:47.834507+00:00", "event": "loop_error", "symbol": "XAUUSD", "error": "Kein Tick fuer XAUUSD (Markt geschlossen/Symbol fehlt?)"}
+{"ts": "2026-09-08T14:22:47.952363+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T14:23:32.834593+00:00", "event": "health_fail"}
+{"ts": "2026-09-08T14:23:32.925825+00:00", "event": "connected", "host": "localhost", "port": 8001}
+{"ts": "2026-09-08T14:27:47.989107+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T14:32:47.981293+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T14:37:48.032368+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T14:40:32.932058+00:00", "event": "loop_error", "symbol": "XAUUSD", "error": "stream has been closed"}
+{"ts": "2026-09-08T14:40:47.930897+00:00", "event": "health_fail"}
+{"ts": "2026-09-08T14:40:47.999989+00:00", "event": "connected", "host": "localhost", "port": 8001}
+{"ts": "2026-09-08T14:42:48.052328+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T14:47:48.054299+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T14:52:48.105341+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T14:57:48.056316+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T15:00:03.062998+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-08 13:00:00+00:00"}
+{"ts": "2026-09-08T15:02:48.060388+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T15:07:48.111301+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T15:12:48.060369+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T15:17:48.062283+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T15:22:48.113289+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T15:27:48.064378+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T15:32:48.067301+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T15:37:48.115320+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T15:42:48.068368+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T15:47:48.069410+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T15:52:48.121278+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T15:57:48.073376+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T16:00:03.078177+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-08 14:00:00+00:00"}
+{"ts": "2026-09-08T16:02:48.072353+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T16:07:48.124395+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T16:12:48.076272+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T16:17:48.077281+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T16:22:48.129329+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T16:27:48.080364+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T16:32:33.039832+00:00", "event": "health_fail"}
+{"ts": "2026-09-08T16:32:33.213639+00:00", "event": "connected", "host": "localhost", "port": 8001}
+{"ts": "2026-09-08T16:32:48.269359+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T16:37:48.321393+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T16:39:18.224760+00:00", "event": "health_fail"}
+{"ts": "2026-09-08T16:39:18.600080+00:00", "event": "connected", "host": "localhost", "port": 8001}
+{"ts": "2026-09-08T16:41:33.611719+00:00", "event": "health_fail"}
+{"ts": "2026-09-08T16:41:37.210203+00:00", "event": "connected", "host": "localhost", "port": 8001}
+{"ts": "2026-09-08T16:42:52.263343+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T16:47:52.265334+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T16:52:52.315339+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T16:57:52.266298+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T17:00:07.274685+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-08 15:00:00+00:00"}
+{"ts": "2026-09-08T17:02:52.269284+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T17:07:52.319378+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T17:12:52.273431+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T17:17:52.276367+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T17:22:52.324392+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T17:27:52.275376+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T17:32:52.276332+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T17:37:52.325313+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T17:42:52.281371+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T17:47:52.282505+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T17:52:52.329371+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T17:57:52.283281+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T18:00:07.288260+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-08 16:00:00+00:00"}
+{"ts": "2026-09-08T18:02:52.282412+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T18:07:52.334309+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T18:12:52.286308+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T18:17:52.288345+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T18:22:52.340302+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T18:27:52.289381+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T18:32:52.290362+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T18:37:52.342285+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T18:42:52.294295+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T18:47:52.296393+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T18:52:52.347268+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T18:57:52.298314+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T19:00:07.304680+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-08 17:00:00+00:00"}
+{"ts": "2026-09-08T19:02:52.299303+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T19:07:52.351286+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T19:12:52.301270+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T19:17:52.302418+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T19:22:52.354399+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T19:27:52.305283+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T19:32:52.306383+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T19:37:52.359923+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T19:42:52.309306+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T19:47:52.311314+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T19:52:52.362355+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T19:57:52.314284+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T20:00:07.319761+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-08 18:00:00+00:00"}
+{"ts": "2026-09-08T20:02:52.315286+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T20:07:52.366302+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T20:12:52.318405+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T20:15:07.325265+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-08 18:15:00+00:00"}
+{"ts": "2026-09-08T20:17:52.318313+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T20:22:52.375390+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T20:27:52.322326+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T20:30:07.327742+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-08 18:30:00+00:00"}
+{"ts": "2026-09-08T20:32:52.323409+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T20:37:52.374286+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T20:42:52.326322+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T20:45:07.331412+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-08 18:45:00+00:00"}
+{"ts": "2026-09-08T20:47:52.327292+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T20:52:52.378286+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T20:57:52.330283+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T21:00:07.336532+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-08 19:00:00+00:00"}
+{"ts": "2026-09-08T21:02:52.332312+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T21:07:52.388305+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T21:12:52.335350+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T21:15:07.340857+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-08 19:15:00+00:00"}
+{"ts": "2026-09-08T21:17:52.336369+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T21:22:52.386310+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T21:27:52.337326+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T21:30:07.344955+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-08 19:30:00+00:00"}
+{"ts": "2026-09-08T21:32:52.339300+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T21:37:52.389395+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T21:42:52.343308+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T21:45:07.349793+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-08 19:45:00+00:00"}
+{"ts": "2026-09-08T21:47:52.346271+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T21:52:52.397298+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T21:57:52.347423+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T22:02:52.348390+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T22:07:52.399318+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T22:12:52.351302+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T22:17:52.352293+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T22:22:52.404302+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T22:27:52.354396+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T22:32:52.355317+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T22:37:52.410308+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T22:42:52.359302+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T22:47:52.360319+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T22:52:52.412418+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T22:57:52.365349+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T23:02:52.364302+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T23:07:52.416321+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T23:12:52.368354+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T23:17:52.369288+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T23:22:52.422364+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T23:27:52.377327+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T23:32:52.374333+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T23:37:52.423420+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T23:42:52.375410+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T23:47:52.377318+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T23:52:52.429392+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T23:57:52.381301+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T00:00:07.384461+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-08 22:00:00+00:00"}
+{"ts": "2026-09-09T00:02:52.383360+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T00:07:52.432831+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T00:12:52.384315+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T00:17:52.384339+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T00:22:52.437305+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T00:27:52.388307+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T00:32:52.388337+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T00:37:52.441375+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T00:42:52.392289+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T00:47:52.392302+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T00:52:52.444267+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T00:57:52.395304+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T01:00:07.401159+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-08 23:00:00+00:00"}
+{"ts": "2026-09-09T01:02:52.398369+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T01:07:52.448347+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T01:12:52.400281+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T01:17:52.401310+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T01:22:52.452351+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T01:27:52.406327+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T01:32:52.407290+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T01:37:52.456320+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T01:42:52.409372+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T01:47:52.411489+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T01:52:52.460325+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T01:57:52.412276+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T02:00:07.417492+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-09 00:00:00+00:00"}
+{"ts": "2026-09-09T02:02:52.414294+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T02:07:52.463299+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T02:12:52.417281+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T02:17:52.418310+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T02:22:52.470294+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T02:27:52.420302+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T02:32:52.420303+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T02:37:52.473286+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T02:42:52.423309+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T02:47:52.425343+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T02:52:52.476309+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T02:57:52.428301+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T03:00:07.433249+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-09 01:00:00+00:00"}
+{"ts": "2026-09-09T03:02:52.429404+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T03:07:52.480276+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T03:12:52.433391+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T03:17:52.432287+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T03:22:52.485395+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T03:27:52.436303+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T03:32:52.438312+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T03:37:52.488287+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T03:42:52.439316+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T03:47:52.442312+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T03:52:52.493299+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T03:57:52.444308+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T04:00:07.450220+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-09 02:00:00+00:00"}
+{"ts": "2026-09-09T04:02:52.445276+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T04:07:52.497311+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T04:12:52.447313+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T04:17:52.449334+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T04:22:52.500326+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T04:27:52.451338+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T04:32:52.453332+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T04:37:52.504317+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T04:42:52.455315+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T04:47:52.456314+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T04:52:52.508372+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T04:57:52.459267+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T05:00:07.465225+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-09 03:00:00+00:00"}
+{"ts": "2026-09-09T05:02:52.462294+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T05:07:52.511316+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T05:12:52.464326+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T05:17:52.465299+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T05:22:52.519319+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T05:27:52.467314+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T05:32:52.469385+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T05:37:52.522260+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T05:42:52.472307+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T05:47:52.473281+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T05:52:52.524326+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T05:57:52.477311+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T06:00:07.481401+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-09 04:00:00+00:00"}
+{"ts": "2026-09-09T06:02:52.478284+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T06:07:52.528376+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T06:12:52.480305+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T06:17:52.482347+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T06:22:52.533291+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T06:27:52.485320+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T06:32:52.485309+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T06:37:52.535323+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T06:42:52.488281+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T06:47:52.490327+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T06:52:52.542280+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T06:57:52.493303+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T07:00:07.498540+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-09 05:00:00+00:00"}
+{"ts": "2026-09-09T07:02:52.494298+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T07:07:52.546317+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T07:12:52.497301+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T07:17:52.497305+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T07:22:52.548315+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T07:27:52.500395+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T07:32:52.502318+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T07:37:52.553303+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T07:42:52.504326+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T07:47:52.515718+00:00", "event": "heartbeat", "equity": 100414.96, "open_positions": 0}
+{"ts": "2026-09-09T07:52:52.566789+00:00", "event": "heartbeat", "equity": 100473.88, "open_positions": 0}
+{"ts": "2026-09-09T07:57:52.515913+00:00", "event": "heartbeat", "equity": 100268.78, "open_positions": 0}
+{"ts": "2026-09-09T08:00:07.562213+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-09 06:00:00+00:00"}
+{"ts": "2026-09-09T08:02:52.509300+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T08:07:52.560286+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T08:12:52.512284+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T08:17:52.516353+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T08:22:52.563328+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T08:27:52.517375+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T08:32:52.517392+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T08:37:52.571350+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T08:42:52.521281+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T08:47:52.522332+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T08:52:52.574397+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T08:57:52.526370+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T09:00:07.530780+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-09 07:00:00+00:00"}
+{"ts": "2026-09-09T09:02:52.528291+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T09:07:52.578319+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T09:12:52.528322+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T09:17:52.530333+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T09:22:52.582330+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T09:27:52.534345+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T09:32:52.536320+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T09:37:52.586322+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T09:42:52.537271+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T09:47:52.538319+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T09:52:52.589295+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T09:57:52.540310+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T10:00:07.546312+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-09 08:00:00+00:00"}
+{"ts": "2026-09-09T10:02:52.543317+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T10:07:52.593360+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T10:12:52.546405+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T10:17:52.546338+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T10:22:52.598274+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T10:27:52.548305+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T10:32:52.553272+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T10:37:52.605327+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T10:42:52.556323+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T10:47:52.555328+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T10:52:52.607380+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T10:57:52.557283+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T11:00:07.566974+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H1", "bar": "2026-09-09 09:00:00+00:00"}
+{"ts": "2026-09-09T11:02:52.558362+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T11:07:52.610332+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T11:12:52.561316+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T11:17:52.563292+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T11:22:52.613323+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T11:27:52.566321+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T11:32:52.569300+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T11:37:52.617391+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T11:42:52.571355+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T11:47:52.570318+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}

@@ -1,0 +1,57 @@
+# analyze_7e9787b27c5c — Portierung "XAUUSD_TrendPullback_Presets_v2.mq5"
+# (extern eingereichtes MT5-EA-Snippet, Research-EA mit explizitem Preset-
+# System: H4-Regime (EMA-Slope+ADX), H1-Impulserkennung + Fibonacci-
+# Retracement-Zone, M15-Reclaim/Sweep-Trigger). Die 5 benannten Presets
+# (baseline/conservative/balanced/fast_pullback/strong_trend) sind als
+# expliziter ``risk_profile``-Auswahlparameter modelliert statt fest
+# verschmolzen (s. Docstring strategies/analyze_7e9787b27c5c.py fuer die
+# Profiltabelle und alle Annahmen/Vereinfachungen; reports/
+# analyze_7e9787b27c5c.md fuer den Review inkl. Pro-Profil-Triage).
+# Symbol/TF direkt aus dem Original: SYMBOL_NAME=XAUUSD, H4/H1/M15.
+strategy: analyze_7e9787b27c5c
+symbols:
+  - XAUUSD
+timeframes: [M15, H1, H4]
+
+risk:
+  risk_per_trade_pct: 0.5   # Original: InpRiskPerTradePct=0.50
+  daily_loss_halt_pct: 0.0
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 1         # Original: InpOnePositionOnly=true
+  streak_limiter: 0
+  prop_profile: none
+
+params:
+  risk_profile: balanced     # Default = Original-Preset-Default (PRESET_BALANCED); WFO waehlt pro Fold
+  tf_entry: M15
+  tf_impulse: H1
+  tf_trend: H4
+  trend_ema_period: 50
+  trend_adx_period: 14
+  trend_slope_bars: 8
+  trend_slope_min_atr: 0.20     # Quick-Check: unbegruendete Konstante, hier gesweept (s. param_space)
+  impulse_atr_period: 14
+  entry_atr_period: 14
+  swing_lookback_h1: 8
+  reclaim_lookback_m15: 4
+  upper_retracement_fixed: 0.618
+  invalidation_retracement: 0.786
+  pullback_range_max_ratio: 0.75  # Quick-Check: unbegruendete Konstante, hier NICHT gesweept (Scope)
+  take_profit_r_fixed: 2.00
+  min_atr_price: 1.00             # Quick-Check: unbegruendete Konstante, hier NICHT gesweept (Scope)
+  allow_long: true
+  allow_short: true
+  risk_pct: 0.005
+  use_session_filter: true
+  start_hour_utc: 8
+  end_hour_utc: 22
+  block_friday_late: true
+  friday_stop_hour_utc: 19
+
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    risk_profile: [baseline, conservative, balanced, fast_pullback, strong_trend]
+    trend_slope_min_atr: [0.10, 0.20, 0.30]

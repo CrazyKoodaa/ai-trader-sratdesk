@@ -1,0 +1,9 @@
+# configs/prop_ftmo_1step.yaml — FTMO 1-Step Challenge (SPEC §4.3 Prop-Profil)
+daily_loss_pct: 3.0
+daily_loss_basis: prev_day_balance
+overall_loss_pct: 6.0
+profit_target_pct: 10.0
+best_day_consistency_pct: 50.0       # 1-Step: bester Tag <= 50 % des Gesamtgewinns
+news_blackout_min_before: 2
+news_blackout_min_after: 2
+leverage: 100

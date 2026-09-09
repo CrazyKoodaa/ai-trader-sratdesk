@@ -1,0 +1,85 @@
+# S5 — FilteredMR (SPEC §5/S5) — XAUUSD + EURUSD, H1
+name: s5_filtered_mr
+strategy: strategies.s5_filtered_mr.S5FilteredMR
+symbols: [XAUUSD, EURUSD]
+timeframes: [H1]
+
+params:
+  risk_pct: 0.005            # 0,5 % Risiko/Trade (SPEC §0)
+  # Kontext-Gates (Pflicht)
+  adx_len: 14
+  adx_max: 25.0
+  atr_len: 14
+  atr_median_len: 20
+  ema_len: 200
+  # Signal
+  rsi_len: 14
+  rsi_oversold: 30.0
+  rsi_overbought: 70.0
+  # Exits
+  atr_mult: 1.5              # SL = 1.5 x ATR14
+  rr: 2.0                    # TP = 2 x SL (1:2 RR)
+  time_stop_bars: 48         # H1-Bars
+  # Filter-Layer (SPEC §6, A/B-schaltbar)
+  session_filter: true       # 07-21 UTC
+  session_start_utc: 7
+  session_end_utc: 21
+  use_news_filter: true      # Pflicht-Default: on
+  use_tier1_halt: true       # FOMC/NFP/CPI global
+  use_regime_filter: false   # A/B-Arm: RegimeFilter.allow_range
+  # Volume-Profile-Konfluenz-Layer (dim13 Variante b; A/B, Default AUS)
+  # F1: Entry nur am POC/HVN (±tolerance_atr×ATR); F6: Block in LVN.
+  # A/B-Variante zum Messen (PF/Expectancy-Uplift, ≥100 Trades je Arm):
+  #   vp_filter: {enabled: true, anchor: swing, lookback_bars: 120}
+  vp_filter:
+    enabled: false           # A/B: false = Verhalten unverändert
+    anchor: swing            # swing (Video-Variante) | rolling
+    lookback_bars: 120       # WFO {60,120,240}; bei swing: Obergrenze
+    entry_requires_hvn: true # F1
+    block_lvn: true          # F6
+    tolerance_atr: 0.25
+    vp_structure_levels: false  # true: SL hinter VA-Low/High (nie enger als ATR-Stop)
+
+# Kostenmodell (SPEC §1: IMMER aktiv)
+costs:
+  XAUUSD:
+    spread_points: 35
+    commission_per_lot_rt: 0.0
+    slippage_multiplier: 1.0
+  EURUSD:
+    spread_points: 2
+    commission_per_lot_rt: 7.0   # USD/Lot Round-Turn
+    slippage_multiplier: 1.0
+
+risk:
+  risk_per_trade_pct: 0.5
+  min_rr: 2.0
+  eod_flat: true
+  friday_flat: true
+  max_concurrent: 1
+
+# WFO-Param-Raeume (SPEC §5/S5)
+wfo_space:
+  rsi_len: [7, 10, 14, 21]
+  rsi_th:
+    - [25, 75]
+    - [30, 70]
+    - [35, 65]
+  adx_max: [20, 25, 30]
+  atr_mult: [1.0, 1.5, 2.0]
+  time_stop: [24, 48, 72]
+  # VP-Layer A/B-Raum (dim13 §5.1: erst enabled on/off, dann Anker/Lookback)
+  vp_filter.enabled: [false, true]
+  vp_filter.anchor: [swing, rolling]
+  vp_filter.lookback_bars: [60, 120, 240]
+
+# Meta-Layer Ablations (SPEC §6): news on/off, regime off/adx_proxy/hmm
+ablation:
+  news_filter: [on, off]
+  regime_filter: [off, adx_proxy, hmm]
+
+# --- Live (pymt5linux) ---
+# Magic Number: eindeutig pro Bot → Trade-Trennung in MT5-Statistiken/Historie
+# Registry: S1=20260901 S2=20260902 S3=20260903 S4=20260904 S5=20260905
+live:
+  magic: 20260905

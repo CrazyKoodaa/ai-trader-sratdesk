@@ -1,0 +1,42 @@
+# configs/validation_gates.yaml — Hard Gates (SPEC §7)
+# Wird von scripts/run_wfa.py geprueft (Exit 0/1).
+
+# 1. Stichprobengroesse
+min_oos_trades: 300                  # OOS-Trades gesamt
+min_oos_trades_intraday_target: 500  # angestrebt bei Intraday (kein Hard Gate)
+max_params_per_30_trades: 1          # <= 1 optimierter Parameter pro 30 Trades
+
+# 2. Kosten-Stress (PF je Faktor, run_backtest.py --stress 1,2,3)
+pf_1x_min: 1.5
+pf_2x_min: 1.2
+pf_3x_min: 1.0
+
+# 3. Walk-Forward-Effizienz
+wfe_median_min: 0.5
+wfe_folds_min_frac: 0.6              # >= 3/5 Folds mit WFE >= 0.5
+wfe_lookahead_max: 1.0               # WFE > 1.0 -> Lookahead-Verdachtspruefung
+
+# 4. Multiplizitaet / Overfitting
+dsr_min: 0.95                        # Deflated Sharpe Ratio (ehrliche Trial-Zaehlung)
+pbo_max: 0.10                        # PBO via CSCV
+pbo_S: 8
+
+# 5. Monte-Carlo
+mc_p95_maxdd_pct: 8.0                # p95-MaxDD <= 8 % Balance
+mc_n_sims: 10000
+mc_seed: 42
+
+# 6. Prop-Simulation
+prop_p_daily_breach_max: 0.05
+prop_p_overall_breach_max: 0.10
+prop_consistency_check: true         # Best-Day-Consistency-Rule pruefen
+
+# 7. Anti-Repaint
+anti_repaint_shift_test: true        # +1 Bar Shift -> Ergebnis darf nicht kollabieren
+deterministic_rerun: true            # gleiche Daten+Config = identisches Ergebnis
+
+# 8. Richtungs-Reporting
+long_short_separate_report: true     # Long-Bias-Inflation dokumentieren
+
+# 9. DST
+dst_weeks_backtest: true             # Maerz/November-Wochen fehlerfrei

@@ -1,0 +1,97 @@
+# S1 — TrendPullback (XAUUSD, H4; Bias D1) — SPEC §5/S1, Basis dim01 "V5"
+# Baseline-Vergleichsarm "V1" (DI-Cross D1 pur, SL 2×ATR, TP 2:1) via variant: v1
+# — V5 muss V1 OOS schlagen, sonst V1 deployen (SPEC §5/S1).
+
+strategy: strategies.s1_trend_pullback.TrendPullback
+name: s1_trend_pullback
+symbols: [XAUUSD]
+timeframes: [H4, D1]          # required_timeframes
+
+params:
+  symbol: XAUUSD
+  variant: v5                 # v5 | v1 (Vergleichsarm)
+  risk_pct: 0.005             # 0.5 % Risiko/Trade (SPEC §0)
+  min_rr: 2.0
+
+  # --- Bias (D1), stabil laut SPEC ---
+  sma_len: 200
+  atr_len: 14
+  adx_len: 14
+  adx_gate: 20.0              # Regime-Gate, kein Entry-Filter
+
+  # --- Setup/Trigger (H4) ---
+  ema_len: 20
+  fib_lo: 0.382
+  fib_hi: 0.618
+  ema_band_atr: 0.5           # EMA20-Vicinity für EMA20∩Fib-Zone
+  swing_left: 2
+  swing_right: 2
+  touch_max_age: 5
+
+  # --- Exits ---
+  sl_atr: 1.5                 # SL = max(sl_atr×ATR14, hinter Swing-Extrem)
+  tp1_r: 2.0                  # TP1 2R (50 %), Runner Trail an H4-Pivots
+  time_exit: 30               # H4-Bars
+
+  # --- V1-Vergleichsarm ---
+  v1_sl_atr: 2.0
+  v1_tp_r: 2.0
+
+  # --- Filter-Layer (A/B, einzeln abschaltbar, SPEC §6) ---
+  filters:
+    session_filter: true      # Entries nur 07–17 UTC (nur V5; V1 = "pur")
+    session_start_utc: "07:00"
+    session_end_utc: "17:00"
+    news_filter: true         # Engine-seitig (USD), Default on (Pflicht)
+    regime_filter: "off"      # off | adx_proxy | hmm — State kommt von Engine
+    friday_flat: true
+
+  # --- Volume-Profile-Konfluenz-Layer (dim13 Variante b; A/B, Default AUS) ---
+  # F1: Entry nur am POC/HVN (±tolerance_atr×ATR); F6: Block in LVN.
+  # A/B-Variante zum Messen (PF/Expectancy-Uplift, ≥100 Trades je Arm):
+  #   vp_filter: {enabled: true, anchor: swing, lookback_bars: 120}
+  vp_filter:
+    enabled: false            # A/B: false = Verhalten unverändert
+    anchor: swing             # swing (Video-Variante) | rolling
+    lookback_bars: 120        # WFO {60,120,240}; bei swing: Obergrenze
+    entry_requires_hvn: true  # F1
+    block_lvn: true           # F6
+    tolerance_atr: 0.25
+    vp_structure_levels: false  # true: SL hinter VA-Low/High (nie enger als ATR-Stop)
+
+# WFO-Param-Räume (SPEC §5/S1); stabil: SMA200, ATR14, RR>=2
+wfo:
+  ema_len: [20, 30, 50]
+  sl_atr: [1.25, 1.5, 2.0, 2.5]
+  time_exit: [15, 30, 60]
+  tp1_r: [1.5, 2.0, 2.5]
+  # VP-Layer A/B-Raum (dim13 §5.1: erst enabled on/off, dann Anker/Lookback)
+  vp_filter.enabled: [false, true]
+  vp_filter.anchor: [swing, rolling]
+  vp_filter.lookback_bars: [60, 120, 240]
+
+risk:
+  risk_per_trade_pct: 0.5
+  min_rr: 2.0
+  daily_loss_halt_pct: 1.5
+  eod_flat: true
+  eod_flat_time_ny: "16:55"
+  friday_flat: true
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+costs:                        # Kostenmodell IMMER aktiv (SPEC §1)
+  XAUUSD:
+    spread_points: 35
+    commission_per_lot_rt: 0.0
+    slippage_multiplier: 1.0  # Stress: 0.5/1/2/3
+    swap_long_pts: 0.0
+    swap_short_pts: 0.0
+    triple_swap_weekday: 2
+
+# --- Live (pymt5linux) ---
+# Magic Number: eindeutig pro Bot → Trade-Trennung in MT5-Statistiken/Historie
+# Registry: S1=20260901 S2=20260902 S3=20260903 S4=20260904 S5=20260905
+live:
+  magic: 20260901

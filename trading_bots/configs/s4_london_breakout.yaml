@@ -1,0 +1,91 @@
+# S4 — LondonBreakout (USDJPY, H1) — SPEC §5/S4
+strategy: s4_london_breakout
+symbols:
+  - USDJPY
+timeframes: [H1, H4, D1]
+
+# Risiko (SPEC §0/§4.3: 0.5 % pro Trade)
+risk:
+  risk_per_trade_pct: 0.5
+  min_rr: 1.5                   # TP 1.5R–2R (Param tp_r)
+  daily_loss_halt_pct: 1.5
+  eod_flat: true                # EOD-Flat 21:00 UTC (Fix vs. Trade-Desk)
+  eod_flat_time_utc: "21:00"
+  friday_flat: true
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+# Kostenmodell (SPEC §1: immer aktiv)
+costs:
+  USDJPY:
+    spread_points: 20           # 20 Pts = 2 Pips (pip_size 0.01)
+    commission_per_lot_rt: 7.0  # 7 USD/Lot RT
+    slippage_multiplier: 1.0
+
+# Strategie-Parameter (Defaults = SPEC §5/S4)
+params:
+  range_start: "00:00"          # Range 00:00–06:59 UTC (H1)
+  range_end: "07:00"            # exklusiv
+  entry_start: "07:00"          # Entry-Fenster 07:00–16:59 UTC
+  entry_end: "17:00"            # exklusiv
+  require_full_range: true
+  eod_flat_utc: "21:00"
+  tp_r: 2.0                     # TP 1.5R–2R (WFO)
+  entry_mode: close             # close | retest (Archetyp B: Limit an Range-Grenze)
+  retest_sl_pips: 10
+  retest_expiry_bars: 6
+  pip_size: 0.01                # USDJPY
+  # Filter-Layer (einzeln schaltbar, SPEC §5/S4)
+  atr_filter: on                # (a) ATR14(D1) > 20d-Median
+  atr_len: 14
+  atr_med_len: 20
+  ema_filter: on                # (b) H4-EMA200-Alignment
+  ema_len: 200
+  range_band: on                # (c) range_min_pips <= Range <= range_max_adr x ADR20
+  range_min_pips: 20
+  range_max_adr: 0.5
+  adr_len: 20
+  skip_monday: on               # (d) Skip Montag (UTC)
+  risk_pct: 0.005
+
+# Meta-Layer (SPEC §6)
+meta_layer:
+  news_filter: on               # (e) Pflicht-Default on
+  regime_filter: off
+  cot_bias: off                 # A/B (nur Forex, scripts/fetch_cot.py)
+
+# WFO-Raeume (SPEC §5/S4)
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    tp_r: [1.5, 2.0]
+    range_min_pips: [15, 20, 25]
+    range_max_adr: [0.4, 0.5, 0.6]
+    atr_filter: [off, on]
+    ema_filter: [off, on]
+    skip_monday: [off, on]
+    entry_mode: [close, retest]
+
+# --- Live (pymt5linux) ---
+# Magic Number: eindeutig pro Bot → Trade-Trennung in MT5-Statistiken/Historie
+# Registry: S1=20260901 S2=20260902 S3=20260903 S4=20260904 S5=20260905
+# Bruecke: WINEPREFIX=~/.mt5 wine "C:\Python313\python.exe" -m pymt5linux
+#          --host localhost --port 8001 "C:\Python313\python.exe" (siehe AGENTS.md)
+# Zweiter Bot auf demselben Konto: David V2 (TrendPullback), Magic 100042 —
+# eigenstaendiger Prozess, siehe Desktop/tagebuch/David-V2-Ben.
+live:
+  host: localhost
+  port: 8001
+  magic: 20260904
+  poll_seconds: 15                # Sekunden zwischen zwei Polls (H1-Strategie, kein Grund fuer straffer)
+  health_interval_seconds: 45
+  heartbeat_seconds: 1800          # "Bot laeuft"-Zeile im Traderbook-Log (Dashboard-Equity-Kurve)
+  history_bars: 800
+  logs_dir: logs                  # jsonl + Traderbook-Log (.log) + Journal (trades_*.csv)
+  deviation: 20                   # max. Slippage in Punkten
+  flatten_on_stop: false          # SIGINT/SIGTERM schliesst NICHT automatisch (SL/TP bleiben serverseitig aktiv)
+  # SICHERHEITSSCHALTER: der Bot verweigert den Start auf einem Echtgeldkonto,
+  # solange dies nicht explizit auf true gesetzt wird (core/live.py: _enforce_account_safety).
+  allow_real_account: false

@@ -1,0 +1,54 @@
+# analyze_98946a741100 — Portierung "Universal Aggressive Trend MACD v3.3 -
+# Trailing TP" (extern eingereichtes Pine-Skript). s. strategies/
+# analyze_98946a741100.py fuer Annahmen/Vereinfachungen, reports/
+# analyze_98946a741100.md fuer den Review inkl. Triage-Ergebnis.
+# Original macht keine Symbol-/TF-Vorgabe -> Default XAUUSD H1 (liquides
+# Trend-Asset, Standard-Instrument dieses Projekts).
+strategy: analyze_98946a741100
+symbols:
+  - XAUUSD
+timeframes: [H1]
+
+risk:
+  risk_per_trade_pct: 0.5
+  daily_loss_halt_pct: 0.0
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 1     # Original: pyramiding=0, kein Stacking
+  streak_limiter: 0
+  prop_profile: none
+
+params:
+  primary_tf: H1
+  fast_len: 14
+  slow_len: 39
+  signal_len: 9
+  use_macd_arming: true
+  macd_valid_bars: 10
+  use_continuation: true
+  continuation_len: 5
+  cooldown_bars: 3
+  allow_longs: true
+  allow_shorts: true
+  trend_ema_len: 99
+  use_ema_slope: true
+  ema_slope_bars: 3
+  adx_len: 11
+  adx_threshold: 20.0
+  use_adx_filter: true
+  use_volume_filter: true
+  vol_sma_len: 22
+  vol_multiplier: 0.6
+  atr_len: 18
+  emergency_mult: 2.5
+  min_rr: 1.0            # Naeherung: Aktivierungsschwelle des Original-Trailing-TP
+  trail_atr_mult: 1.0    # Naeherung: Original-Giveback-Prozentsatz (3%)
+  risk_pct: 0.005
+
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    adx_threshold: [15.0, 20.0, 25.0]
+    min_rr: [1.0, 1.5]
+    trail_atr_mult: [1.0, 1.5]

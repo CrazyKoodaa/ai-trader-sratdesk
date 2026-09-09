@@ -1,0 +1,69 @@
+# S21b — Gold-Reaper-Konzept (EMA-Stack-Momentum, XAUUSD H1), LIVE-TEST mit
+# reduziertem max_concurrent (5 statt 10) — s. strategies/s21_goldreaper_momentum_stack.py
+# fuer die volle Herleitung (Verhaltens-Reverse-Engineering aus MQL5-Signal
+# #2265877, 855 echte Trades, kein Bytecode/keine Produktseite als Quelle).
+#
+# WFA (reports/wfa_s21_goldreaper_xauusd_mc5.log, 20 Folds, n(OOS)=1169):
+# 7 von 10 Gates bestanden. PF(1x)=1.433 (<1.5 FAIL), PBO=0.343 (FAIL),
+# MC p95-MaxDD=8.56% (<8.0% FAIL, aber verbessert von 8.93% bei max_concurrent=10).
+# DSR=1.000 (PASS, beispiellos in diesem Projekt), PF(2x)=1.313/PF(3x)=1.208
+# (beide PASS — Edge uebersteht Kosten-Stresstest). Wie S10 (auch 7/10, auch
+# live als Test): NICHT alle Gates bestanden -> bewusst reduziertes Risiko,
+# Beobachtungs-Deploy, keine volle Freigabe.
+#
+# Parameter = juengster Fold (19, IS 2024-07..2026-07, OOS-PF 1.26) — Standard-
+# Praxis bei WFA-basiertem Live-Deploy: zuletzt gewaehlte Best-Params nehmen,
+# nicht global ueber alle Folds gemittelt.
+strategy: s21_goldreaper_momentum_stack
+symbols:
+  - XAUUSD
+timeframes: [H1]
+
+risk:
+  risk_per_trade_pct: 0.3
+  daily_loss_halt_pct: 0.0
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 5        # reduziert von 10 (mc5-WFA-Variante)
+  streak_limiter: 0
+  prop_profile: none
+
+params:
+  primary_tf: H1
+  ema_fast: 20
+  ema_mid: 50
+  ema_slow: 200
+  rsi_len: 14
+  rsi_min: 55.0             # Fold 19 (juengster Fold)
+  require_mid_slow_align: true
+  require_cross: true
+  atr_len: 14
+  atr_vol_min_percentile: 0.0
+  sl_atr_mult: 1.5          # Fold 19
+  trail_atr_mult: 3.0
+  min_rr: 1.5               # Fold 19
+  risk_pct: 0.003            # klein: Strategie stapelt bewusst mehrere Positionen
+
+# --- Live (pymt5linux) ---
+# Magic Number: eindeutig pro Bot -> Trade-Trennung in MT5-Statistiken/Historie
+# Registry: S1=20260901 S2=20260902 S3=20260903 S4=20260904 S5=20260905
+#           S4-XAU=20260906 S6=20260906 S7/S8=20260907 S10-NZDUSD=20260910
+#           S21b-GoldReaper=20260911 (neu)
+# Bruecke: WINEPREFIX=~/.mt5 wine "C:\Python313\python.exe" -m pymt5linux
+#          --host localhost --port 8001 "C:\Python313\python.exe" (siehe AGENTS.md)
+# Andere Bots auf demselben Konto: S4-USDJPY Magic 20260904, David V2 Magic
+# 100042, S10-NZDUSD Magic 20260910.
+live:
+  host: localhost
+  port: 8001
+  magic: 20260911
+  poll_seconds: 15                # H1-Strategie, kein Grund fuer straffer (wie S4-XAU)
+  health_interval_seconds: 45
+  heartbeat_seconds: 300
+  history_bars: 800               # > ema_slow*2=400 + Puffer (s. Strategie-_window)
+  logs_dir: logs
+  deviation: 20
+  flatten_on_stop: false          # SIGINT/SIGTERM schliesst NICHT automatisch (SL/Trail bleiben serverseitig aktiv)
+  # SICHERHEITSSCHALTER: der Bot verweigert den Start auf einem Echtgeldkonto,
+  # solange dies nicht explizit auf true gesetzt wird (core/live.py: _enforce_account_safety).
+  allow_real_account: false

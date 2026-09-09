@@ -1,0 +1,60 @@
+{"ts": "2026-09-07T14:05:42.085462+00:00", "event": "startup", "config": "configs/s10_ema_cross_nzdusd_live.yaml", "dry_run": true, "symbols": ["NZDUSD"], "timeframes": ["H4"]}
+{"ts": "2026-09-07T14:05:42.159696+00:00", "event": "connected", "host": "localhost", "port": 8001}
+{"ts": "2026-09-07T14:05:42.266294+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-07T14:05:42.283823+00:00", "event": "new_bar", "symbol": "NZDUSD", "tf": "H4", "bar": "2026-09-07 09:00:00+00:00"}
+{"ts": "2026-09-07T14:05:42.284108+00:00", "event": "shutdown"}
+{"ts": "2026-09-07T14:09:04.466187+00:00", "event": "startup", "config": "configs/s10_ema_cross_nzdusd_live.yaml", "dry_run": false, "symbols": ["NZDUSD"], "timeframes": ["H4"]}
+{"ts": "2026-09-07T14:09:04.543175+00:00", "event": "connected", "host": "localhost", "port": 8001}
+{"ts": "2026-09-07T14:09:04.648294+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-07T14:09:04.663338+00:00", "event": "new_bar", "symbol": "NZDUSD", "tf": "H4", "bar": "2026-09-07 09:00:00+00:00"}
+{"ts": "2026-09-07T14:39:04.651500+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-07T15:09:04.656282+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-07T15:39:04.661325+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-07T16:09:04.663346+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-07T16:39:04.670324+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-07T17:00:04.677600+00:00", "event": "new_bar", "symbol": "NZDUSD", "tf": "H4", "bar": "2026-09-07 13:00:00+00:00"}
+{"ts": "2026-09-07T17:09:04.672297+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-07T17:39:04.677298+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-07T18:09:04.683420+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-07T18:39:04.689391+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-07T19:09:04.690329+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-07T19:39:04.696378+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-07T20:09:04.697295+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-07T20:39:04.701294+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-07T21:00:05.691870+00:00", "event": "new_bar", "symbol": "NZDUSD", "tf": "H4", "bar": "2026-09-07 17:00:00+00:00"}
+{"ts": "2026-09-07T21:09:04.705288+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-07T21:39:04.711310+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-07T22:09:04.716348+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-07T22:39:04.717308+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-07T23:09:04.725311+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-07T23:39:04.731332+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T00:09:04.730488+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T00:39:04.736408+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T01:00:04.744177+00:00", "event": "new_bar", "symbol": "NZDUSD", "tf": "H4", "bar": "2026-09-07 21:00:00+00:00"}
+{"ts": "2026-09-08T01:09:04.741779+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T01:39:04.743285+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T02:09:04.750306+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T02:39:04.749341+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T03:09:04.755280+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T03:39:04.758323+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T04:09:04.762311+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T04:39:04.767364+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T05:00:04.773740+00:00", "event": "new_bar", "symbol": "NZDUSD", "tf": "H4", "bar": "2026-09-08 01:00:00+00:00"}
+{"ts": "2026-09-08T05:09:04.770313+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T05:39:04.776273+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T06:09:04.778333+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T06:39:04.787310+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T07:09:04.788334+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T07:39:04.789374+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T08:09:04.795276+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T08:39:04.798410+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T09:00:04.807297+00:00", "event": "new_bar", "symbol": "NZDUSD", "tf": "H4", "bar": "2026-09-08 05:00:00+00:00"}
+{"ts": "2026-09-08T09:09:04.801291+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T09:37:34.706156+00:00", "event": "loop_error", "symbol": "NZDUSD", "error": "Kein Tick fuer NZDUSD (Markt geschlossen/Symbol fehlt?)"}
+{"ts": "2026-09-08T09:39:04.809362+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T10:09:04.810290+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T10:39:04.815316+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T11:09:04.820371+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T11:39:04.823328+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T12:09:04.826302+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T12:39:04.855417+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}

@@ -1,0 +1,79 @@
+# S8 — DayFlow VWAP Relay (GBPUSD, M5) — Portierung von TradingView
+# "DayFlow VWAP Relay — Majors" (exlux, Pine v6, MPL-2.0).
+# Zwei Fixes ggue. Original vor dem WFA-Test (s. strategies/s8_dayflow_vwap_relay.py):
+#   1. SL/TP fix bei Entry (Engine haelt Position.sl/tp fest, kein Live-Nachziehen)
+#   2. EOD-Flat ueber risk.eod_flat_time_utc ergaenzt (Original: kein Zeit-Exit)
+# EURUSD hat in diesem Projekt keine M5-Daten (nur H1) -> GBPUSD gewaehlt
+# (naechstliquideres Major mit M5-Historie).
+strategy: s8_dayflow_vwap_relay
+symbols:
+  - GBPUSD
+timeframes: [M5]
+
+risk:
+  risk_per_trade_pct: 0.5
+  min_rr: 1.0                     # tp_atr/sl_atr ~1.5 (Param), kein festes RR-Gate
+  daily_loss_halt_pct: 1.5
+  eod_flat: true                  # Fix #2: im Original fehlend
+  eod_flat_time_utc: "17:00"      # = sess_end (Session-Ende)
+  friday_flat: true
+  max_concurrent: 1               # ersetzt das Original-Reversal-Flip (s. Docstring)
+  streak_limiter: 0
+  prop_profile: none
+
+costs:
+  GBPUSD:
+    spread_points: 12             # wie configs/common.yaml
+    commission_per_lot_rt: 0.0
+    slippage_multiplier: 1.0
+
+params:
+  primary_tf: M5
+  sig_len: 63
+  stdev_mult: 1.0
+  exp_gate: 0.95                 # Median der beobachteten expansion-Verteilung (TWAP-Fallback)
+  micro_span: 10
+  micro_gate: 0.20
+  sess_start: "07:00"            # UTC, London-NY-Overlap-Fenster (Original: "0700-1700")
+  sess_end: "17:00"
+  atr_len: 14
+  sl_atr: 1.2
+  tp_atr: 1.8
+  cooldown_bars: 10
+  risk_pct: 0.005
+
+meta_layer:
+  news_filter: on
+  regime_filter: off
+
+# WFO-Raeume — Original-Defaults als Zentrum, moderate Nachbarschaft.
+# Bewusst kein riesiges Grid (Lehre aus S4/XAUUSD: 576 Kombis mit engen
+# SL-Parametern erzeugten ein Backtester-Artefakt statt echten Edge).
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    exp_gate: [0.7, 0.95, 1.2]      # an reale expansion-Verteilung angepasst (TWAP-Fallback, s. Docstring)
+    stdev_mult: [0.8, 1.0, 1.2]
+    sl_atr: [1.0, 1.2, 1.5]
+    tp_atr: [1.5, 1.8, 2.2]
+    micro_gate: [0.10, 0.20, 0.30]
+
+# --- Live (pymt5linux) — NUR VORBEREITUNG, NICHT STARTEN vor WFA-Freigabe ---
+# Registry: S1=20260901 S2=20260902 S3=20260903 S4=20260904 S5=20260905
+#           S6=20260906 S7=20260907 S10=20260910 S21b=20260911 S4-XAU=20260912
+#           S8=20260913 (2026-09-08 korrigiert: war 20260907, kollidierte mit
+#           S7 — beide Werte waren unabhaengig als "naechste freie Magic"
+#           vergeben worden, s. dashboard.py LIVE_CONFIGS-Kommentar)
+live:
+  host: localhost
+  port: 8001
+  magic: 20260913
+  poll_seconds: 15
+  health_interval_seconds: 45
+  heartbeat_seconds: 300
+  history_bars: 800
+  logs_dir: logs
+  deviation: 20
+  flatten_on_stop: false
+  allow_real_account: false

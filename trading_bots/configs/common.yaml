@@ -1,0 +1,360 @@
+# configs/common.yaml — Basis-Konfiguration (Pfade, Kosten je Symbol, Zeitzonen)
+# Wird von scripts/run_backtest.py / run_wfa.py als --common geladen.
+# Strategie-Configs duerfen Werte ueberschreiben (Merge in run_backtest).
+
+paths:
+  data_dir: data
+  reports_dir: reports
+  logs_dir: logs
+  news_cache: data/news
+  dukascopy_cache: data/dukascopy_cache
+
+# Zeitzone-Defaults (SPEC §1: intern IMMER UTC tz-aware; Sessions via zoneinfo)
+timezone:
+  internal: UTC
+  session_new_york: America/New_York
+  session_london: Europe/London
+  server_day_offset_hours: 0        # Server-Tag = UTC-Tag + Offset (Backtest-Konvention)
+  weekend_close_fri_hour_utc: 21    # Gap-Audit: Fr 21:00 UTC - So 21:00 UTC geschlossen
+  weekend_open_sun_hour_utc: 21
+
+# Kosten je Symbol (Defaults — Backtest-Kostenmodell ist IMMER aktiv, SPEC §1)
+# point_value: Wert einer 1.0-Preisbewegung je 1.0 Lot in QUOTIERUNGS-Waehrung
+#   (Standard-Lot 100k Basis / 100 oz Gold). point_value x account_ccy_rate
+#   ergibt den Wert in Kontowaehrung (USD). Statische Naeherungsraten
+#   (Stand 2026-09): JPY 0.0067, CHF 1.13, CAD 0.74.
+# spread_points: typischer Spread in MT5-Punkten (point = kleinste Preiseinheit)
+symbols:
+  XAUUSD:
+    point: 0.01
+    digits: 2
+    point_value: 100.0            # 1 Lot = 100 oz -> 100 USD je 1.0 Preisbewegung
+    spread_points: 35             # ~0.35 USD
+    commission_per_lot_rt: 0.0
+    swap_long_pts: -40.0
+    swap_short_pts: 20.0
+    triple_swap_weekday: 2
+    volume_step: 0.01
+  # Nachfolgend: Silber/Platin/Palladium, live von MT5 abgefragt
+  # (core.connector.symbol_info/symbol_info_tick, s. reports/... Portfolio-
+  # Pooling-Untersuchung) -- point_value = contract_size (wie bei XAUUSD:
+  # $ je 1.0 Preisbewegung x 1 Lot), spread_points aus Live-Snapshot
+  # Bid/Ask, swap direkt aus MT5 (swap_mode=1 = Punkte, keine Umrechnung
+  # noetig).
+  XAGUSD:
+    point: 0.001
+    digits: 3
+    point_value: 5000.0           # 1 Lot = 5000 oz
+    spread_points: 66             # Live-Snapshot ~0.066 USD
+    commission_per_lot_rt: 0.0
+    swap_long_pts: -2.3
+    swap_short_pts: 0.2
+    triple_swap_weekday: 2
+    volume_step: 0.01
+  XPTUSD:
+    point: 0.001
+    digits: 3
+    point_value: 1.0              # Broker-Kontraktgroesse 1 oz/Lot (MT5 contract_size)
+    spread_points: 3140           # Live-Snapshot ~3.14 USD
+    commission_per_lot_rt: 0.0
+    swap_long_pts: 0.0
+    swap_short_pts: 0.0
+    triple_swap_weekday: 2
+    volume_step: 0.1
+  XPDUSD:
+    point: 0.001
+    digits: 3
+    point_value: 1.0
+    spread_points: 3000           # Live-Snapshot ~3.00 USD
+    commission_per_lot_rt: 0.0
+    swap_long_pts: 0.0
+    swap_short_pts: 0.0
+    triple_swap_weekday: 2
+    volume_step: 0.1
+    volume_min: 0.01
+    volume_max: 100.0
+  US100:
+    point: 0.01
+    digits: 2
+    point_value: 1.0              # 1 USD je Indexpunkt je Lot (brokerabhaengig!)
+    spread_points: 120            # ~1.20 USD
+    commission_per_lot_rt: 0.0
+    swap_long_pts: -300.0
+    swap_short_pts: 100.0
+    triple_swap_weekday: 2
+    volume_step: 0.01
+    volume_min: 0.01
+    volume_max: 100.0
+  NAS100: # Alias — manche Broker nutzen NAS100 statt US100
+    point: 0.01
+    digits: 2
+    point_value: 1.0
+    spread_points: 120
+    commission_per_lot_rt: 0.0
+    swap_long_pts: -300.0
+    swap_short_pts: 100.0
+    triple_swap_weekday: 2
+    volume_step: 0.01
+    volume_min: 0.01
+    volume_max: 100.0
+  EURUSD:
+    point: 0.00001
+    digits: 5
+    point_value: 100000.0         # 1 Lot = 100k EUR -> 100k USD je 1.0 Preisbewegung
+    spread_points: 8              # ~0.8 Pip
+    commission_per_lot_rt: 0.0
+    swap_long_pts: -65.0
+    swap_short_pts: 30.0
+    triple_swap_weekday: 2
+    volume_step: 0.01
+    volume_min: 0.01
+    volume_max: 100.0
+  GBPUSD:
+    point: 0.00001
+    digits: 5
+    point_value: 100000.0
+    spread_points: 12
+    commission_per_lot_rt: 0.0
+    swap_long_pts: -35.0
+    swap_short_pts: 5.0
+    triple_swap_weekday: 2
+    volume_step: 0.01
+    volume_min: 0.01
+    volume_max: 100.0
+  USDJPY:
+    point: 0.001
+    digits: 3
+    point_value: 100000.0         # 100k JPY je 1.0 Preisbewegung je Lot
+    account_ccy_rate: 0.0067      # JPY -> USD (~149)
+    spread_points: 10
+    commission_per_lot_rt: 0.0
+    swap_long_pts: 50.0
+    swap_short_pts: -90.0
+    triple_swap_weekday: 2
+    volume_step: 0.01
+    volume_min: 0.01
+    volume_max: 100.0
+  USDCHF:
+    point: 0.00001
+    digits: 5
+    point_value: 100000.0         # 100k CHF je 1.0
+    account_ccy_rate: 1.13        # CHF -> USD (~0.88)
+    spread_points: 12
+    commission_per_lot_rt: 0.0
+    swap_long_pts: 25.0
+    swap_short_pts: -55.0
+    triple_swap_weekday: 2
+    volume_step: 0.01
+    volume_min: 0.01
+    volume_max: 100.0
+  AUDUSD:
+    point: 0.00001
+    digits: 5
+    point_value: 100000.0
+    spread_points: 12
+    commission_per_lot_rt: 0.0
+    swap_long_pts: -30.0
+    swap_short_pts: 5.0
+    triple_swap_weekday: 2
+    volume_step: 0.01
+    volume_min: 0.01
+    volume_max: 100.0
+  USDCAD:
+    point: 0.00001
+    digits: 5
+    point_value: 100000.0         # 100k CAD je 1.0
+    account_ccy_rate: 0.74        # CAD -> USD (~1.35)
+    spread_points: 14
+    commission_per_lot_rt: 0.0
+    swap_long_pts: 5.0
+    swap_short_pts: -35.0
+    triple_swap_weekday: 2
+    volume_step: 0.01
+    volume_min: 0.01
+    volume_max: 100.0
+  NZDUSD:
+    point: 0.00001
+    digits: 5
+    point_value: 100000.0
+    spread_points: 16
+    commission_per_lot_rt: 0.0
+    swap_long_pts: -25.0
+    swap_short_pts: 0.0
+    triple_swap_weekday: 2
+    volume_step: 0.01
+    volume_min: 0.01
+    volume_max: 100.0
+  EURJPY:
+    point: 0.001
+    digits: 3
+    point_value: 100000.0         # 100k JPY je 1.0
+    account_ccy_rate: 0.0067      # JPY -> USD
+    spread_points: 15
+    commission_per_lot_rt: 0.0
+    swap_long_pts: 20.0
+    swap_short_pts: -60.0
+    triple_swap_weekday: 2
+    volume_step: 0.01
+    volume_min: 0.01
+    volume_max: 100.0
+  GBPJPY:
+    point: 0.001
+    digits: 3
+    point_value: 100000.0         # 100k JPY je 1.0
+    account_ccy_rate: 0.0067      # JPY -> USD
+    spread_points: 20
+    commission_per_lot_rt: 0.0
+    swap_long_pts: 30.0
+    swap_short_pts: -80.0
+    triple_swap_weekday: 2
+    volume_step: 0.01
+    volume_min: 0.01
+    volume_max: 100.0
+
+  # --- Kreuz-Paare (neu, breiteres Trendfolge-Universum) ---
+  # Spread/Swap sind grobe, plausible Schaetzwerte (keine Live-Quotes) —
+  # ausreichend fuer Kostenmodell-Groessenordnung im Backtest, nicht fuer
+  # Live-Praezision. account_ccy_rate = Quote-Waehrung -> USD (Kontowaehrung),
+  # ungefaehre Kurse Stand dieser Recherche.
+  AUDCAD:
+    point: 0.00001
+    digits: 5
+    point_value: 100000.0
+    account_ccy_rate: 0.74        # CAD -> USD
+    spread_points: 20
+    commission_per_lot_rt: 0.0
+    swap_long_pts: -10.0
+    swap_short_pts: -10.0
+    triple_swap_weekday: 2
+    volume_step: 0.01
+    volume_min: 0.01
+    volume_max: 100.0
+  AUDCHF:
+    point: 0.00001
+    digits: 5
+    point_value: 100000.0
+    account_ccy_rate: 1.13        # CHF -> USD
+    spread_points: 25
+    commission_per_lot_rt: 0.0
+    swap_long_pts: -15.0
+    swap_short_pts: -10.0
+    triple_swap_weekday: 2
+    volume_step: 0.01
+    volume_min: 0.01
+    volume_max: 100.0
+  AUDJPY:
+    point: 0.001
+    digits: 3
+    point_value: 100000.0
+    account_ccy_rate: 0.0067      # JPY -> USD
+    spread_points: 18
+    commission_per_lot_rt: 0.0
+    swap_long_pts: 5.0
+    swap_short_pts: -40.0
+    triple_swap_weekday: 2
+    volume_step: 0.01
+    volume_min: 0.01
+    volume_max: 100.0
+  AUDNZD:
+    point: 0.00001
+    digits: 5
+    point_value: 100000.0
+    account_ccy_rate: 0.60        # NZD -> USD
+    spread_points: 25
+    commission_per_lot_rt: 0.0
+    swap_long_pts: -15.0
+    swap_short_pts: -10.0
+    triple_swap_weekday: 2
+    volume_step: 0.01
+    volume_min: 0.01
+    volume_max: 100.0
+  CADCHF:
+    point: 0.00001
+    digits: 5
+    point_value: 100000.0
+    account_ccy_rate: 1.13        # CHF -> USD
+    spread_points: 25
+    commission_per_lot_rt: 0.0
+    swap_long_pts: -10.0
+    swap_short_pts: -15.0
+    triple_swap_weekday: 2
+    volume_step: 0.01
+    volume_min: 0.01
+    volume_max: 100.0
+  EURAUD:
+    point: 0.00001
+    digits: 5
+    point_value: 100000.0
+    account_ccy_rate: 0.65        # AUD -> USD
+    spread_points: 20
+    commission_per_lot_rt: 0.0
+    swap_long_pts: -15.0
+    swap_short_pts: -5.0
+    triple_swap_weekday: 2
+    volume_step: 0.01
+    volume_min: 0.01
+    volume_max: 100.0
+  EURCAD:
+    point: 0.00001
+    digits: 5
+    point_value: 100000.0
+    account_ccy_rate: 0.74        # CAD -> USD
+    spread_points: 20
+    commission_per_lot_rt: 0.0
+    swap_long_pts: -20.0
+    swap_short_pts: 0.0
+    triple_swap_weekday: 2
+    volume_step: 0.01
+    volume_min: 0.01
+    volume_max: 100.0
+  EURCHF:
+    point: 0.00001
+    digits: 5
+    point_value: 100000.0
+    account_ccy_rate: 1.13        # CHF -> USD
+    spread_points: 15
+    commission_per_lot_rt: 0.0
+    swap_long_pts: -20.0
+    swap_short_pts: -5.0
+    triple_swap_weekday: 2
+    volume_step: 0.01
+    volume_min: 0.01
+    volume_max: 100.0
+  EURGBP:
+    point: 0.00001
+    digits: 5
+    point_value: 100000.0
+    account_ccy_rate: 1.27        # GBP -> USD
+    spread_points: 15
+    commission_per_lot_rt: 0.0
+    swap_long_pts: -20.0
+    swap_short_pts: 0.0
+    triple_swap_weekday: 2
+    volume_step: 0.01
+    volume_min: 0.01
+    volume_max: 100.0
+  EURNZD:
+    point: 0.00001
+    digits: 5
+    point_value: 100000.0
+    account_ccy_rate: 0.60        # NZD -> USD
+    spread_points: 30
+    commission_per_lot_rt: 0.0
+    swap_long_pts: -20.0
+    swap_short_pts: -10.0
+    triple_swap_weekday: 2
+    volume_step: 0.01
+    volume_min: 0.01
+    volume_max: 100.0
+  USTEC:
+    point: 0.01
+    digits: 2
+    point_value: 1.0              # wie US100/NAS100
+    spread_points: 150
+    commission_per_lot_rt: 0.0
+    swap_long_pts: -300.0
+    swap_short_pts: 100.0
+    triple_swap_weekday: 2
+    volume_step: 0.01
+    volume_min: 0.01
+    volume_max: 100.0

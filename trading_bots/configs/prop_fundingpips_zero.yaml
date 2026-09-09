@@ -1,0 +1,9 @@
+# configs/prop_fundingpips_zero.yaml — FundingPips Zero (SPEC §4.3 Prop-Profil)
+daily_loss_pct: 10.0
+daily_loss_basis: prev_day_balance
+overall_loss_pct: 10.0
+profit_target_pct: 8.0
+best_day_consistency_pct: 0          # keine explizite Best-Day-Regel
+news_blackout_min_before: 10
+news_blackout_min_after: 10
+leverage: 100

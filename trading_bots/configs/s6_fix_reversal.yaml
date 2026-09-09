@@ -1,0 +1,97 @@
+# S6 — FixReversal (WM/Reuters 4pm London Fix Reversal, M5)
+# Neuer Bot (Backlog-Eintrag AGENTS.md "naechste freie Magic: 20260906");
+# nicht in SPEC.md §5 (Version 1.0, nur S1-S5) — Regelwerk aus dem
+# Research-Brief, das diesen 6. Bot begruendet (Krohn 2024, Journal of
+# Finance, "Foreign Exchange Fixings and Returns around the Clock").
+#
+# Dieselbe Regel + derselbe Parametersatz laeuft identisch auf allen vier
+# Paaren (kein Pair-Sonderfall im Code, strategies/s6_fix_reversal.py) —
+# absichtlich, um genug kombinierte Trade-Anzahl fuer die Walk-Forward-Gates
+# zu erreichen (SPEC §7: n(OOS) >= 300).
+strategy: strategies.s6_fix_reversal.S6FixReversal
+name: s6_fix_reversal
+symbols: [GBPUSD, AUDUSD, NZDUSD, USDCAD]
+timeframes: [M5]
+
+params:
+  risk_pct: 0.005              # 0,5 % Risiko/Trade (SPEC §0)
+  # RR-Gate (Design-Entscheidung, siehe strategies/s6_fix_reversal.py
+  # Modul-Docstring): target_r ist bewusst < SPEC-Default 2.0 (Fade-Setup,
+  # kein Trendfolge-Ziel) -> eigener, niedrigerer Gate-Wert als risk.min_rr
+  # unten (das bleibt SPEC-konform 2.0, wie bei S1/S4/S5 ein von der Engine
+  # nicht erzwungenes Dokumentationsfeld).
+  min_rr: 0.5
+  # --- Fix-Definition (Europe/London-Lokalzeit, DST-sicher via zoneinfo) ---
+  fix_time: "16:00"
+  fix_tz: "Europe/London"
+  # --- WFO-Parameter (5, Research-Brief) ---
+  pre_window_min: 15           # WFO {10,15,20}
+  trigger_threshold: 1.25      # WFO {0.5,1.0,2.0} (x ATR)
+  stop_buffer: 0.35            # WFO {0.2,0.35,0.5} (x ATR)
+  target_r: 1.0                # WFO {0.5,1.0,1.5} (R = Stop-Distanz)
+  max_hold_min: 30             # WFO {15,30,45}
+  # --- ATR (fix, kein WFO-Parameter) ---
+  atr_len: 20
+  # --- Filter-Layer (SPEC §6) ---
+  use_news_filter: true        # Pflicht-Default: on (SPEC §6.1)
+
+# Meta-Layer-Deklaration (SPEC §6, wie bei S1-S5; wird von
+# scripts/run_backtest.py --layers fuer den A/B-Vergleich getoggelt)
+meta_layer:
+  news_filter: on
+  regime_filter: off
+  cot_bias: off                # nur S4/S5-Forex laut SPEC §6.3; hier (noch)
+                                # nicht verdrahtet, Platzhalter fuer Parität
+
+# WFO-Raeume (5 Parameter, bewusst klein gehalten — SPEC §7:
+# <= 1 optimierter Parameter je 30 Trades)
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    pre_window_min: [10, 15, 20]
+    trigger_threshold: [0.5, 1.0, 2.0]
+    stop_buffer: [0.2, 0.35, 0.5]
+    target_r: [0.5, 1.0, 1.5]
+    max_hold_min: [15, 30, 45]
+
+risk:
+  risk_per_trade_pct: 0.5
+  min_rr: 2.0                  # SPEC-Default (RiskConfig, SPEC §4.3) —
+                                # Dokumentationsfeld, von der Engine nicht
+                                # erzwungen (wie bei S1/S4/S5); der
+                                # tatsaechliche Setup-Gate ist params.min_rr
+  daily_loss_halt_pct: 1.5
+  eod_flat: true
+  eod_flat_time_ny: "16:55"
+  friday_flat: true
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+# Kostenmodell (SPEC §1: IMMER aktiv); Werte gespiegelt aus
+# configs/common.yaml (Single Source of Truth fuer Symbol-Specs)
+costs:
+  GBPUSD:
+    spread_points: 12
+    commission_per_lot_rt: 0.0
+    slippage_multiplier: 1.0
+  AUDUSD:
+    spread_points: 12
+    commission_per_lot_rt: 0.0
+    slippage_multiplier: 1.0
+  NZDUSD:
+    spread_points: 16
+    commission_per_lot_rt: 0.0
+    slippage_multiplier: 1.0
+  USDCAD:
+    spread_points: 14
+    commission_per_lot_rt: 0.0
+    slippage_multiplier: 1.0
+
+# --- Live (pymt5linux) ---
+# Magic Number: eindeutig pro Bot -> Trade-Trennung in MT5-Statistiken/Historie
+# Registry: S1=20260901 S2=20260902 S3=20260903 S4=20260904 S5=20260905
+# S6=20260906 (naechste freie Magic laut AGENTS.md)
+live:
+  magic: 20260906

@@ -1,0 +1,35 @@
+# S9 — Donchian-Breakout-Trendfolge (symbol-agnostisch, H4)
+# Turtle-Archetyp: Range-Ausbruch + ATR-Trailing-Stop, kein festes TP.
+# Absichtlich wenig Parameter (guenstig fuer PBO/Params-Gate). Symbol via
+# --symbol beim Aufruf von run_backtest.py/run_wfa.py, Kostenmodell faellt
+# automatisch auf configs/common.yaml zurueck (kein costs:-Block noetig).
+strategy: s9_donchian_trend
+symbols:
+  - XAUUSD
+timeframes: [H4]
+
+risk:
+  risk_per_trade_pct: 0.5
+  daily_loss_halt_pct: 0.0     # kein Daily-Halt — Trendfolge haelt bewusst ueber Tage
+  eod_flat: false              # KEIN EOD-Flat — Positionen laufen ueber Tage/Wochen
+  friday_flat: false
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+params:
+  primary_tf: H4
+  don_len: 20
+  atr_len: 14
+  sl_atr_mult: 2.0
+  trail_atr_mult: 3.0
+  min_rr: 2.0                # Mindest-RR; TP wird bei Beruehrung zur Trail-Aktivierung (Move-to-Trail)
+  risk_pct: 0.005
+
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    don_len: [15, 20, 30]
+    sl_atr_mult: [1.5, 2.0, 2.5]
+    trail_atr_mult: [2.0, 3.0, 4.0]

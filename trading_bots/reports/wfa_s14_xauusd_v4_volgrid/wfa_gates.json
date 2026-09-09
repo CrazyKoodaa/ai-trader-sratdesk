@@ -1,0 +1,67 @@
+{
+  "metrics": {
+    "n_oos": 208,
+    "oos_pf": 1.2417170105186275,
+    "wfe_median": 0.5985692322311178,
+    "wfe_folds_ge_05": 0.7,
+    "mc_p95_dd_pct": 9.279223378194759,
+    "dsr": 0.1528546573682651,
+    "pbo": 0.12857142857142856,
+    "n_params": 5,
+    "oos_pf_2x": 1.184959367786327,
+    "oos_pf_3x": 1.12820832459693,
+    "n_folds": 20
+  },
+  "checks": [
+    [
+      "n(OOS) >= 300",
+      false,
+      "n=208"
+    ],
+    [
+      "WFE-Median >= 0.5",
+      true,
+      "wfe=0.599"
+    ],
+    [
+      ">= 60% Folds WFE>=0.5",
+      true,
+      "frac=0.70"
+    ],
+    [
+      "PF(1x) >= 1.5",
+      false,
+      "pf=1.242"
+    ],
+    [
+      "PF(2x, OOS, WFA-Params) >= 1.2",
+      false,
+      "pf=1.185"
+    ],
+    [
+      "PF(3x, OOS, WFA-Params) >= 1.0",
+      true,
+      "pf=1.128"
+    ],
+    [
+      "DSR >= 0.95",
+      false,
+      "dsr=0.153"
+    ],
+    [
+      "PBO/CSCV < 0.1",
+      false,
+      "pbo=0.129"
+    ],
+    [
+      "Params (5) <= 6 (1 je 30 OOS-Trades)",
+      true,
+      "5 params bei n=208"
+    ],
+    [
+      "MC p95-MaxDD <= 8.0%",
+      false,
+      "p95=9.28%"
+    ]
+  ]
+}

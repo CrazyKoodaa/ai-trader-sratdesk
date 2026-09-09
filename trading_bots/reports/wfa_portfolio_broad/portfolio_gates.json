@@ -1,0 +1,73 @@
+{
+  "metrics": {
+    "n_oos": 840,
+    "oos_pf": 1.2405510162382487,
+    "wfe_median": 0.7791245301176933,
+    "wfe_folds_ge_05": 0.8,
+    "mc_p95_dd_pct": 12.75005065251555,
+    "dsr": 0.38199593629170253,
+    "pbo": null,
+    "n_params": 25,
+    "oos_pf_2x": 1.1809282932972671,
+    "oos_pf_3x": 1.1254795416413954,
+    "n_folds": 5,
+    "n_legs": 7,
+    "risk_scale": 0.14285714285714285
+  },
+  "legs": [
+    "XAUUSD",
+    "USTEC",
+    "NZDUSD",
+    "USDCHF",
+    "AUDNZD",
+    "EURJPY",
+    "USDCAD"
+  ],
+  "checks": [
+    [
+      "n(OOS) >= 300",
+      true,
+      "n=840"
+    ],
+    [
+      "WFE-Median >= 0.5",
+      true,
+      "wfe=0.779"
+    ],
+    [
+      ">= 60% Folds WFE>=0.5",
+      true,
+      "frac=0.80"
+    ],
+    [
+      "PF(1x) >= 1.5",
+      false,
+      "pf=1.241"
+    ],
+    [
+      "PF(2x, OOS, WFA-Params) >= 1.2",
+      false,
+      "pf=1.181"
+    ],
+    [
+      "PF(3x, OOS, WFA-Params) >= 1.0",
+      true,
+      "pf=1.125"
+    ],
+    [
+      "DSR >= 0.95",
+      false,
+      "dsr=0.382"
+    ],
+    [
+      "Params (25) <= 28 (1 je 30 OOS-Trades)",
+      true,
+      "25 params bei n=840"
+    ],
+    [
+      "MC p95-MaxDD <= 8.0%",
+      false,
+      "p95=12.75%"
+    ]
+  ]
+}

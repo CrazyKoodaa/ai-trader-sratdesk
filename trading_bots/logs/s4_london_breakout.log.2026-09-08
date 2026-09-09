@@ -1,0 +1,144 @@
+2026-09-08 11:39:55,277 [INFO] Live-Loop startet (dry_run=False, Symbole=['USDJPY'])
+2026-09-08 11:39:55,357 [INFO] Kontotyp bestaetigt: DEMO (Konto 111885336, MetaQuotes-Demo)
+2026-09-08 11:39:55,357 [INFO] Verbunden: localhost:8001 (Magic 20260904, dry_run=False)
+2026-09-08 11:39:55,462 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 11:39:55,642 [INFO] KEIN EINSTIEG [s4_london_breakout]: USDJPY | Range 152.89-153.92 (103.4 Pips) | blockiert: inside_range
+2026-09-08 12:00:10,869 [INFO] KEIN EINSTIEG [s4_london_breakout]: USDJPY | Range 152.89-153.92 (103.4 Pips) | Breakout LONG | blockiert: range_band, ema_filter
+2026-09-08 12:09:55,471 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 12:39:55,481 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 13:00:10,501 [INFO] KEIN EINSTIEG [s4_london_breakout]: USDJPY | Range 152.89-153.92 (103.4 Pips) | blockiert: inside_range
+2026-09-08 13:09:55,485 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 13:39:55,498 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 14:00:10,524 [INFO] KEIN EINSTIEG [s4_london_breakout]: USDJPY | Range 152.89-153.92 (103.4 Pips) | Breakout LONG | blockiert: range_band, ema_filter
+2026-09-08 14:09:55,504 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 14:39:55,519 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 15:00:10,584 [INFO] KEIN EINSTIEG [s4_london_breakout]: USDJPY | Range 152.89-153.92 (103.4 Pips) | Breakout LONG | blockiert: range_band, ema_filter
+2026-09-08 15:09:55,538 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 15:39:55,575 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 16:00:10,601 [INFO] KEIN EINSTIEG [s4_london_breakout]: USDJPY | Range 152.89-153.92 (103.4 Pips) | blockiert: inside_range
+2026-09-08 16:09:55,587 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 16:21:55,488 [WARNING] Health-Check fehlgeschlagen — Reconnect
+2026-09-08 16:21:55,569 [INFO] Kontotyp bestaetigt: DEMO (Konto 111885336, MetaQuotes-Demo)
+2026-09-08 16:21:55,569 [INFO] Verbunden: localhost:8001 (Magic 20260904, dry_run=False)
+2026-09-08 16:39:55,677 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 16:40:25,574 [ERROR] Risiko-Update USDJPY fehlgeschlagen: connection closed by peer
+Traceback (most recent call last):
+  File "/home/crazyneo/projects/dev/ai-trader/trading_bots/core/live.py", line 564, in run
+    last_health = 0.0
+    
+  File "/home/crazyneo/projects/dev/ai-trader/trading_bots/core/connector.py", line 416, in account_info
+    info = self._as_dict(mt5.account_info())
+                         ~~~~~~~~~~~~~~~~^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/pymt5linux/__init__.py", line 301, in account_info
+    return self.__conn.eval(code)
+           ~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/netref.py", line 239, in __call__
+    return syncreq(_self, consts.HANDLE_CALL, args, kwargs)
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/netref.py", line 63, in syncreq
+    return conn.sync_request(handler, proxy, *args)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/protocol.py", line 744, in sync_request
+    return _async_res.value
+           ^^^^^^^^^^^^^^^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/async_.py", line 109, in value
+    self.wait()
+    ~~~~~~~~~^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/async_.py", line 51, in wait
+    self._conn.serve(self._ttl, waiting=self._waiting)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/protocol.py", line 464, in serve
+    data = self._channel.poll(timeout) and self._channel.recv()
+                                           ~~~~~~~~~~~~~~~~~~^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/channel.py", line 55, in recv
+    header = self.stream.read(self.FRAME_HEADER.size)
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/stream.py", line 280, in read
+    raise EOFError("connection closed by peer")
+EOFError: connection closed by peer
+2026-09-08 16:40:25,576 [ERROR] Loop-Fehler USDJPY: stream has been closed
+Traceback (most recent call last):
+  File "/home/crazyneo/projects/dev/ai-trader/trading_bots/core/live.py", line 579, in run
+    # Herzschlag: Equity + offene Positionen (Dashboard liest dies aus
+  File "/home/crazyneo/projects/dev/ai-trader/trading_bots/core/live.py", line 298, in _fetch_bars
+    self.risk = RiskManager(risk_cfg, prop_profile=prop_profile,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/crazyneo/projects/dev/ai-trader/trading_bots/core/connector.py", line 351, in fetch_ohlcv
+    offset = self.server_offset(symbol)
+  File "/home/crazyneo/projects/dev/ai-trader/trading_bots/core/connector.py", line 311, in server_offset
+    tick = mt5.symbol_info_tick(symbol)
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/pymt5linux/__init__.py", line 321, in symbol_info_tick
+    return self.__conn.eval(code)
+           ~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/netref.py", line 239, in __call__
+    return syncreq(_self, consts.HANDLE_CALL, args, kwargs)
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/netref.py", line 63, in syncreq
+    return conn.sync_request(handler, proxy, *args)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/protocol.py", line 741, in sync_request
+    _async_res = self.async_request(handler, *args, timeout=timeout)
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/protocol.py", line 768, in async_request
+    self._async_request(handler, args, res)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/protocol.py", line 750, in _async_request
+    self._send(consts.MSG_REQUEST, seq, (handler, self._box(args)))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/protocol.py", line 308, in _send
+    self._channel.send(data)
+    ~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/channel.py", line 78, in send
+    self.stream.write(header + data + self.FLUSHER)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/stream.py", line 288, in write
+    count = self.sock.send(data[:self.MAX_IO_CHUNK])
+            ^^^^^^^^^^^^^^
+  File "/home/crazyneo/miniforge3/lib/python3.13/site-packages/rpyc/core/stream.py", line 96, in __getattr__
+    raise EOFError("stream has been closed")
+EOFError: stream has been closed
+2026-09-08 16:40:40,574 [WARNING] Health-Check fehlgeschlagen — Reconnect
+2026-09-08 16:40:40,643 [INFO] Kontotyp bestaetigt: DEMO (Konto 111885336, MetaQuotes-Demo)
+2026-09-08 16:40:40,643 [INFO] Verbunden: localhost:8001 (Magic 20260904, dry_run=False)
+2026-09-08 17:00:10,770 [INFO] KEIN EINSTIEG [s4_london_breakout]: USDJPY | Range 152.89-153.92 (103.4 Pips) | blockiert: inside_range
+2026-09-08 17:09:55,756 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 17:39:55,758 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 18:00:10,784 [INFO] KEIN EINSTIEG [s4_london_breakout]: USDJPY | Range 152.89-153.92 (103.4 Pips) | Breakout LONG | blockiert: range_band, ema_filter
+2026-09-08 18:09:55,769 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 18:32:25,682 [WARNING] Health-Check fehlgeschlagen — Reconnect
+2026-09-08 18:32:26,062 [INFO] Kontotyp bestaetigt: DEMO (Konto 111885336, MetaQuotes-Demo)
+2026-09-08 18:32:26,062 [INFO] Verbunden: localhost:8001 (Magic 20260904, dry_run=False)
+2026-09-08 18:39:11,074 [WARNING] Health-Check fehlgeschlagen — Reconnect
+2026-09-08 18:39:11,451 [INFO] Kontotyp bestaetigt: DEMO (Konto 111885336, MetaQuotes-Demo)
+2026-09-08 18:39:11,451 [INFO] Verbunden: localhost:8001 (Magic 20260904, dry_run=False)
+2026-09-08 18:39:56,464 [WARNING] Health-Check fehlgeschlagen — Reconnect
+2026-09-08 18:39:56,855 [INFO] Kontotyp bestaetigt: DEMO (Konto 111885336, MetaQuotes-Demo)
+2026-09-08 18:39:56,855 [INFO] Verbunden: localhost:8001 (Magic 20260904, dry_run=False)
+2026-09-08 18:39:56,912 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 18:40:41,868 [WARNING] Health-Check fehlgeschlagen — Reconnect
+2026-09-08 18:40:42,146 [INFO] Kontotyp bestaetigt: DEMO (Konto 111885336, MetaQuotes-Demo)
+2026-09-08 18:40:42,147 [INFO] Verbunden: localhost:8001 (Magic 20260904, dry_run=False)
+2026-09-08 19:00:12,272 [INFO] KEIN EINSTIEG [s4_london_breakout]: USDJPY | Range 152.89-153.92 (103.4 Pips) | Breakout LONG | blockiert: range_band, ema_filter
+2026-09-08 19:09:57,263 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 19:23:42,159 [ERROR] Loop-Fehler USDJPY: Kein Tick fuer USDJPY (Markt geschlossen/Symbol fehlt?)
+Traceback (most recent call last):
+  File "/home/crazyneo/projects/dev/ai-trader/trading_bots/core/live.py", line 579, in run
+    # Herzschlag: Equity + offene Positionen (Dashboard liest dies aus
+  File "/home/crazyneo/projects/dev/ai-trader/trading_bots/core/live.py", line 298, in _fetch_bars
+    self.risk = RiskManager(risk_cfg, prop_profile=prop_profile,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/crazyneo/projects/dev/ai-trader/trading_bots/core/connector.py", line 351, in fetch_ohlcv
+    offset = self.server_offset(symbol)
+  File "/home/crazyneo/projects/dev/ai-trader/trading_bots/core/connector.py", line 313, in server_offset
+    raise RuntimeError(f"Kein Tick fuer {symbol} (Markt geschlossen/Symbol fehlt?)")
+RuntimeError: Kein Tick fuer USDJPY (Markt geschlossen/Symbol fehlt?)
+2026-09-08 19:39:57,262 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 20:00:12,289 [INFO] KEIN EINSTIEG [s4_london_breakout]: USDJPY | Range 152.89-153.92 (103.4 Pips) | Breakout LONG | blockiert: range_band, ema_filter
+2026-09-08 20:09:57,274 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 20:39:57,281 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 21:09:57,286 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 21:39:57,294 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 22:09:57,305 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 22:39:57,311 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 23:09:57,319 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-08 23:39:57,328 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 00:09:57,338 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 00:39:57,346 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 01:09:57,352 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.
+2026-09-09 01:39:57,362 [INFO] ♥ [s4_london_breakout] Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.

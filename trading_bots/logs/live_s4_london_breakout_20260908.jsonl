@@ -1,0 +1,96 @@
+{"ts": "2026-09-08T09:39:55.277780+00:00", "event": "startup", "config": "configs/s4_london_breakout.yaml", "dry_run": false, "symbols": ["USDJPY"], "timeframes": ["H1", "H4", "D1"]}
+{"ts": "2026-09-08T09:39:55.357526+00:00", "event": "connected", "host": "localhost", "port": 8001}
+{"ts": "2026-09-08T09:39:55.462250+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T09:39:55.641489+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-08 07:00:00+00:00"}
+{"ts": "2026-09-08T10:00:10.485061+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-08 08:00:00+00:00"}
+{"ts": "2026-09-08T10:09:55.471291+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T10:39:55.481312+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T11:00:10.500463+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-08 09:00:00+00:00"}
+{"ts": "2026-09-08T11:09:55.485319+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T11:39:55.498335+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T12:00:10.521455+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-08 10:00:00+00:00"}
+{"ts": "2026-09-08T12:09:55.504316+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T12:39:55.519274+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T13:00:10.579191+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-08 11:00:00+00:00"}
+{"ts": "2026-09-08T13:09:55.538273+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T13:39:55.575313+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T14:00:10.600427+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-08 12:00:00+00:00"}
+{"ts": "2026-09-08T14:09:55.587299+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T14:21:55.487949+00:00", "event": "health_fail"}
+{"ts": "2026-09-08T14:21:55.569345+00:00", "event": "connected", "host": "localhost", "port": 8001}
+{"ts": "2026-09-08T14:39:55.677339+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T14:40:25.576926+00:00", "event": "loop_error", "symbol": "USDJPY", "error": "stream has been closed"}
+{"ts": "2026-09-08T14:40:40.574656+00:00", "event": "health_fail"}
+{"ts": "2026-09-08T14:40:40.643235+00:00", "event": "connected", "host": "localhost", "port": 8001}
+{"ts": "2026-09-08T15:00:10.770037+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-08 13:00:00+00:00"}
+{"ts": "2026-09-08T15:09:55.756320+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T15:39:55.758298+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T16:00:10.781334+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-08 14:00:00+00:00"}
+{"ts": "2026-09-08T16:09:55.769288+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T16:32:25.682691+00:00", "event": "health_fail"}
+{"ts": "2026-09-08T16:32:26.062709+00:00", "event": "connected", "host": "localhost", "port": 8001}
+{"ts": "2026-09-08T16:39:11.074471+00:00", "event": "health_fail"}
+{"ts": "2026-09-08T16:39:11.451451+00:00", "event": "connected", "host": "localhost", "port": 8001}
+{"ts": "2026-09-08T16:39:56.464262+00:00", "event": "health_fail"}
+{"ts": "2026-09-08T16:39:56.855910+00:00", "event": "connected", "host": "localhost", "port": 8001}
+{"ts": "2026-09-08T16:39:56.912392+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T16:40:41.868535+00:00", "event": "health_fail"}
+{"ts": "2026-09-08T16:40:42.147154+00:00", "event": "connected", "host": "localhost", "port": 8001}
+{"ts": "2026-09-08T17:00:12.269312+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-08 15:00:00+00:00"}
+{"ts": "2026-09-08T17:09:57.263402+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T17:23:42.159473+00:00", "event": "loop_error", "symbol": "USDJPY", "error": "Kein Tick fuer USDJPY (Markt geschlossen/Symbol fehlt?)"}
+{"ts": "2026-09-08T17:39:57.262298+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T18:00:12.286092+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-08 16:00:00+00:00"}
+{"ts": "2026-09-08T18:09:57.274340+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T18:39:57.281394+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T19:00:12.303332+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-08 17:00:00+00:00"}
+{"ts": "2026-09-08T19:09:57.286342+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T19:39:57.294311+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T20:00:12.320925+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-08 18:00:00+00:00"}
+{"ts": "2026-09-08T20:09:57.305285+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T20:39:57.311315+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T21:00:12.336210+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-08 19:00:00+00:00"}
+{"ts": "2026-09-08T21:09:57.319327+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T21:39:57.328291+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T22:00:12.350729+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-08 20:00:00+00:00"}
+{"ts": "2026-09-08T22:09:57.338339+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T22:39:57.346375+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T23:00:12.362318+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-08 21:00:00+00:00"}
+{"ts": "2026-09-08T23:09:57.352344+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-08T23:39:57.362288+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T00:00:12.399242+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-08 22:00:00+00:00"}
+{"ts": "2026-09-09T00:09:57.367510+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T00:39:57.375327+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T01:00:12.395778+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-08 23:00:00+00:00"}
+{"ts": "2026-09-09T01:09:57.385312+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T01:39:57.395320+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T02:00:12.415256+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-09 00:00:00+00:00"}
+{"ts": "2026-09-09T02:09:57.403404+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T02:39:57.410315+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T03:00:12.432380+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-09 01:00:00+00:00"}
+{"ts": "2026-09-09T03:09:57.416306+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T03:39:57.425306+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T04:00:12.447169+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-09 02:00:00+00:00"}
+{"ts": "2026-09-09T04:09:57.434337+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T04:39:57.441320+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T05:00:12.463075+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-09 03:00:00+00:00"}
+{"ts": "2026-09-09T05:09:57.448338+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T05:39:57.457286+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T06:00:12.477173+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-09 04:00:00+00:00"}
+{"ts": "2026-09-09T06:09:57.465314+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T06:39:57.475339+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T07:00:12.496912+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-09 05:00:00+00:00"}
+{"ts": "2026-09-09T07:09:57.482289+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T07:39:57.492334+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
+{"ts": "2026-09-09T08:00:12.513404+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-09 06:00:00+00:00"}
+{"ts": "2026-09-09T08:09:57.498300+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T08:39:57.510339+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T09:00:12.533165+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-09 07:00:00+00:00"}
+{"ts": "2026-09-09T09:09:57.515338+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T09:39:57.527349+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T10:00:12.544000+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-09 08:00:00+00:00"}
+{"ts": "2026-09-09T10:09:57.530315+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T10:39:57.542341+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T11:00:12.561875+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-09 09:00:00+00:00"}
+{"ts": "2026-09-09T11:09:57.548340+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T11:39:57.555294+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}

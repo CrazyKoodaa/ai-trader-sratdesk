@@ -1,0 +1,109 @@
+# FOMC scheduled rate-decision dates, 2019-01-01 .. 2026-12-31 (America/New_York
+# local time; convert to UTC with zoneinfo at load time — never hardcode a
+# fixed UTC offset, per AGENTS.md "Haerteste Regeln" #1, DST-Asynchronwochen).
+#
+# Scope: ONLY regularly scheduled 2-day FOMC meetings whose decision/
+# statement is released at the standard, publicly pre-announced time. This
+# is the population the pre-FOMC-drift literature (Lucca & Moench 2015 and
+# the EUR/USD follow-on work cited in strategies/s7_fomc_drift.py) studies —
+# anticipated, scheduled announcements. EXCLUDED by design:
+#   - Unscheduled/emergency intermeeting actions (e.g. 2020-03-03, 2020-03-15
+#     COVID rate cuts) — these have no advance-known decision time, so an
+#     "entry_check_hour before the decision" rule cannot apply to them, and
+#     they are not part of the studied population.
+#   - "Notation vote" entries (e.g. 2025-08-22) — administrative/procedural
+#     votes without a scheduled 2:00pm ET statement release, not FOMC rate
+#     decisions in the SPEC §5/S7 sense.
+#   - The regularly-scheduled March 17-18, 2020 meeting, which was
+#     effectively superseded/absorbed by the unscheduled March 15, 2020
+#     (Sunday) emergency cut to zero — no normal 2:00pm ET announcement was
+#     made for that meeting slot.
+#
+# decision_date = second day of the 2-day meeting (the day the statement is
+# released). time_et = release time, America/New_York local, DST-safe.
+# 2:00 PM ET has been the FOMC's standard statement-release time for every
+# regularly scheduled meeting since 2011 (Fed communications policy).
+#
+# Source (real, publicly published, independently verifiable):
+#   - Federal Reserve Board, "Meeting calendars and information":
+#     https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm
+#     (current + 2 upcoming years, i.e. covers 2025-2027 as of 2026-09-05)
+#   - Federal Reserve Board, per-year historical calendars:
+#     https://www.federalreserve.gov/monetarypolicy/fomchistorical2019.htm
+#     https://www.federalreserve.gov/monetarypolicy/fomchistorical2020.htm
+#     (analogous fomchistorical20YY.htm pages exist for 2021-2024)
+#   - Cross-checked against the Fed's own per-meeting press-conference pages,
+#     which encode the exact decision date in their URL/title, e.g.
+#     https://www.federalreserve.gov/monetarypolicy/fomcpresconf20190130.htm
+#     https://www.federalreserve.gov/monetarypolicy/fomcpresconf20220316.htm
+#     https://www.federalreserve.gov/monetarypolicy/fomcpresconf20231101.htm
+#   Fetched and cross-verified 2026-09-05. NOTE: an initial single-page fetch
+#   of fomchistorical2019.htm hallucinated a spurious "October 4 (unscheduled)"
+#   2019 entry that a second, independent verification (search + per-meeting
+#   press-conference URLs) did not corroborate — it is excluded here. This is
+#   exactly why every year below is cross-checked against a second source
+#   rather than trusted from a single fetch.
+date,time_et
+2019-01-30,14:00
+2019-03-20,14:00
+2019-05-01,14:00
+2019-06-19,14:00
+2019-07-31,14:00
+2019-09-18,14:00
+2019-10-30,14:00
+2019-12-11,14:00
+2020-01-29,14:00
+2020-04-29,14:00
+2020-06-10,14:00
+2020-07-29,14:00
+2020-09-16,14:00
+2020-11-05,14:00
+2020-12-16,14:00
+2021-01-27,14:00
+2021-03-17,14:00
+2021-04-28,14:00
+2021-06-16,14:00
+2021-07-28,14:00
+2021-09-22,14:00
+2021-11-03,14:00
+2021-12-15,14:00
+2022-01-26,14:00
+2022-03-16,14:00
+2022-05-04,14:00
+2022-06-15,14:00
+2022-07-27,14:00
+2022-09-21,14:00
+2022-11-02,14:00
+2022-12-14,14:00
+2023-02-01,14:00
+2023-03-22,14:00
+2023-05-03,14:00
+2023-06-14,14:00
+2023-07-26,14:00
+2023-09-20,14:00
+2023-11-01,14:00
+2023-12-13,14:00
+2024-01-31,14:00
+2024-03-20,14:00
+2024-05-01,14:00
+2024-06-12,14:00
+2024-07-31,14:00
+2024-09-18,14:00
+2024-11-07,14:00
+2024-12-18,14:00
+2025-01-29,14:00
+2025-03-19,14:00
+2025-05-07,14:00
+2025-06-18,14:00
+2025-07-30,14:00
+2025-09-17,14:00
+2025-10-29,14:00
+2025-12-10,14:00
+2026-01-28,14:00
+2026-03-18,14:00
+2026-04-29,14:00
+2026-06-17,14:00
+2026-07-29,14:00
+2026-09-16,14:00
+2026-10-28,14:00
+2026-12-09,14:00

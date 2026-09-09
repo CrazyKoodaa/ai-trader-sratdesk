@@ -1,0 +1,78 @@
+# S3 — SilverBullet (NAS100 + XAUUSD, M5) — SPEC §5/S3
+strategy: s3_silver_bullet
+symbols:
+  - NAS100
+  - XAUUSD
+timeframes: [M5, H4]
+
+# Risiko (SPEC §0/§4.3: 0.5 % pro Trade, RR >= 2)
+risk:
+  risk_per_trade_pct: 0.5
+  min_rr: 2.0
+  daily_loss_halt_pct: 1.5
+  eod_flat: true
+  eod_flat_time_ny: "16:55"
+  friday_flat: true
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+# Kostenmodell (SPEC §1: immer aktiv; Spread in Punkten je Symbol)
+costs:
+  NAS100:
+    spread_points: 120          # US100/NAS100: 120 Pts
+    commission_per_lot_rt: 0.0
+    slippage_multiplier: 1.0
+  XAUUSD:
+    spread_points: 35           # XAUUSD: 35 Pts
+    commission_per_lot_rt: 0.0
+    slippage_multiplier: 1.0
+
+# Strategie-Parameter (Defaults = SPEC §5/S3)
+params:
+  window: "10:00-11:00"         # America/New_York; Alternativen s. wfo.param_space
+  window_tz: America/New_York
+  sweep_ref: hour9              # High/Low der 09:00-ET-Stundenkerze (Alt: asian)
+  asian_tz: UTC
+  asian_start: "00:00"
+  asian_end: "07:00"
+  atr_len: 20                   # ATR20
+  sweep_wick_atr: 0.1           # Wick-Exzess >= 0.1 x ATR
+  disp_body_atr: 1.5            # Body >= 1.5 x ATR20
+  disp_body_range: 0.7          # Body/Range >= 0.7
+  swing_k: 2                    # Swing-Fraktal k=2
+  swing_lookback: 30
+  fvg_min: 0.3                  # FVG >= 0.3 x ATR
+  entry_ce: 0.5                 # Limit am 50 % Consequent Encroachment
+  expiry: 12                    # Limit-Expiry in Bars (Purge-Regel)
+  sl_buffer_atr: 0.3            # SL hinter Sweep-Extrem + 0.3 x ATR
+  rr_min: 2.0                   # TP = Gegen-Liquiditaet, Gate RR >= 2
+  max_trades_per_window: 1
+  be_enabled: false             # BE bei 3R (Runner-Option)
+  be_at_r: 3.0
+  htf_bias: off                 # A/B-Arm: H4 letztes BOS/CHoCH
+  risk_pct: 0.005
+
+# Meta-Layer (SPEC §6)
+meta_layer:
+  news_filter: on               # Pflicht-Default on
+  regime_filter: off
+
+# WFO-Raeume (SPEC §5/S3)
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    window: ["10:00-11:00", "03:00-04:00", "08:30-09:10", "14:00-15:00"]
+    sweep_ref: [hour9, asian]
+    disp_body_atr: [1.0, 1.5, 2.0]
+    fvg_min: [0.1, 0.3, 0.5]
+    expiry: [8, 12, 20]
+    rr_min: [2.0, 2.5, 3.0]
+    htf_bias: [off, on]
+
+# --- Live (pymt5linux) ---
+# Magic Number: eindeutig pro Bot → Trade-Trennung in MT5-Statistiken/Historie
+# Registry: S1=20260901 S2=20260902 S3=20260903 S4=20260904 S5=20260905
+live:
+  magic: 20260903
