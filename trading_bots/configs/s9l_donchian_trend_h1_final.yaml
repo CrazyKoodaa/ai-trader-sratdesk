@@ -1,0 +1,58 @@
+# S9l — S9 DonchianTrend XAUUSD H1, Konvergenz-Kandidat fuer die
+# Gates-Validierung (nicht mehr Explorations-Diagnose wie S9i/j/k).
+#
+# S9h->S9i->S9j->S9k (jeweils Grid verbreitert, s. reports/wfa_s9{h,i,j,k}_
+# donchian_xauusd_h1*) zeigten monoton verbessernde Metriken bei jeder
+# Erweiterung (PF1x 1.11->1.20->1.32->1.39, PF3x 0.94->1.05->1.17->1.24,
+# MC-DD 21.4%->14.9%->10.3%->8.29%) und eine sich AUFLOESENDE
+# Rand-Pinnung (don_len/sl_atr_mult/trail_atr_mult wanderten je Runde ans
+# neue obere Ende, verteilen sich in S9k aber schon spuerbar auf den
+# Innenraum: don_len 250/300/400/500 alle vertreten, sl_atr_mult alle 4
+# Werte, trail_atr_mult 4/5 gemischt). don_len~300-500 H1-Bars (~12-21
+# Handelstage) liegt zudem im klassischen Turtle-System-Bereich (20-55
+# Tage) -- ein Plausibilitaets-Signal, keine reine Zufalls-Konvergenz.
+#
+# WICHTIG: jede Grid-Erweiterung erhoehte gleichzeitig n_trials fuer
+# deflated_sharpe() (= Grid-Groesse, ehrliche Multiple-Testing-Korrektur,
+# SPEC §7.4) UND die PBO-Overfitting-Flaeche -- die Explorations-Laeufe
+# (bis zu 192 Kombos) bestrafen DSR staerker als noetig. Dieser Lauf
+# TRIMMT das Grid auf die tatsaechlich wiederholt gewinnenden Werte
+# (S9k-Fold-Log: don_len {300,400,500} dominant vs. 250 selten;
+# sl_atr_mult 4.0 haeufigster Gewinner, aber 3.0/3.5 auch mehrfach;
+# trail_atr_mult 4/5 statt 3; adx_min echt gemischt 0/20/25, bleibt
+# komplett) fuer eine faire, weniger bestrafte finale Messung -- 54 statt
+# 144-192 Kombos. risk_pct leicht reduziert (0.005->0.0045) als
+# mechanischer Sicherheitsabstand ANTS MC-DD-Gate (8.29% in S9k, knapp
+# ueber der 8.0%-Schwelle; DD skaliert linear mit Positionsgroesse).
+strategy: s9_donchian_trend
+symbols:
+  - XAUUSD
+timeframes: [H1]
+
+risk:
+  risk_per_trade_pct: 0.5
+  daily_loss_halt_pct: 0.0
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+params:
+  primary_tf: H1
+  don_len: 400
+  atr_len: 14
+  sl_atr_mult: 3.5
+  trail_atr_mult: 4.0
+  min_rr: 2.0
+  risk_pct: 0.0045
+  adx_min: 20.0
+
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    don_len: [300, 400, 500]
+    sl_atr_mult: [3.0, 3.5, 4.0]
+    trail_atr_mult: [4.0, 5.0]
+    adx_min: [0.0, 20.0, 25.0]
