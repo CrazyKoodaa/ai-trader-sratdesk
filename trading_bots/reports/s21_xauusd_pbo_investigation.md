@@ -65,7 +65,7 @@ plateau; S21c: 36 Kombos/pf [ATR]; S21f: 6 Kombos/plateau; S21g: 6 Kombos/
 pf) liefern **bit-identisches PBO = 24/70 ≈ 0.343** (Ausnahme S21c mit
 zusaetzlicher ATR-Dimension: 0.457 — separater Effekt, s.o.).
 
-**Erklaerung, im Code verifiziert:** `pbo_cscv()`
+**Erklaerung Teil 1 (Selektionsmethode), im Code verifiziert:** `pbo_cscv()`
 (`core/validation.py`) wird ausschliesslich auf `result.is_pf_matrix`
 berechnet — der vollen Kombos-x-Folds-IS-PF-Tabelle. Diese Matrix wird
 in `walk_forward()` unabhaengig von `best_params`/der Selektionsmethode
@@ -77,20 +77,43 @@ PBO-Berechnung **gar nicht ein**. Plateau-Selektion kann PBO bei diesem
 Design also grundsaetzlich nicht direkt beeinflussen (sie bleibt trotzdem
 sinnvoll fuer OOS-Robustheit und ist SPEC-konform — nur eben kein PBO-Hebel).
 
-Dass PBO zusaetzlich ueber 12→6 Kombos hinweg (unterschiedliche Matrix-
-Formen) bit-identisch bleibt, deutet auf einen tieferen strukturellen
-Befund hin: die getesteten Parameter-Varianten (rsi_min, sl_atr_mult,
-min_rr — alles Feintuning DESSELBEN EMA-Stack-Momentum-Signals) sind
-untereinander so stark korreliert, dass ihre OOS-Rangfolge unabhaengig
-von der konkreten Kombo-Auswahl gleich instabil ist. Kombiniert mit dem
-frueheren Fund (S21-Edge konzentriert in seltenen `sl_gap`-Exits, ~16%
-der Trades, PF 37.6 auf diesem Segment vs. ~0.94 auf dem Rest) und der
-Jahres-Aufschluesselung (2018, 2021, 2022 klar unrentabel — Regime-
-Abhaengigkeit) ist die plausibelste Erklaerung: **PBO misst hier
-tatsaechlich Regime-Instabilitaet des zugrunde liegenden Signals, nicht
-Overfitting durch die Parameterwahl.** Kein an diesen drei Parametern
-ansetzender Hebel (Selektionsmethode, Grid-Groesse, ein zusaetzlicher
-Filter aus derselben Signalfamilie) kann das beheben.
+**Erklaerung Teil 2 (12→6 Kombos bit-identisch), direkt nachgewiesen, KEIN
+Bug:** Erst per Direktaufruf verifiziert, dass `pbo_cscv()` ueberhaupt auf
+Aenderungen reagiert (synthetische Zufallsmatrizen und sogar
+quasi-identische Spalten liefern *unterschiedliche* PBO-Werte je nach
+Form — die Funktion ist nicht konstant). Danach die echte
+`is_pf_matrix` beider Grids direkt aus `walk_forward()` gezogen (nicht nur
+aus den WFA-Reports rekonstruiert): das 6-Kombo-Grid (S21f/g:
+`rsi_min` x `sl_atr_mult`, `min_rr` fix 2.0) ist **bit-exakt** die
+`min_rr=2.0`-Teilmenge (Spalten 1,3,5,7,9,11 in Produkt-Reihenfolge) des
+12-Kombo-Grids (mc5/S21e) — max. Abweichung 0.0 (deterministischer
+Backtester auf identischen Daten/Foldgrenzen/Parametern, erwartungsgemaess).
+Und entscheidend: `pbo_cscv()` liefert auf genau dieser 6-Spalten-Teilmenge
+ALLEIN bereits dasselbe 0.34285714285714286 wie auf der vollen
+12-Spalten-Matrix. Das heisst: in **keinem** der 70 CSCV-Splits stammt das
+IS-Argmax-Element aus einer `min_rr=1.5`-Spalte — `min_rr=2.0` dominiert
+die IS-Mittelwert-Performance in jeder getesteten Block-Kombination dieses
+20-Fold-Datensatzes durchgehend. Ob `min_rr` ueberhaupt im WFO-Grid steht
+oder nicht, kann das PBO-Ergebnis deshalb fuer dieses Signal/diesen
+Datensatz gar nicht aendern — nicht weil der Test kaputt ist, sondern weil
+die zusaetzliche Dimension nie den Ausschlag gab. (Zur Kalibrierung: eine
+gezielte Ein-Spalten-Stoerung derselben echten Matrix verschiebt PBO sehr
+wohl auf 23/70 — die Funktion reagiert also durchaus, nur eben nicht auf
+diese beiden Grid-Varianten, weil sie strukturell (fast) dieselbe
+Information enthalten.)
+
+Kombiniert mit dem frueheren Fund (S21-Edge konzentriert in seltenen
+`sl_gap`-Exits, ~16% der Trades, PF 37.6 auf diesem Segment vs. ~0.94 auf
+dem Rest — grosse RR-Gewinner treiben die IS-Performance, was zur
+durchgehenden `min_rr=2.0`-Dominanz passt) und der Jahres-Aufschluesselung
+(2018, 2021, 2022 klar unrentabel) bleibt der Gesamtbefund: das
+verifizierte PBO=0.343 ist eine **echte, robuste, reproduzierbare**
+Eigenschaft des `rsi_min` x `sl_atr_mult`-Unterraums dieses Signals auf
+diesem Datensatz — kein Artefakt der Selektionsmethode oder der
+Grid-Groesse, und kein Mess- oder Implementierungsfehler. Kein an diesen
+Parametern ansetzender Hebel (Selektionsmethode, Grid-Groesse, ein
+zusaetzlicher Filter aus derselben Signalfamilie) kann das beheben, weil
+keiner dieser Hebel die tatsaechlich pruefungsrelevanten Spalten aendert.
 
 ## Empfehlung
 
