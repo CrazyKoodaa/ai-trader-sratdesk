@@ -67,14 +67,30 @@ def _select_best_params(combos: list[dict], pfs: list[float], selection: str) ->
     (>=60% Nachbarzellen mit positiver Metrik) vor dem globalen Maximum,
     um Overfitting auf eine einzelne rauschende IS-Spitze zu vermeiden
     (die PBO/CSCV explizit bestraft). Faellt bei <2 Kombos oder <2 endlichen
-    PFs auf reines Max-PF zurueck (plateau_select braucht >=2 Zeilen)."""
+    PFs auf reines Max-PF zurueck (plateau_select braucht >=2 Zeilen).
+
+    WICHTIG: ``plateau_select``s "positive Nachbarn"-Kriterium (SPEC-Text
+    "positive Metrik") ist an PnL/Returns gedacht, die auch negativ sein
+    koennen (s. TestPlateauSelect-Fixture, Werte -2..9). Profit-Factor ist
+    per Definition >= 0 (Verhaeltnis von Gewinn- zu Verlustsumme) -- ohne
+    Korrektur waere JEDE Nachbarzelle "positiv" und die Plateau-Bedingung
+    degeneriert zu einem Bestehen-immer-Test, sprich: reines Arg-Max, nur
+    over Umwege (empirisch verifiziert: identische Ergebnisse ueber alle
+    20 Folds ggue. selection="pf" in einem Testlauf dieser Session). Fix:
+    PF wird vor dem Plateau-Check um 1.0 verschoben (pf - 1.0), sodass
+    "positiv" tatsaechlich "OOS-profitabler Nachbar" (PF > 1) bedeutet --
+    das eigentlich gemeinte Stabilitaets-Kriterium. best_pf bleibt der
+    UNVERSCHOBENE PF (fuer WFE/Logging weiterhin PF-Semantik)."""
     if selection == "plateau" and len(combos) >= 2:
         finite = [(c, p) for c, p in zip(combos, pfs) if np.isfinite(p)]
         if len(finite) >= 2:
             df = pd.DataFrame([c for c, _ in finite])
-            df["metric"] = [p for _, p in finite]
+            df["metric"] = [p - 1.0 for _, p in finite]  # PF->PnL-artige Skala
             res = plateau_select(df)
-            return dict(res["selected"]), float(res["metric"])
+            pf_by_combo = {tuple(sorted(c.items())): p for c, p in finite}
+            selected = dict(res["selected"])
+            best_pf = pf_by_combo[tuple(sorted(selected.items()))]
+            return selected, float(best_pf)
     best_params, best_pf = None, -np.inf
     for params, pf in zip(combos, pfs):
         if np.isfinite(pf) and pf > best_pf:

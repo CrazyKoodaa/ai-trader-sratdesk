@@ -191,26 +191,59 @@ class TestSelectBestParams:
     combos/pfs-Schnittstelle, wie walk_forward sie tatsaechlich aufruft."""
 
     def _combos_pfs(self):
-        metrics = {
-            (1, 1): 9.0, (1, 2): -1.0, (1, 3): -1.0,
-            (2, 1): 0.5, (2, 2): 2.0, (2, 3): 1.8,
-            (3, 1): -1.0, (3, 2): 1.5, (3, 3): 1.2,
+        # Profit-Factor-Skala (>= 0, Breakeven = 1.0) -- dieselbe Spitze/
+        # Plateau-Geometrie wie TestPlateauSelect._grid(), aber um +1.0
+        # verschoben, weil _select_best_params("plateau") PF intern wieder
+        # um -1.0 verschiebt, bevor es an plateau_select geht (s. Docstring
+        # dort: rohes PF ist nie negativ, "positive Nachbarn" waere sonst
+        # immer 100% -> Plateau-Test degeneriert zu Arg-Max).
+        pfs_by_combo = {
+            (1, 1): 10.0, (1, 2): 0.0, (1, 3): 0.0,
+            (2, 1): 1.5, (2, 2): 3.0, (2, 3): 2.8,
+            (3, 1): 0.0, (3, 2): 2.5, (3, 3): 2.2,
         }
-        combos = [{"a": a, "b": b} for (a, b) in metrics]
-        pfs = list(metrics.values())
+        combos = [{"a": a, "b": b} for (a, b) in pfs_by_combo]
+        pfs = list(pfs_by_combo.values())
         return combos, pfs
 
     def test_pf_selection_picks_global_max(self):
         combos, pfs = self._combos_pfs()
         params, pf = validation_module._select_best_params(combos, pfs, "pf")
         assert params == {"a": 1, "b": 1}
-        assert pf == pytest.approx(9.0)
+        assert pf == pytest.approx(10.0)
 
     def test_plateau_selection_avoids_spike(self):
         combos, pfs = self._combos_pfs()
         params, pf = validation_module._select_best_params(combos, pfs, "plateau")
         assert params == {"a": 2, "b": 2}
-        assert pf == pytest.approx(2.0)
+        assert pf == pytest.approx(3.0)  # echter PF an (2,2), nicht die verschobene Metrik
+
+    def test_plateau_shift_matters_for_all_positive_pf(self):
+        """Regressionstest fuer den PF>=0-Degenerations-Bug: ohne die
+        interne -1.0-Verschiebung waeren ALLE PF-Werte "positiv" und
+        die Plateau-Bedingung (>=60% positive Nachbarn) triviell erfuellt
+        fuer jede Zelle -> Ergebnis identisch zu reinem Arg-Max. Diese
+        Fixture hat eine Spitze (1,1)=5.0 mit ausschliesslich <1.0-Nachbarn
+        (unprofitabel) und ein stabiles Plateau um (2,2)=2.0 mit
+        ausschliesslich >1.0-Nachbarn (profitabel) -- mit der Korrektur
+        muss "plateau" das Plateau waehlen, NICHT die Spitze."""
+        pfs_by_combo = {
+            (1, 1): 5.0, (1, 2): 0.3, (1, 3): 0.3,
+            (2, 1): 1.2, (2, 2): 2.0, (2, 3): 1.8,
+            (3, 1): 0.3, (3, 2): 1.5, (3, 3): 1.3,
+        }
+        combos = [{"a": a, "b": b} for (a, b) in pfs_by_combo]
+        pfs = list(pfs_by_combo.values())
+        pf_params, pf_pf = validation_module._select_best_params(combos, pfs, "pf")
+        plateau_params, plateau_pf = validation_module._select_best_params(
+            combos, pfs, "plateau")
+        assert pf_params == {"a": 1, "b": 1}
+        assert pf_pf == pytest.approx(5.0)
+        assert plateau_params == {"a": 2, "b": 2}
+        assert plateau_pf == pytest.approx(2.0)
+        assert plateau_params != pf_params, (
+            "Plateau-Selektion darf bei diesem Setup NICHT mit Arg-Max "
+            "zusammenfallen -- sonst ist die PF>=0-Degeneration zurueck.")
 
     def test_plateau_falls_back_to_pf_for_single_combo(self):
         params, pf = validation_module._select_best_params(

@@ -1,0 +1,52 @@
+# S21d — wie s21c_goldreaper_atrfilter.yaml (ATR-Vol-Filter als WFO-Param,
+# reduziertes Risiko/max_concurrent), zusaetzlich wfo.selection: plateau.
+#
+# Motivation: core/validation.py::walk_forward hat bisher IMMER reines
+# Max-IS-PF fuer die Fold-Parameterwahl genutzt, obwohl plateau_select()
+# (SPEC §4.9 "Plateau-Selektion statt Max-PF") implementiert und getestet
+# war, aber nirgends aufgerufen wurde (s. Commit "Wire up plateau-selection
+# in WFA fold selector"). Max-PF waehlt bevorzugt eine einzelne rauschende
+# IS-Spitze -- genau das Muster, das PBO/CSCV bestraft. Alle bisherigen
+# XAUUSD-Kandidaten dieser Session (inkl. s21/s21_mc5, PBO 0.343) scheitern
+# am PBO<0.10-Gate. Diese Variante testet, ob Plateau-Selektion (>=60%
+# positive IS-Nachbarzellen) die Parameterwahl stabiler macht und damit das
+# PBO-Gate faellt, bei ansonsten identischem Setup zu s21c.
+strategy: s21_goldreaper_momentum_stack
+symbols:
+  - XAUUSD
+timeframes: [H1]
+
+risk:
+  risk_per_trade_pct: 0.3
+  daily_loss_halt_pct: 0.0
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 4
+  streak_limiter: 0
+  prop_profile: none
+
+params:
+  primary_tf: H1
+  ema_fast: 20
+  ema_mid: 50
+  ema_slow: 200
+  rsi_len: 14
+  rsi_min: 60.0
+  require_mid_slow_align: true
+  require_cross: true
+  atr_len: 14
+  atr_vol_min_percentile: 0.0
+  sl_atr_mult: 2.0
+  trail_atr_mult: 3.0
+  min_rr: 2.0
+  risk_pct: 0.0025
+
+wfo:
+  is_months: 24
+  oos_months: 6
+  selection: plateau
+  param_space:
+    rsi_min: [55, 60, 65]
+    sl_atr_mult: [1.5, 2.0]
+    min_rr: [1.5, 2.0]
+    atr_vol_min_percentile: [0.0, 0.2, 0.4]
