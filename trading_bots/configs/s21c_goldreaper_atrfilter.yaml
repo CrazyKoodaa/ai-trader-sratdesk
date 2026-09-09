@@ -1,0 +1,56 @@
+# S21c — GoldReaper-Variante: ATR-Volatilitaets-Filter als WFO-Parameter
+# statt fixem Aus (s21_goldreaper_momentum_stack_mc5.yaml). Motivation
+# (Post-Hoc-Analyse der mc5-OOS-Trades, reports/wfa_s21_goldreaper_xauusd_mc5):
+#   - Trade-Edge sitzt fast vollstaendig in "sl_gap"-Exits (Trail bereits im
+#     Gewinn, Gap ueberspringt den nachgezogenen Stop weiter in Trendrichtung
+#     -> PF 37.6 auf diesem Segment, n=188/1169); die Mehrheit der Trades
+#     (974/1169, regulaerer "sl"-Exit) ist knapp unrentabel (PF 0.94).
+#   - ATR-Quintile bei Entry: unterstes Quintil (niedrigste Vol) klar
+#     schwaechste Gruppe (PF 1.17 vs. 1.39-1.89 in den oberen vier).
+#   - atr_vol_min_percentile existiert bereits als Strategie-Parameter
+#     (strategies/s21_goldreaper_momentum_stack.py), war aber fix auf 0.0
+#     (aus) gesetzt und NICHT im WFO-Grid -> wird hier als echter,
+#     kausal-je-Fold-selektierter WFO-Parameter ergaenzt (kein Hindsight-Cut
+#     auf denselben OOS-Daten, jeder Fold waehlt ihn nur aus seinem eigenen
+#     IS-Fenster).
+# Ziel: PF(1x) ueber 1.5 UND PBO/CSCV < 0.10 UND MC p95-MaxDD <= 8% (die drei
+# offenen Gates aus der mc5-Variante) durch weniger, aber hoeherwertige
+# Trades plus reduziertes Risiko/Trade.
+strategy: s21_goldreaper_momentum_stack
+symbols:
+  - XAUUSD
+timeframes: [H1]
+
+risk:
+  risk_per_trade_pct: 0.3
+  daily_loss_halt_pct: 0.0
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 4        # weiter reduziert ggue. mc5 (5) -> DD-Gate
+  streak_limiter: 0
+  prop_profile: none
+
+params:
+  primary_tf: H1
+  ema_fast: 20
+  ema_mid: 50
+  ema_slow: 200
+  rsi_len: 14
+  rsi_min: 60.0
+  require_mid_slow_align: true
+  require_cross: true
+  atr_len: 14
+  atr_vol_min_percentile: 0.0
+  sl_atr_mult: 2.0
+  trail_atr_mult: 3.0
+  min_rr: 2.0
+  risk_pct: 0.0025         # von 0.003 -> 0.0025 (~17% weniger) fuers DD-Gate
+
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    rsi_min: [55, 60, 65]
+    sl_atr_mult: [1.5, 2.0]
+    min_rr: [1.5, 2.0]
+    atr_vol_min_percentile: [0.0, 0.2, 0.4]
