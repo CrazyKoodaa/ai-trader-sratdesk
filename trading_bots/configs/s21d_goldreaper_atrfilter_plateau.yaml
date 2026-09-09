@@ -11,6 +11,21 @@
 # am PBO<0.10-Gate. Diese Variante testet, ob Plateau-Selektion (>=60%
 # positive IS-Nachbarzellen) die Parameterwahl stabiler macht und damit das
 # PBO-Gate faellt, bei ansonsten identischem Setup zu s21c.
+#
+# NACHTRAG: dieselbe Datei wurde parallel in zwei Sitzungen angelegt (Sandbox-
+# und lokale Fortsetzung derselben Session, dieser Merge fuehrt beide
+# Fassungen zusammen — inhaltlich identisch bis auf den Kommentarkopf).
+# Ausserdem: die urspruengliche plateau_select-Anbindung hatte einen
+# Degenerations-Bug bei PF-Metriken (immer >=0 -> "positive Nachbarn" war
+# trivial erfuellt, s. Commit "Fix plateau-selection degeneration fuer
+# PF-Metrik") -- s21c und s21d lieferten dadurch bit-identische Ergebnisse.
+# Mit dem Fix und echten Broker-Daten (data_mt5, 2015-2026, s.
+# reports/wfa_s21c_goldreaper_atrfilter_mt5 und
+# .../wfa_s21d_goldreaper_atrfilter_plateau_mt5) schneidet der ATR-Filter
+# durchgehend SCHLECHTER ab als die unveraenderte mc5-Baseline (PF 1.26 vs.
+# 1.42, PBO 0.46 vs. 0.34, MC-DD 9.94% vs. 8.93%) -- die Post-Hoc-ATR-
+# Quintil-Beobachtung generalisiert nicht kausal. s21e isoliert die
+# Plateau-Selektion (ohne ATR-Filter-Grid) gegen dieselbe Baseline.
 strategy: s21_goldreaper_momentum_stack
 symbols:
   - XAUUSD
