@@ -1,0 +1,56 @@
+# S9q — DISCIPLINED single-shot run (reports/s9_xauusd_h1_metaoverfitting_finding.md).
+#
+# Per that finding: S9h through S9p (8 rounds) show PF(1x) and PBO
+# moving in near-lockstep (0.0->0.83) as the grid was manually narrowed
+# each round toward whatever won the previous round's full-sample fold
+# log -- hindsight curve-fitting the framework's own overfitting metric
+# correctly flagged. This run breaks that pattern: every grid value
+# below comes from EXTERNAL convention, not from anything observed
+# winning in S9h-p:
+#   - don_len [50, 100, 200]: round geometric bar-count spacing, no
+#     relation to the 300/400/500 that emerged from narrowing.
+#   - sl_atr_mult [1.5, 2.0, 3.0]: reuses this project's OWN established
+#     defaults across other strategies (S1 uses 1.5, S9's original H4
+#     config uses 2.0) rather than the 3.0-4.0 zone this session
+#     converged on.
+#   - trail_atr_mult [2.0, 3.0, 4.0]: literally s9_donchian_trend.yaml's
+#     (the original H4 config's) own WFO grid, unchanged.
+#   - adx_min [0.0, 25.0]: off vs. the single standard textbook
+#     ADX trend/no-trend threshold (25) -- not the fine 15/20/25 sweep
+#     built through narrowing.
+#
+# ONE run. Whatever this produces gets reported as-is -- no follow-up
+# grid redesign based on its fold log, per the disciplined-attempt
+# agreement.
+strategy: s9_donchian_trend
+symbols:
+  - XAUUSD
+timeframes: [H1]
+
+risk:
+  risk_per_trade_pct: 0.5
+  daily_loss_halt_pct: 0.0
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+params:
+  primary_tf: H1
+  don_len: 100
+  atr_len: 14
+  sl_atr_mult: 2.0
+  trail_atr_mult: 3.0
+  min_rr: 2.0
+  risk_pct: 0.005
+  adx_min: 0.0
+
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    don_len: [50, 100, 200]
+    sl_atr_mult: [1.5, 2.0, 3.0]
+    trail_atr_mult: [2.0, 3.0, 4.0]
+    adx_min: [0.0, 25.0]
