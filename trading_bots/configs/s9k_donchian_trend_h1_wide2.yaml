@@ -1,0 +1,38 @@
+# S9k — Diagnose-Lauf Runde 3. S9j (reports/wfa_s9j_donchian_xauusd_h1_wide)
+# erreichte 7/10 Gates (PBO=0.029 ✓, PF2x/3x ✓), aber don_len=300 (12/20
+# oberer Rand) und sl_atr_mult=3.0 (12/20 oberer Rand) pinnen weiterhin;
+# trail_atr_mult zeigt inzwischen echte Innenverteilung (3/4/5 alle
+# vertreten). Grid fuer die zwei noch pinnenden Dimensionen nochmals nach
+# oben erweitert, trail_atr_mult beibehalten.
+strategy: s9_donchian_trend
+symbols:
+  - XAUUSD
+timeframes: [H1]
+
+risk:
+  risk_per_trade_pct: 0.5
+  daily_loss_halt_pct: 0.0
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+params:
+  primary_tf: H1
+  don_len: 300
+  atr_len: 14
+  sl_atr_mult: 3.0
+  trail_atr_mult: 4.0
+  min_rr: 2.0
+  risk_pct: 0.005
+  adx_min: 20.0
+
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    don_len: [250, 300, 400, 500]
+    sl_atr_mult: [2.5, 3.0, 3.5, 4.0]
+    trail_atr_mult: [3.0, 4.0, 5.0]
+    adx_min: [0.0, 20.0, 25.0]
