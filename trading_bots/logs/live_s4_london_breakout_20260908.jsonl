@@ -94,3 +94,18 @@
 {"ts": "2026-09-09T11:00:12.561875+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-09 09:00:00+00:00"}
 {"ts": "2026-09-09T11:09:57.548340+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
 {"ts": "2026-09-09T11:39:57.555294+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T12:39:57.596442+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T13:00:12.615279+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-09 11:00:00+00:00"}
+{"ts": "2026-09-09T13:09:57.610490+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T13:39:57.589331+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T14:00:12.615874+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-09 12:00:00+00:00"}
+{"ts": "2026-09-09T14:09:57.602306+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T14:39:57.607399+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T15:00:12.628489+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-09 13:00:00+00:00"}
+{"ts": "2026-09-09T15:09:57.634420+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T15:39:57.626518+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T16:00:12.603587+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-09 14:00:00+00:00"}
+{"ts": "2026-09-09T16:09:57.630346+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T16:39:57.638382+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
+{"ts": "2026-09-09T17:00:12.660637+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-09 15:00:00+00:00"}
+{"ts": "2026-09-09T17:09:57.672688+00:00", "event": "heartbeat", "equity": 100078.35, "open_positions": 0}
