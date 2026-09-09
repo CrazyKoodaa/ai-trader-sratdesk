@@ -1,0 +1,56 @@
+# S21f — kleineres WFO-Grid + plateau-Selektion + leicht reduziertes Risiko.
+#
+# Bisherige Befunde dieser Session (s21_mc5 Baseline PF=1.424/PBO=0.343/
+# DSR=1.000/MC-DD=8.93%; s21c/d ATR-Vol-Filter als 4. WFO-Dimension: auf
+# allen 3 offenen Gates SCHLECHTER, reports/wfa_s21c..._mt5,
+# wfa_s21d..._mt5; s21e Plateau-Selektion isoliert, reports/
+# wfa_s21e_goldreaper_plateau_only: PF/MC-DD minimal besser, PBO praktisch
+# UNVERAENDERT 0.343 -> die IS/OOS-Instabilitaet sitzt nicht in "welche
+# Zelle waehlt der Fold", sondern in der Trade-Verteilung selbst
+# (Edge konzentriert in seltenen sl_gap-Exits, s. Commit-Historie)).
+#
+# Diese Variante greift einen anderen, ebenfalls literaturgestuetzten Hebel
+# an: CSCV/PBO bestraft tendenziell groessere Parameter-Raeume (mehr
+# Kombinationen = mehr Gelegenheit fuer eine zufaellig gute IS-Zelle).
+# min_rr wird hier NICHT gesweept (fix auf 2.0, dem Median-nahen Wert aus
+# der Reverse-Engineering-Beobachtung, s. Strategie-Docstring), das Grid
+# schrumpft von 3x2x2=12 auf 3x2=6 Kombinationen. risk_pct leicht reduziert
+# (0.003 -> 0.0028) als mechanischer Hebel fuers MC-DD-Gate (DD skaliert
+# linear mit Positionsgroesse, s21e lag bei 8.31% -> ~7.75% erwartet).
+strategy: s21_goldreaper_momentum_stack
+symbols:
+  - XAUUSD
+timeframes: [H1]
+
+risk:
+  risk_per_trade_pct: 0.3
+  daily_loss_halt_pct: 0.0
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 5
+  streak_limiter: 0
+  prop_profile: none
+
+params:
+  primary_tf: H1
+  ema_fast: 20
+  ema_mid: 50
+  ema_slow: 200
+  rsi_len: 14
+  rsi_min: 60.0
+  require_mid_slow_align: true
+  require_cross: true
+  atr_len: 14
+  atr_vol_min_percentile: 0.0
+  sl_atr_mult: 2.0
+  trail_atr_mult: 3.0
+  min_rr: 2.0
+  risk_pct: 0.0028
+
+wfo:
+  is_months: 24
+  oos_months: 6
+  selection: plateau
+  param_space:
+    rsi_min: [55, 60, 65]
+    sl_atr_mult: [1.5, 2.0]
