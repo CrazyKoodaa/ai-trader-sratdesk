@@ -1037,6 +1037,40 @@ def bot_stats(magic: int, live: dict | None) -> dict:
     }
 
 
+def daily_realized(live: dict | None) -> dict:
+    """Heute (UTC) realisierte P&L und Trade-Anzahl ueber ALLE Bots des
+    Kontos, plus Zeitpunkt des letzten Closed-Deals. Deals werden wie in
+    bot_stats() je position_id gruppiert; ein Trade zaehlt in den heutigen
+    Topf, wenn sein Exit-Deal (entry==1) heute (UTC) liegt. Deals ohne
+    Zeitstempel (z.B. in Tests) werden nicht abgezaehlt, crashen aber
+    nicht."""
+    if not live:
+        return {"daily_realized": 0.0, "daily_trades": 0, "last_close_ts": None}
+    today = datetime.now(UTC).date()
+    groups: dict[int, dict] = {}
+    for d in live.get("deals", []):
+        pos_id = int(d.get("position_id") or d.get("position") or 0)
+        g = groups.setdefault(pos_id, {"net": 0.0, "exit_ts": None})
+        g["net"] += (float(d.get("profit", 0.0) or 0.0)
+                     + float(d.get("commission", 0.0) or 0.0)
+                     + float(d.get("swap", 0.0) or 0.0))
+        if int(d.get("entry", -1)) == 1 and d.get("time"):
+            g["exit_ts"] = int(d["time"])
+    daily_net = 0.0
+    daily_count = 0
+    last_close = None
+    for g in groups.values():
+        if g["exit_ts"] is None:
+            continue
+        if last_close is None or g["exit_ts"] > last_close:
+            last_close = g["exit_ts"]
+        if datetime.fromtimestamp(g["exit_ts"], UTC).date() == today:
+            daily_net += g["net"]
+            daily_count += 1
+    return {"daily_realized": round(daily_net, 2), "daily_trades": daily_count,
+            "last_close_ts": last_close}
+
+
 def bot_freshness(narrative_log: Path) -> dict:
     """'Ist der Bot-Prozess aktiv?' — abgeleitet vom mtime des Traderbook-Logs
     (unabhaengig von der MT5-Bruecke: zeigt an, ob der Prozess selbst laeuft)."""
@@ -1209,6 +1243,7 @@ def build_overview_payload(cache: MT5Cache) -> dict:
         },
         "bridge": bridge_status(),
         "bots": bots_out,
+        **daily_realized(live),
     }
 
 
@@ -1262,22 +1297,29 @@ def build_bot_payload(cache: MT5Cache, key: str) -> dict:
 
 # ----------------------------------------------------------------------
 # Gemeinsames Design-System (Token-CSS + Kopfzeile) fuer alle 4 Seiten —
-# "Handelsterminal"-Identitaet statt generischem SaaS-Dark-Theme: Graphit
-# statt Reinschwarz, Bernstein als einziger interaktiver Akzent (Gruen/Rot
-# bleiben strikt P&L/Pass-Fail vorbehalten), IBM Plex Mono als durchgehende
-# UI-Stimme (tabellarische Ziffern fuer Kennzahlen-Vergleiche), feste
-# 4-Punkt-Navigation statt wachsender Pro-Bot-Linkliste.
+# "Kaltblau-Terminal"-Identitaet statt generischem SaaS-Dark-Theme:
+# blauer Graphit statt Reinschwarz, Eisblau als einziger interaktiver
+# Akzent (Gruen/Rot bleiben strikt P&L/Pass-Fail vorbehalten, Bernstein
+# nur fuer Warn-/Mid-States), IBM Plex Mono als durchgehende UI-Stimme
+# (tabellarische Ziffern fuer Kennzahlen-Vergleiche), feste 4-Punkt-
+# Navigation statt wachsender Pro-Bot-Linkliste.
 # ----------------------------------------------------------------------
 FONTS_LINK = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
               '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?'
-              'family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">')
+              'family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">'
+              '<link rel="icon" href="data:image/svg+xml,'
+              '%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E'
+              '%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%2311151c%27/%3E'
+              '%3Cpath d=%27M3.5 10.5 6.5 7.5 9.5 9.5 12.5 5%27 stroke=%27%234da3ff%27 '
+              'stroke-width=%271.8%27 fill=%27none%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">')
 
 BASE_CSS = r"""
   :root {
-    --ink: #0a0b0d; --panel: #14151a; --panel2: #1c1e24; --line: #2b2e35;
-    --paper: #e9e7e2; --ash: #8b8d96; --signal: #d99a3d; --signal-dim: rgba(217,154,61,.14);
-    --gain: #6fbf8b; --gain-dim: rgba(111,191,139,.14);
-    --loss: #d97a6c; --loss-dim: rgba(217,122,108,.14);
+    --ink: #0a0d12; --panel: #11151c; --panel2: #181d26; --line: #242b36;
+    --paper: #e6eaf0; --ash: #7f8899; --signal: #4da3ff; --signal-dim: rgba(77,163,255,.14);
+    --gain: #5fbf8f; --gain-dim: rgba(95,191,143,.14);
+    --loss: #e07a6a; --loss-dim: rgba(224,122,106,.14);
+    --warn: #d4a72c; --warn-dim: rgba(212,167,44,.14);
   }
   * { box-sizing: border-box; }
   html { color-scheme: dark; }
@@ -1314,7 +1356,7 @@ BASE_CSS = r"""
   #topbar .live { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--ash); }
   #topbar .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ash); flex-shrink: 0; }
   #topbar .dot.on { background: var(--gain); box-shadow: 0 0 5px var(--gain); }
-  #topbar .dot.warn { background: var(--signal); box-shadow: 0 0 5px var(--signal); }
+  #topbar .dot.warn { background: var(--warn); box-shadow: 0 0 5px var(--warn); }
   #topbar .refresh { background: none; border: 1px solid var(--line); color: var(--ash);
                     border-radius: 3px; width: 26px; height: 26px; cursor: pointer; font-size: 13px; }
   #topbar .refresh:hover { color: var(--paper); border-color: var(--signal); }
@@ -1357,7 +1399,7 @@ BASE_CSS = r"""
 
   .badge { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 11.5px; font-weight: 600; }
   .badge.good { background: var(--gain-dim); color: var(--gain); }
-  .badge.mid { background: var(--signal-dim); color: var(--signal); }
+  .badge.mid { background: var(--warn-dim); color: var(--warn); }
   .badge.bad { background: var(--loss-dim); color: var(--loss); }
   .badge.none { background: var(--panel2); color: var(--ash); }
 
@@ -1397,6 +1439,81 @@ BASE_CSS = r"""
   .tag.long { background: var(--gain-dim); color: var(--gain); }
   .tag.short { background: var(--loss-dim); color: var(--loss); }
   .tag.open { background: var(--signal-dim); color: var(--signal); }
+
+  /* Hero: Equity links + drei Konto-Toepfe rechts (Tages-/Floating/Offene) */
+  .hero { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; }
+  .hero-stats { display: grid; grid-template-columns: repeat(3, minmax(150px, 1fr)); gap: 1px;
+               background: var(--line); border: 1px solid var(--line); border-radius: 5px; overflow: hidden; }
+  .hstat { background: var(--panel); padding: 12px 16px; }
+  .hstat .lbl { color: var(--ash); font-size: 10.5px; }
+  .hstat .val { font-size: 22px; font-weight: 600; margin-top: 4px; font-variant-numeric: tabular-nums; }
+  .hstat .sub { color: var(--ash); font-size: 11px; margin-top: 2px; }
+
+  /* Fehler-Banner (MT5 nicht erreichbar) + abgedunkelte Alt-Daten darunter */
+  .banner { display: flex; align-items: center; gap: 14px; padding: 14px 16px; margin-bottom: 14px;
+           border: 1px solid var(--loss); border-radius: 5px; background: var(--loss-dim); }
+  .banner .btxt { flex: 1; }
+  .banner .btxt b { display: block; font-size: 13.5px; margin-bottom: 2px; }
+  .banner .btxt span { color: var(--ash); font-size: 12px; }
+  .stale { opacity: .55; }
+
+  /* Skeleton fuer den ersten Ladevorgang (bis der erste API-Poll antwortet) */
+  .sk { position: relative; overflow: hidden; background: var(--panel2); border-radius: 5px; }
+  .sk::after { content: ""; position: absolute; inset: 0; transform: translateX(-100%);
+              background: linear-gradient(90deg, transparent, rgba(230,234,240,.06), transparent);
+              animation: shimmer 1.4s ease-out infinite; }
+  @keyframes shimmer { to { transform: translateX(100%); } }
+  .sk-hero { height: 110px; margin-bottom: 14px; }
+  .sk-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 14px; }
+  .sk-kpis .sk { height: 72px; }
+  .sk-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .sk-cards .sk { height: 280px; }
+
+  /* Bot-Karte: Prozess-Status und Log-Frische als getrennte Angaben */
+  .botstatus { display: flex; align-items: center; gap: 12px; font-size: 11.5px; margin: 2px 0 10px; flex-wrap: wrap; }
+  .botstatus .run { color: var(--gain); }
+  .botstatus .stop { color: var(--loss); }
+  .botstatus .logage { color: var(--ash); }
+  .diagmore { background: none; border: none; color: var(--signal); font: 11.5px "IBM Plex Mono", monospace;
+             cursor: pointer; padding: 2px 0; text-align: left; }
+  .diagmore:hover { text-decoration: underline; }
+  .lastline-wrap { margin-top: 10px; }
+  .lastline-wrap summary { cursor: pointer; color: var(--ash); font-size: 11px; }
+  .lastline-wrap summary:hover { color: var(--signal); }
+
+  /* Inline-Meldungen (Toasts) statt alert() */
+  .toasts { position: fixed; right: 20px; bottom: 20px; display: flex; flex-direction: column; gap: 8px; z-index: 50; }
+  .toast { background: var(--panel); border: 1px solid var(--line); border-left: 2px solid var(--signal);
+          border-radius: 5px; padding: 10px 14px; font-size: 12.5px; max-width: 380px;
+          box-shadow: 0 8px 24px rgba(0,0,0,.45); animation: toastin .2s ease-out;
+          transition: opacity .3s ease, transform .3s ease; }
+  .toast.ok { border-left-color: var(--gain); }
+  .toast.warn { border-left-color: var(--warn); }
+  .toast.err { border-left-color: var(--loss); }
+  .toast.bye { opacity: 0; transform: translateY(6px); }
+  @keyframes toastin { from { opacity: 0; transform: translateY(8px); } }
+
+  /* Gate-Matrix: Werte nach Gate-Schwelle faerben */
+  .num-good { color: var(--gain); }
+  .num-mid { color: var(--warn); }
+  .num-bad { color: var(--loss); }
+  .legend { display: flex; gap: 20px; margin-top: 12px; color: var(--ash); font-size: 12px; flex-wrap: wrap; }
+  .legend .sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; }
+  .sw.good { background: var(--gain); }
+  .sw.mid { background: var(--warn); }
+  .sw.bad { background: var(--loss); }
+
+  /* Chart-Empty-State (Bot ohne Heartbeats) */
+  .chart-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+                height: 280px; color: var(--ash); text-align: center; padding: 16px; }
+  .chart-empty b { color: var(--paper); font-size: 14px; }
+  .chart-empty span { font-size: 12px; max-width: 440px; }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .sk-kpis { grid-template-columns: repeat(2, 1fr); }
+    .sk-cards { grid-template-columns: 1fr; }
+  }
 """
 
 
@@ -1407,15 +1524,19 @@ def _topbar(active: str, back_href: str | None = None, back_label: str = "") -> 
     Strategien erreicht und tragen stattdessen einen '<- Zurueck'-Link."""
     items = [("/", "Übersicht"), ("/strategies", "Strategien"),
             ("/gates-matrix", "Gate-Matrix"), ("/analyze", "Analyse")]
-    links = "".join(f'<a href="{href}" class="{"on" if href == active else ""}">{label}</a>'
-                    for href, label in items)
+    links = []
+    for href, label in items:
+        on = href == active
+        aria = ' aria-current="page"' if on else ""
+        links.append(f'<a href="{href}" class="{"on" if on else ""}"{aria}>{label}</a>')
+    links = "".join(links)
     back = f'<a class="back" href="{back_href}">← {back_label}</a>' if back_href else ""
     return f"""<header id="topbar">
   <a class="mark" href="/">STRAT<b>DESK</b></a>
-  <nav>{links}</nav>
+  <nav aria-label="Hauptnavigation">{links}</nav>
   <span class="spacer"></span>
   <span class="live" id="live-wrap"><span class="dot" id="live"></span><span id="stamp">lädt…</span></span>
-  <button class="refresh" onclick="location.reload()" title="Neu laden">⟳</button>
+  <button class="refresh" onclick="location.reload()" title="Neu laden" aria-label="Neu laden">⟳</button>
 </header>{back}"""
 
 
@@ -1468,13 +1589,45 @@ __BASE_CSS__
 </head>
 <body data-view="__VIEW__">
 __TOPBAR__
-<main id="app"></main>
+<main id="app">
+  <!-- Skeleton bis der erste API-Poll antwortet (Loading-State, kein leerer Tab) -->
+  <div id="boot-skeleton" aria-hidden="true">
+    <div class="sk sk-hero"></div>
+    <div class="sk-kpis"><div class="sk"></div><div class="sk"></div><div class="sk"></div><div class="sk"></div></div>
+    <div class="sk-cards"><div class="sk"></div><div class="sk"></div></div>
+  </div>
+</main>
 <script>
 const fmt2 = v => v == null ? "—" : Number(v).toLocaleString("de-DE", {minimumFractionDigits:2, maximumFractionDigits:2});
 const fmtPct = v => v == null ? "—" : Number(v).toLocaleString("de-DE", {maximumFractionDigits:1}) + " %";
-const cls = v => v == null ? "" : (v >= 0 ? "pos" : "neg");
+const cls = v => v == null || v === 0 ? "" : (v > 0 ? "pos" : "neg");
+const sgn = v => v == null || v === 0 ? fmt2(v) : (v > 0 ? "+" : "") + fmt2(v);
 const VIEW = document.body.dataset.view;
 let DATA = null;
+
+// UI-Zustand, der ueber Auto-Refresh-Neurenders hinweg erhalten bleibt:
+// aufgeklappte Diagnose-Listen (Overview) und Autopsie-Zeilen (Bot-Detail,
+// per Ticket-ID) — sonst kollabiert der Refresh alles, was der Nutzer
+// gerade aufgeklappt/gelesen hat.
+const expandedDiag = {};
+const expandedAuto = new Set();
+let firstRender = true;
+
+function toast(msg, tone) {
+  let region = document.getElementById("toasts");
+  if (!region) {
+    region = document.createElement("div");
+    region.id = "toasts";
+    region.className = "toasts";
+    region.setAttribute("aria-live", "polite");
+    document.body.appendChild(region);
+  }
+  const el = document.createElement("div");
+  el.className = "toast " + (tone || "info");
+  el.textContent = msg;
+  region.appendChild(el);
+  setTimeout(() => { el.classList.add("bye"); setTimeout(() => el.remove(), 300); }, 4200);
+}
 
 async function refresh() {
   try {
@@ -1486,7 +1639,12 @@ async function refresh() {
     dot.classList.toggle("warn", !DATA.connected);
     document.getElementById("stamp").title = DATA.connected ? "MT5 verbunden" : "MT5 nicht erreichbar (letzter Stand)";
     document.getElementById("stamp").textContent = DATA.generated.slice(11, 19) + " UTC";
+    // Scroll-Position erhalten: das Neu-Render ersetzt das DOM, der
+    // Browser sonst zur Seite nach oben springen.
+    const y = window.scrollY;
     VIEW === "overview" ? renderOverview() : renderBotDetail();
+    if (!firstRender) window.scrollTo(0, y);
+    firstRender = false;
   } catch (e) {
     document.getElementById("stamp").textContent = "Fehler: " + e;
   }
@@ -1526,61 +1684,109 @@ function renderOverview() {
   const acc = DATA.account || {};
   const app = document.getElementById("app");
   const br = DATA.bridge || {};
-  let html = `<div class="pagehead"><h1>Übersicht</h1><span class="ctx">${DATA.bots.length} Bots erfasst</span></div>`;
+  const bots = DATA.bots;
+  const paused = !DATA.connected;  // MT5 weg: Start/Stop pausieren, Daten abgedunkelt
+  const totalOpen = bots.reduce((a, b) => a + (b.open_count || 0), 0);
+  const totalFloat = bots.reduce((a, b) => a + (b.floating_pl || 0), 0);
+  const totalNetto = bots.reduce((a, b) => a + (b.netto || 0), 0);
+  const totalClosed = bots.reduce((a, b) => a + (b.closed_trades || 0), 0);
+  const runningCount = bots.filter(b => (b.process || {}).running).length;
+  const aliveCount = bots.filter(b => b.alive).length;
+  const lastClose = DATA.last_close_ts ? new Date(DATA.last_close_ts * 1000).toISOString().slice(11, 16) : "—";
+
+  let html = `<div class="pagehead"><h1>Übersicht</h1><span class="ctx">${bots.length} Bots erfasst</span></div>`;
+  if (paused) {
+    html += `<div class="banner" role="alert">
+      <div class="btxt"><b>MT5 nicht erreichbar</b>
+      <span>Letzter Stand: ${DATA.generated.slice(11, 19)} UTC. Daten können veraltet sein, Start und Stop sind pausiert.</span></div>
+      <button class="btn" onclick="startBridge()">Erneut verbinden</button>
+    </div>`;
+  }
+  html += `<div class="${paused ? "stale" : ""}">`;
   html += `<div class="hero">
-    <div class="lbl">Equity</div>
-    <div class="val">${fmt2(acc.equity)}<span class="cur">${acc.currency||""}</span></div>
-    <div class="sub">Balance ${fmt2(acc.balance)} — Konto ${acc.login||"—"} @ ${acc.server||"—"}</div>
+    <div>
+      <div class="lbl">Equity</div>
+      <div class="val">${fmt2(acc.equity)}<span class="cur">${acc.currency||""}</span></div>
+      <div class="sub">Balance ${fmt2(acc.balance)} — Konto ${acc.login||"—"} @ ${acc.server||"—"}</div>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="lbl">Heute realisiert</div><div class="val ${cls(DATA.daily_realized)}">${sgn(DATA.daily_realized)}</div><div class="sub">${DATA.daily_trades ?? 0} Trades</div></div>
+      <div class="hstat"><div class="lbl">Floating gesamt</div><div class="val ${cls(totalFloat)}">${sgn(totalFloat)}</div><div class="sub">${totalOpen} offene Positionen</div></div>
+      <div class="hstat"><div class="lbl">Offene Positionen</div><div class="val">${totalOpen}</div><div class="sub">über alle Bots</div></div>
+    </div>
   </div>`;
-  const kpis = [
-    ["Bots aktiv", DATA.bots.filter(b=>b.alive).length + " / " + DATA.bots.length, "", ""],
-  ];
-  html += '<div class="kpis">' + kpis.map(([l,v,s,c]) =>
-    `<div class="kpi"><div class="lbl">${l}</div><div class="val ${c}">${v}</div><div class="sub">${s}</div></div>`
-  ).join('') +
-    `<div class="kpi">
+  html += `<div class="kpis">
+    <div class="kpi">
       <div class="lbl">MT5-Brücke</div>
-      <div class="val ${br.running?"pos":"neg"}">${br.running ? "läuft" : "nicht gefunden"}</div>
-      <div class="sub">${br.running ? "PID "+br.pid : "pymt5linux/Wine"}</div>
+      <div class="val ${br.running?"pos":"neg"}">${br.running ? "läuft" : "offline"}</div>
+      <div class="sub">${br.running ? "PID "+br.pid : "pymt5linux/Wine nicht gefunden"}</div>
       ${br.running ? '' : `<button class="btn go" id="btnBridge" style="margin-top:6px" onclick="startBridge()">▶ Starten</button>
         <span class="ctrlmsg" id="bridgeMsg"></span>`}
-    </div>` +
-  '</div>';
+    </div>
+    <div class="kpi"><div class="lbl">Bots aktiv</div><div class="val">${runningCount} / ${bots.length}</div>
+      <div class="sub">Prozess läuft · Log frisch: ${aliveCount}</div></div>
+    <div class="kpi"><div class="lbl">Realisiert (400 Tage)</div><div class="val ${cls(totalNetto)}">${sgn(totalNetto)}</div>
+      <div class="sub">${totalClosed} geschlossene Trades</div></div>
+    <div class="kpi"><div class="lbl">Letzter Trade</div><div class="val">${lastClose}</div>
+      <div class="sub">alle Bots, UTC</div></div>
+  </div>`;
   html += '<div class="botgrid">';
-  for (const b of DATA.bots) {
+  for (const b of bots) {
     const aliveDot = b.alive ? '<span class="dot on" style="display:inline-block"></span>'
-                             : '<span class="dot warn" style="display:inline-block"></span>';
+                              : '<span class="dot warn" style="display:inline-block"></span>';
     const link = b.detail_path ? `<a href="${b.detail_path}">Details →</a>` : '';
     const p = b.process || {};
+    const diag = b.diagnostics || [];
+    const diagOpen = !!expandedDiag[b.key];
+    const shownDiag = diagOpen ? diag : diag.slice(0, 2);
+    const moreCount = diag.length - 2;
+    const procLabel = p.controllable
+      ? (p.running ? '<span class="run">läuft</span>' : '<span class="stop">gestoppt</span>')
+      : '<span class="logage">extern</span>';
+    const logAge = b.alive ? "frisch"
+      : (b.age_seconds != null ? "vor " + Math.round(b.age_seconds/60) + " min" : "nicht gefunden");
     let ctrl = '';
     if (p.controllable) {
       ctrl = `<div class="ctrlrow" style="margin-top:10px">
-        <button class="btn go" ${p.running ? "disabled" : ""} onclick="botAction('${b.key}','start',this)">▶ Start</button>
-        <button class="btn stop" ${p.running ? "" : "disabled"} onclick="botAction('${b.key}','stop',this)">■ Stop</button>
+        <button class="btn go" ${(p.running || paused) ? "disabled" : ""} onclick="botAction('${b.key}','start',this)">▶ Start</button>
+        <button class="btn stop" ${(!p.running || paused) ? "disabled" : ""} onclick="botAction('${b.key}','stop',this)">■ Stop</button>
         <span class="ctrlmsg" id="ctrlmsg-${b.key}"></span>
       </div>`;
     }
     html += `<div class="botcard ${b.alive ? "alive" : ""}">
       <h3>${aliveDot} ${b.name} ${link ? '<span style="flex:1"></span>'+link : ''}</h3>
-      <div class="magic">Magic ${b.magic} · ${b.alive ? 'aktiv' : (b.age_seconds!=null ? 'letztes Log vor '+Math.round(b.age_seconds/60)+' min' : 'kein Log gefunden')}
-        ${p.controllable ? ' · Prozess: ' + (p.running ? '<span class="pos">laeuft</span>' : '<span class="neg">gestoppt</span>') : ''}</div>
+      <div class="magic">Magic ${b.magic}</div>
+      <div class="botstatus">
+        <span>Prozess: ${procLabel}</span>
+        <span class="logage">Log: ${logAge}</span>
+      </div>
       <div class="botmetrics">
         <div class="m">Offene Positionen<b>${b.open_count}</b></div>
-        <div class="m">Floating P&amp;L<b class="${cls(b.floating_pl)}">${fmt2(b.floating_pl)}</b></div>
+        <div class="m">Floating P&amp;L<b class="${cls(b.floating_pl)}">${sgn(b.floating_pl)}</b></div>
         <div class="m">Geschl. Trades<b>${b.closed_trades}</b></div>
         <div class="m">Winrate<b>${fmtPct(b.winrate)}</b></div>
-        <div class="m">Netto P&amp;L<b class="${cls(b.netto)}">${fmt2(b.netto)}</b></div>
+        <div class="m">Netto P&amp;L<b class="${cls(b.netto)}">${sgn(b.netto)}</b></div>
         <div class="m">Profit-Faktor<b>${b.profit_factor ?? "—"}</b></div>
       </div>
-      ${(b.diagnostics||[]).length ? `<div class="diaglist">` +
-        b.diagnostics.map(d => `<div class="diagrow"><span class="sym">${d.symbol}</span><span class="txt">${d.text}</span></div>`).join('') +
+      ${diag.length ? `<div class="diaglist">` +
+        shownDiag.map(d => `<div class="diagrow"><span class="sym">${d.symbol}</span><span class="txt">${d.text}</span></div>`).join('') +
+        (moreCount > 0 ? `<button class="diagmore" onclick="toggleDiag('${b.key}')">${diagOpen ? "weniger anzeigen" : "+" + moreCount + " weitere"}</button>` : "") +
         `</div>` : ''}
-      ${b.last_line ? `<div class="sub lastline">${b.last_line}</div>` : ''}
+      ${b.last_line ? `<details class="lastline-wrap"><summary>letzte Log-Zeile</summary><div class="sub lastline">${b.last_line}</div></details>` : ''}
       ${ctrl}
     </div>`;
   }
   html += '</div>';
+  html += '</div>';  // .stale-Wrapper
   app.innerHTML = html;
+}
+
+// Diagnose-Liste auf-/zuklappen (Zustand bleibt ueber Refresh erhalten)
+function toggleDiag(key) {
+  expandedDiag[key] = !expandedDiag[key];
+  const y = window.scrollY;
+  renderOverview();
+  window.scrollTo(0, y);
 }
 
 // ---------------- Bot-Detail (generisch fuer jeden BOTS-Eintrag) ----------------
@@ -1588,7 +1794,16 @@ let eqChart = null;
 function renderBotDetail() {
   const s = DATA.stats, f = DATA.freshness, g = DATA.gates || {}, p = DATA.process || {};
   const app = document.getElementById("app");
+  const paused = !DATA.connected;
   let html = `<div class="pagehead"><h1>${DATA.name}</h1><span class="ctx">Magic ${DATA.magic}</span></div>`;
+  if (paused) {
+    html += `<div class="banner" role="alert">
+      <div class="btxt"><b>MT5 nicht erreichbar</b>
+      <span>Letzter Stand: ${DATA.generated.slice(11, 19)} UTC. Daten können veraltet sein, Start und Stop sind pausiert.</span></div>
+      <button class="btn" onclick="startBridge()">Erneut verbinden</button>
+    </div>`;
+  }
+  html += `<div class="${paused ? "stale" : ""}">`;
   const kpis = [
     ["Status", f.alive ? "● aktiv" : "○ inaktiv", f.age_seconds!=null ? "Log vor "+Math.round(f.age_seconds/60)+" min" : "kein Log", f.alive?"pos":"neg"],
     ["Offene Positionen", String(s.open_count), "", ""],
@@ -1605,8 +1820,8 @@ function renderBotDetail() {
   if (p.controllable) {
     html += `<div class="card"><h2>Steuerung</h2><div class="ctrlrow">
       <span class="sub">Prozess: ${p.running ? '<span class="pos">● laeuft</span>' : '<span class="neg">○ gestoppt</span>'}</span>
-      <button class="btn go" ${p.running ? "disabled" : ""} onclick="botAction('${DATA.key}','start',this)">▶ Start</button>
-      <button class="btn stop" ${p.running ? "" : "disabled"} onclick="botAction('${DATA.key}','stop',this)">■ Stop</button>
+      <button class="btn go" ${(p.running || paused) ? "disabled" : ""} onclick="botAction('${DATA.key}','start',this)">▶ Start</button>
+      <button class="btn stop" ${(!p.running || paused) ? "disabled" : ""} onclick="botAction('${DATA.key}','stop',this)">■ Stop</button>
       <span class="ctrlmsg" id="ctrlmsg-${DATA.key}"></span>
     </div></div>`;
   }
@@ -1635,7 +1850,16 @@ function renderBotDetail() {
     html += `</div>`;
   }
 
-  html += `<div class="card"><h2>Equity (aus Heartbeat-Log)</h2><div class="chartbox"><canvas id="eqChart"></canvas></div></div>`;
+  const eq = DATA.equity || [];
+  const eqMin = eq.length ? eq.reduce((m, x) => Math.min(m, x.v), Infinity) : null;
+  const eqMax = eq.length ? eq.reduce((m, x) => Math.max(m, x.v), -Infinity) : null;
+  const eqSub = eq.length
+    ? `aktuell ${fmt2(eq[eq.length-1].v)} · min ${fmt2(eqMin)} · max ${fmt2(eqMax)}`
+    : "noch keine Heartbeats";
+  html += `<div class="card"><h2>Equity (aus Heartbeat-Log)<span class="sub">${eqSub}</span></h2>
+    ${eq.length ? `<div class="chartbox"><canvas id="eqChart"></canvas></div>`
+                : `<div class="chart-empty"><b>Noch keine Heartbeat-Daten</b><span>Die Kurve erscheint nach dem ersten Equity-Heartbeat des Bots.</span></div>`}
+  </div>`;
 
   html += `<div class="card"><h2>Offene Positionen</h2><div class="tablewrap"><table>
     <thead><tr><th>Ticket</th><th>Symbol</th><th>Vol</th><th>Entry</th><th>SL</th><th>TP</th><th>P&L</th></tr></thead>
@@ -1652,14 +1876,20 @@ function renderBotDetail() {
     </table></div></div>`;
 
   html += `<div class="card"><h2>Traderbook (letzte 250 Zeilen)</h2><div id="log"></div></div>`;
+  html += '</div>';  // .stale-Wrapper
   app.innerHTML = html;
 
   document.getElementById("log").textContent = (DATA.log_tail || []).join("\n");
   document.getElementById("log").scrollTop = 1e9;
   renderEqChart();
+  // Autopsie-Aufklappung pro Ticket merken: ein Auto-Refresh darf die
+  // Zeile nicht wieder zuklappen (Zustand in expandedAuto, s. oben).
   window._toggleAuto = (i) => {
+    const t = DATA.trades[i];
+    const id = String(t.ticket);
+    if (expandedAuto.has(id)) expandedAuto.delete(id); else expandedAuto.add(id);
     const row = document.getElementById("auto-" + i);
-    row.hidden = !row.hidden;
+    if (row) row.hidden = !row.hidden;
   };
 }
 
@@ -1667,13 +1897,14 @@ function tradeRow(t, i) {
   const dirTag = t.richtung ? `<span class="tag ${t.richtung.toLowerCase()}">${t.richtung}</span>` : "";
   const statusTag = t.offen ? '<span class="tag open">OFFEN</span>' : '';
   const auto = (t.autopsy||[]).map(a => `<li><span class="at">${a.ts}</span><span>${a.msg}</span></li>`).join('');
+  const open = expandedAuto.has(String(t.ticket));
   return `<tr><td>${(t.open_zeit||"").replace("T"," ").slice(0,16)}</td><td><b>${t.symbol}</b></td>
     <td>${dirTag}</td><td>${t.lots}</td><td>${t.entry}</td><td>${t.sl}</td><td>${t.tp}</td>
     <td>${(t.close_zeit||"").replace("T"," ").slice(0,16) || statusTag}</td><td>${t.exit ?? "—"}</td>
     <td class="${cls(t.gewinn)}">${t.gewinn!=null ? fmt2(t.gewinn) : "—"}</td>
     <td>${t.close_grund || t.grund || ""}</td>
-    <td><button class="autobtn" onclick="_toggleAuto(${i})">⌕</button></td></tr>
-    <tr id="auto-${i}" class="autorow" hidden><td colspan="12"><ul class="autotl">${auto || '<li class="muted">keine Log-Zeilen im Zeitfenster</li>'}</ul></td></tr>`;
+    <td><button class="autobtn" aria-expanded="${open}" aria-label="Autopsie für Ticket ${t.ticket}" onclick="_toggleAuto(${i})">⌕</button></td></tr>
+    <tr id="auto-${i}" class="autorow" ${open ? "" : "hidden"}><td colspan="12"><ul class="autotl">${auto || '<li class="muted">keine Log-Zeilen im Zeitfenster</li>'}</ul></td></tr>`;
 }
 
 function renderEqChart() {
@@ -1682,16 +1913,22 @@ function renderEqChart() {
   if (!ctx) return;
   if (eqChart) eqChart.destroy();
   if (!pts.length) return;
+  // Farben aus dem Design-System (CSS-Tokens), nicht hart kodiert:
+  // die Kurve ist Akzentfarbe, Gitter/Labels Ash/Line.
+  const css = getComputedStyle(document.documentElement);
+  const signal = (css.getPropertyValue("--signal") || "#4da3ff").trim();
+  const ash = (css.getPropertyValue("--ash") || "#7f8899").trim();
+  const line = (css.getPropertyValue("--line") || "#242b36").trim();
   eqChart = new Chart(ctx, {
     type: "line",
     data: { labels: pts.map(p => p.t.slice(5,16).replace("T"," ")),
-      datasets: [{ data: pts.map(p => p.v), borderColor: "#58a6ff",
-        backgroundColor: "rgba(88,166,255,.08)", fill: true, tension: .25,
+      datasets: [{ data: pts.map(p => p.v), borderColor: signal,
+        backgroundColor: signal + "14", fill: true, tension: .25,
         pointRadius: 0, borderWidth: 2 }] },
     options: { responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false } },
-      scales: { x: { ticks: { color: "#8b98a9", maxTicksLimit: 10 }, grid: { color: "#202836" } },
-               y: { ticks: { color: "#8b98a9" }, grid: { color: "#202836" } } } },
+      scales: { x: { ticks: { color: ash, maxTicksLimit: 10 }, grid: { color: line } },
+                y: { ticks: { color: ash }, grid: { color: line } } } },
   });
 }
 
@@ -2019,6 +2256,24 @@ const VIEW = document.body.dataset.view;
 const fmt3 = v => v == null ? "—" : Number(v).toFixed(3);
 const fmtPct = v => v == null ? "—" : (Number(v)*100).toFixed(1) + "%";
 
+// Inline-Meldung statt alert(): bleibt im Dokument, ist screenreader-
+// lesbar (aria-live) und passt zur Terminal-Optik.
+function toast(msg, tone) {
+  let region = document.getElementById("toasts");
+  if (!region) {
+    region = document.createElement("div");
+    region.id = "toasts";
+    region.className = "toasts";
+    region.setAttribute("aria-live", "polite");
+    document.body.appendChild(region);
+  }
+  const el = document.createElement("div");
+  el.className = "toast " + (tone || "info");
+  el.textContent = msg;
+  region.appendChild(el);
+  setTimeout(() => { el.classList.add("bye"); setTimeout(() => el.remove(), 300); }, 4200);
+}
+
 function gateBadge(passed, total) {
   if (passed == null) return '<span class="badge none">n/a</span>';
   const cls = passed === total ? "good" : (passed >= total*0.7 ? "mid" : "bad");
@@ -2042,7 +2297,7 @@ async function loadList() {
       <td>${row.symbol || "—"}</td>
       <td>${gateBadge(row.gates_passed, row.gates_total)}</td>
       <td class="muted" style="max-width:260px">${(row.verdict||"").slice(0,80)}</td>
-      <td><label class="toggle"><input type="checkbox" ${row.enabled?"checked":""} onchange="toggleEnabled('${row.id}', this)"><span class="slider"></span></label></td>
+      <td><label class="toggle" aria-label="${row.key} aktivieren oder deaktivieren"><input type="checkbox" ${row.enabled?"checked":""} onchange="toggleEnabled('${row.id}', this)"><span class="slider"></span></label></td>
       <td>${p.controllable ? (p.running ? '<span class="pos">● läuft</span>' : '<span class="muted">○ gestoppt</span>') : '<span class="muted">keine Live-Config</span>'}</td>
       <td><div class="ctrlrow">
         <button class="btn go" ${startDisabled?"disabled":""} onclick="strategyAction('${row.id}','start',this)">▶</button>
@@ -2059,7 +2314,9 @@ async function toggleEnabled(id, checkbox) {
   try {
     const action = checkbox.checked ? "enable" : "disable";
     await fetch(`/api/strategy/${id}/${action}`, {method: "POST"});
-  } catch (e) { checkbox.checked = !checkbox.checked; }
+    toast(checkbox.checked ? "Strategie aktiviert: erscheint jetzt in der Übersicht" : "Strategie deaktiviert",
+          checkbox.checked ? "ok" : "warn");
+  } catch (e) { checkbox.checked = !checkbox.checked; toast("Fehler: " + e, "err"); }
   checkbox.disabled = false;
   loadList();
 }
@@ -2069,8 +2326,10 @@ async function strategyAction(id, action, btn) {
   try {
     const r = await fetch(`/api/strategy/${id}/${action}`, {method: "POST"});
     const res = await r.json();
-    if (!res.ok) alert(res.error || "Fehler");
-  } catch (e) { alert("Fehler: " + e); }
+    if (!res.ok) toast(res.error || "Fehler", "err");
+    else toast(action === "start" ? "Strategie gestartet" : "Strategie gestoppt",
+               action === "start" ? "ok" : "info");
+  } catch (e) { toast("Fehler: " + e, "err"); }
   setTimeout(() => { VIEW === "list" ? loadList() : loadDetail(VIEW); }, 1500);
 }
 
@@ -2149,6 +2408,10 @@ __BASE_CSS__
   a.rowlink { color: var(--paper); text-decoration: none; font-weight: 600; }
   a.rowlink:hover { color: var(--signal); }
   .pass { color: var(--gain); } .fail { color: var(--loss); }
+  /* Sticky-Header: die Matrix ist lang, der Kopf bleibt beim Scrollen oben.
+     Kein overflow-Container um die Tabelle, sonst wirke Sticky nicht. */
+  .matrixwrap { border: 1px solid var(--line); border-radius: 5px; background: var(--panel); }
+  .matrixwrap thead th { position: sticky; top: 52px; background: var(--panel); z-index: 5; }
 </style>
 </head>
 <body>
@@ -2159,10 +2422,14 @@ __TOPBAR__
 </main>
 <script>
 const fmt3 = v => v == null ? "—" : Number(v).toFixed(3);
+// Farbcodierung nach den Gate-Schwellen aus configs/validation_gates.yaml:
+// PF 1x >= 1.5 (mid ab 1.2), PF 2x >= 1.2 (mid ab 1.0), PF 3x >= 1.0,
+// DSR >= 0.95, PBO < 0.10, WFE-Median > 0.
+const thCls = (v, ok, mid) => v == null ? "" : (ok ? "num-good" : (mid ? "num-mid" : "num-bad"));
 async function load() {
   const r = await fetch("/api/strategies?t=" + Date.now(), {cache: "no-store"});
   const rows = (await r.json()).filter(x => x.has_wfa !== false && x.gates_total);
-  let html = `<div class="tablewrap"><table><thead><tr>
+  let html = `<div class="matrixwrap"><table><thead><tr>
     <th>Strategie</th><th>Symbol</th><th>Gates</th><th>n(OOS)</th><th>PF 1x</th><th>PF 2x</th>
     <th>PF 3x</th><th>WFE-Med</th><th>DSR</th><th>PBO</th><th>Ergebnis</th>
   </tr></thead><tbody>`;
@@ -2173,12 +2440,21 @@ async function load() {
       <td>${row.symbol || "—"}</td>
       <td class="${cls}">${row.gates_passed}/${row.gates_total}</td>
       <td>${row.n_oos ?? "—"}</td>
-      <td>${fmt3(row.pf)}</td><td>${fmt3(row.pf2x)}</td><td>${fmt3(row.pf3x)}</td>
-      <td>${fmt3(row.wfe_median)}</td><td>${fmt3(row.dsr)}</td><td>${fmt3(row.pbo)}</td>
+      <td class="${thCls(row.pf, row.pf >= 1.5, row.pf >= 1.2)}">${fmt3(row.pf)}</td>
+      <td class="${thCls(row.pf2x, row.pf2x >= 1.2, row.pf2x >= 1.0)}">${fmt3(row.pf2x)}</td>
+      <td class="${thCls(row.pf3x, row.pf3x >= 1.0)}">${fmt3(row.pf3x)}</td>
+      <td class="${thCls(row.wfe_median, row.wfe_median > 0)}">${fmt3(row.wfe_median)}</td>
+      <td class="${thCls(row.dsr, row.dsr >= 0.95)}">${fmt3(row.dsr)}</td>
+      <td class="${thCls(row.pbo, row.pbo < 0.10)}">${fmt3(row.pbo)}</td>
       <td class="muted" style="text-align:left;max-width:220px;white-space:normal">${row.verdict || ""}</td>
     </tr>`;
   }
   html += "</tbody></table></div>";
+  html += `<div class="legend">
+    <span><i class="sw good"></i>Gate erfüllt</span>
+    <span><i class="sw mid"></i>nahe an der Schwelle</span>
+    <span><i class="sw bad"></i>Gate verletzt</span>
+  </div>`;
   document.getElementById("app").innerHTML = html;
 }
 load();

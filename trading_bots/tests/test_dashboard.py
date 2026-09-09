@@ -4,7 +4,7 @@ core.connector nur fuer den Typ/lazy connect(), ruft ihn hier nicht auf)."""
 from __future__ import annotations
 
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -56,6 +56,38 @@ def test_bot_stats_filters_by_magic_and_groups_by_position():
     assert stats["winrate"] == 50.0
     assert stats["netto"] == round((0.0 - 1.0 + 650.0 - 2.0) + (0.0 - 1.0 - 300.0), 2)
     assert stats["profit_factor"] == round(647.0 / 301.0, 2)
+
+
+# ---------------------------------------------------------------------------
+# daily_realized
+# ---------------------------------------------------------------------------
+def test_daily_realized_counts_only_today():
+    now = datetime.now(UTC)
+    today_ts = int(now.timestamp())
+    yesterday_ts = int((now - timedelta(days=1)).timestamp())
+    live = {
+        "deals": [
+            _deal(position_id=1, entry=0, profit=0.0, commission=-1.0, time=today_ts),
+            _deal(position_id=1, entry=1, profit=100.0, time=today_ts),
+            _deal(position_id=2, entry=0, profit=0.0, time=yesterday_ts),
+            _deal(position_id=2, entry=1, profit=-50.0, time=yesterday_ts),
+            _deal(position_id=3, entry=0, profit=0.0, time=today_ts),  # noch offen
+        ],
+    }
+    out = dash.daily_realized(live)
+    assert out["daily_realized"] == 99.0  # 100.0 - 1.0 Kommission, nur heute
+    assert out["daily_trades"] == 1
+    assert out["last_close_ts"] == today_ts
+
+
+def test_daily_realized_deals_without_time_do_not_crash():
+    out = dash.daily_realized({"deals": [_deal(entry=1, profit=50.0)]})
+    assert out == {"daily_realized": 0.0, "daily_trades": 0, "last_close_ts": None}
+
+
+def test_daily_realized_empty():
+    assert dash.daily_realized(None) == {"daily_realized": 0.0, "daily_trades": 0, "last_close_ts": None}
+    assert dash.daily_realized({}) == {"daily_realized": 0.0, "daily_trades": 0, "last_close_ts": None}
 
 
 # ---------------------------------------------------------------------------
