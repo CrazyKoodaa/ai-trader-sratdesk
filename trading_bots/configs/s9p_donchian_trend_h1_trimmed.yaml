@@ -1,0 +1,48 @@
+# S9p — S9o (reports/wfa_s9o_donchian_xauusd_h1_moretrades) erreichte
+# 8/10 Gates: n=313 PASS, PF(1x)=1.540 PASS, PF(2x)/PF(3x) PASS,
+# MC-DD=5.79% PASS -- nur DSR (0.887) und PBO (0.629) offen. Fold-Log
+# zeigt: sl_atr_mult=4.0 (12/20) und adx_min=25.0 (13/20) dominieren,
+# aber don_len spreizt sich gleichmaessig ueber 300/400/500 (400 nur
+# 3/20 -- selten Gewinner). sl_atr_mult=3.5 gewann nur 1/20 Mal.
+#
+# Grid getrimmt auf die Werte, die tatsaechlich wiederholt gewinnen
+# (don_len {300,500} statt {300,400,500}, sl_atr_mult {3.0,4.0} statt
+# {3.0,3.5,4.0}, adx_min komplett behalten -- zeigt echte Verteilung
+# ueber alle drei Werte inkl. adx_min=15 in den juengsten,
+# staerksten Folds 17-19). 27 -> 12 Kombos: senkt sowohl die
+# DSR-n_trials-Straf-Groesse (SPEC §7.4, deflated_sharpe(n_trials=
+# Grid-Groesse)) als auch (moeglicherweise, PBO reagierte bisher nicht
+# monoton auf Grid-Groesse) die PBO-Ueberanpassungs-Flaeche, waehrend
+# n(OOS) durch die Beibehaltung von don_len=300 ueber der 300er-Schwelle
+# bleiben sollte.
+strategy: s9_donchian_trend
+symbols:
+  - XAUUSD
+timeframes: [H1]
+
+risk:
+  risk_per_trade_pct: 0.5
+  daily_loss_halt_pct: 0.0
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+params:
+  primary_tf: H1
+  don_len: 500
+  atr_len: 14
+  sl_atr_mult: 4.0
+  trail_atr_mult: 4.0
+  min_rr: 2.0
+  risk_pct: 0.0045
+  adx_min: 25.0
+
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    don_len: [300, 500]
+    sl_atr_mult: [3.0, 4.0]
+    adx_min: [15.0, 20.0, 25.0]
