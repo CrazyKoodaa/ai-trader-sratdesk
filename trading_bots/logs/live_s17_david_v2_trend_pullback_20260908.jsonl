@@ -1,5 +1,0 @@
-{"ts": "2026-09-08T14:22:28.662090+00:00", "event": "startup", "config": "configs/s17_david_v2_trend_pullback_live.yaml", "dry_run": false, "symbols": ["XAUUSD"], "timeframes": ["H4", "D1"]}
-{"ts": "2026-09-08T14:22:28.766857+00:00", "event": "connected", "host": "localhost", "port": 8001}
-{"ts": "2026-09-08T14:22:28.895282+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
-{"ts": "2026-09-08T14:22:28.927504+00:00", "event": "new_bar", "symbol": "XAUUSD", "tf": "H4", "bar": "2026-09-08 09:00:00+00:00"}
-{"ts": "2026-09-08T14:23:28.779440+00:00", "event": "shutdown"}

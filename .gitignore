@@ -222,6 +222,9 @@ __marimo__/
 trading_bots/data/dukascopy_cache/
 trading_bots/data/histdata_cache/
 
+# ai-trader: live trading logs (local only, regenerated each session)
+trading_bots/logs/
+
 # Agent tooling state (local only, not part of the project)
 .agents/
 .claude/

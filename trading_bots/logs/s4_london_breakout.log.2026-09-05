@@ -1,4 +1,0 @@
-2026-09-05 22:12:51,537 [INFO] Live-Loop startet (dry_run=True, Symbole=['USDJPY'])
-2026-09-05 22:12:51,614 [INFO] Kontotyp bestaetigt: DEMO (Konto 111885336, MetaQuotes-Demo)
-2026-09-05 22:12:51,614 [INFO] Verbunden: localhost:8001 (Magic 20260904, dry_run=True)
-2026-09-05 22:12:51,721 [INFO] ♥ Bot laeuft — Equity 100508.27 EUR, 0 Position(en) offen.

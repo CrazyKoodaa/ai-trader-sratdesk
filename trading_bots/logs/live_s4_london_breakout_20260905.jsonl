@@ -1,4 +1,0 @@
-{"ts": "2026-09-05T20:12:51.537650+00:00", "event": "startup", "config": "configs/s4_london_breakout.yaml", "dry_run": true, "symbols": ["USDJPY"], "timeframes": ["H1", "H4", "D1"]}
-{"ts": "2026-09-05T20:12:51.614401+00:00", "event": "connected", "host": "localhost", "port": 8001}
-{"ts": "2026-09-05T20:12:51.721395+00:00", "event": "heartbeat", "equity": 100508.27, "open_positions": 0}
-{"ts": "2026-09-05T20:12:51.871401+00:00", "event": "new_bar", "symbol": "USDJPY", "tf": "H1", "bar": "2026-09-05 17:15:00+00:00"}
