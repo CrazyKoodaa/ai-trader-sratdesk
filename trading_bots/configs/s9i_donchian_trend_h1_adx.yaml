@@ -1,0 +1,51 @@
+# S9i — DonchianTrend XAUUSD H1, Runde 2. Basis: s9h_donchian_trend_h1.yaml
+# (reports/wfa_s9h_donchian_xauusd_h1: n=963 ✓, PBO=0.0 ✓✓, aber PF(1x)=1.11,
+# PF(3x)=0.94 < 1.0, DSR=0.18, MC-DD=21.4% -- roher H1-Breakout ist zu
+# verrauscht). Zwei Fixes gleichzeitig:
+#
+# 1. Grid-Rand-Warnsignal aus s9h behoben: don_len=120 (oberes Ende des
+#    5er-Grids) gewann 17/20 Folds, trail_atr_mult trendete klar zu 4.0 --
+#    klassisches "Parameter am Rand" Overfitting-Symptom (wie bei S2
+#    dokumentiert). Grid nach oben erweitert (80/120/160/200), schwache
+#    untere Werte (20/40/60 bei don_len, 1.5 bei sl_atr_mult, 2.0 bei
+#    trail_atr_mult) entfernt -- weniger Kombos UND kein Rand-Pinning mehr,
+#    falls 120 wirklich das Optimum war (WFO zeigt es dann als Innenpunkt).
+# 2. Neuer ADX-Trend-Regime-Filter (strategies/s9_donchian_trend.py,
+#    `adx_min`, vorher nicht existent) als echte WFO-Dimension: filtert
+#    Choppy-Phasen kausal, je Fold selektiert. adx_min=0 (aus) bleibt im
+#    Grid als Kontroll-Wert -- WFO entscheidet, ob der Filter overhaupt
+#    hilft, statt es anzunehmen (Lehre aus dem gescheiterten S21-ATR-Filter-
+#    Experiment: Post-Hoc-Intuition muss WFO-verifiziert werden, nicht
+#    einfach scharfgeschaltet werden).
+strategy: s9_donchian_trend
+symbols:
+  - XAUUSD
+timeframes: [H1]
+
+risk:
+  risk_per_trade_pct: 0.5
+  daily_loss_halt_pct: 0.0
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+params:
+  primary_tf: H1
+  don_len: 120
+  atr_len: 14
+  sl_atr_mult: 2.0
+  trail_atr_mult: 4.0
+  min_rr: 2.0
+  risk_pct: 0.005
+  adx_min: 0.0
+
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    don_len: [80, 120, 160, 200]
+    sl_atr_mult: [2.0, 2.5]
+    trail_atr_mult: [3.0, 4.0]
+    adx_min: [0.0, 20.0, 25.0]

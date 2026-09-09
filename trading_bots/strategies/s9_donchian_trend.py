@@ -14,12 +14,22 @@ Ergebnis, bevor der Trail zurueckfaellt.
 Symbol-agnostisch, keine Instrument-spezifischen Annahmen (keine Pips,
 keine Session-Fenster) — bewusst so einfach wie moeglich (wenige Parameter
 -> guenstig fuer PBO/Params-Gate) fuer den breiten Multi-Symbol-Test.
+
+Optionaler ADX-Trend-Regime-Filter (``adx_min``, Default 0.0 = aus,
+rueckwaertskompatibel): auf H1 (s. configs/s9h_donchian_trend_h1.yaml)
+erzeugt der rohe Breakout deutlich mehr Fehlausbrueche in Choppy-Phasen
+als auf H4 (verifiziert: reports/wfa_s9h_donchian_xauusd_h1, MC-DD 21.4%,
+DSR 0.18 vs. H4s 8.9%/0.87). ``adx_min`` filtert Bars mit ADX(``atr_len``)
+unter der Schwelle -- kausal (nur abgeschlossene Bars, core/indicators.py
+ist die kanonische ADX-Implementierung), je Fold WFO-selektiert statt
+hindsight-gesetzt.
 """
 from __future__ import annotations
 
 import numpy as np
 import pandas as pd
 
+from core.indicators import adx as _adx
 from strategies.base import Signal, Strategy, atr as _atr
 
 
@@ -39,6 +49,7 @@ class S9DonchianTrend(Strategy):
         self.trail_atr_mult = float(p.get("trail_atr_mult", 3.0))
         self.min_rr = float(p.get("min_rr", 2.0))
         self.risk_pct = float(p.get("risk_pct", 0.005))
+        self.adx_min = float(p.get("adx_min", 0.0))  # 0.0 = aus (Default, rueckwaertskompatibel)
 
         self._window = max(self.don_len, self.atr_len) + 5
 
@@ -66,6 +77,11 @@ class S9DonchianTrend(Strategy):
         a = float(atr_series.iloc[-1])
         if not (a > 0):
             return None
+
+        if self.adx_min > 0:
+            adx_v = float(_adx(win, self.atr_len)["adx"].iloc[-1])
+            if not (adx_v >= self.adx_min):
+                return None
 
         sl = c - direction * self.sl_atr_mult * a
         tp = c + direction * self.min_rr * self.sl_atr_mult * a

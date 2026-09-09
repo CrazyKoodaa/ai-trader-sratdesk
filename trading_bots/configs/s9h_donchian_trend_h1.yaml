@@ -1,0 +1,49 @@
+# S9h — DonchianTrend auf XAUUSD H1 statt H4 (s9_donchian_trend.yaml).
+#
+# Motivation (s. reports/s21_xauusd_pbo_investigation.md "Empfehlung"):
+# S21 GoldReaper (EMA/RSI-Momentum) haengt strukturell bei PBO=0.343 fest
+# (verifiziert: echte Eigenschaft des Signal-Subraums, kein Artefakt) --
+# naechster Kandidat braucht einen GRUNDLEGEND anderen Signal-Mechanismus,
+# nicht nur einen weiteren Filter auf demselben Kern.
+#
+# S9 auf H4 (reports/wfa_s9_xauusd) zeigte bereits die staerkste PF-Zahl
+# der ganzen XAUUSD-Session (PF(1x)=1.751, PF(2x)=1.711, PF(3x)=1.656,
+# alle >= Gate) UND das bisher niedrigste PBO (0.214, naeher an 0.10 als
+# jeder S21-Lauf) -- einziges Strukturproblem: n(OOS)=228 < 300 (H4 +
+# max_concurrent=1 + nur 2021-2026 Fensterbeginn [Donchian-Warmup] liefert
+# schlicht zu wenige Signale). H1 (4x mehr Bars/Zeiteinheit) sollte n(OOS)
+# komfortabel ueber 300 heben, bei strukturell gleichem, einfachem
+# Turtle-Breakout-Mechanismus (Symbol-/TF-agnostischer Code,
+# strategies/s9_donchian_trend.py, unveraendert). don_len-Grid nach oben
+# erweitert (60/80/120 Bars ~ 2.5-5 Tage) als H4-aequivalente Fenster,
+# 20/30 als schnellere Alternative -- WFO entscheidet.
+strategy: s9_donchian_trend
+symbols:
+  - XAUUSD
+timeframes: [H1]
+
+risk:
+  risk_per_trade_pct: 0.5
+  daily_loss_halt_pct: 0.0
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+params:
+  primary_tf: H1
+  don_len: 60
+  atr_len: 14
+  sl_atr_mult: 2.0
+  trail_atr_mult: 3.0
+  min_rr: 2.0
+  risk_pct: 0.005
+
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    don_len: [20, 40, 60, 80, 120]
+    sl_atr_mult: [1.5, 2.0, 2.5]
+    trail_atr_mult: [2.0, 3.0, 4.0]
