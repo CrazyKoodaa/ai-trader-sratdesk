@@ -1,0 +1,44 @@
+# S9o — S9n (reports/wfa_s9n_donchian_xauusd_h1_leaner) war die bisher
+# staerkste XAUUSD-Kandidatur der ganzen Session: PF(1x)=1.579 PASS (der
+# ERSTE PF(1x)-Pass ueberhaupt in dieser Session), PF(2x)/PF(3x) PASS,
+# DSR=0.929 (naeher an 0.95 als je zuvor), MC-DD=5.47% PASS -- aber
+# n(OOS)=291, knapp 9 Trades UNTER der 300er-Schwelle (Gate-Fail), und
+# PBO auf 0.529 gesprungen (schlechter als S9l).
+#
+# Dieser Lauf holt don_len=300 zurueck ins Grid (in S9j/S9k mehrfach
+# Fold-Gewinner, in S9n versehentlich ganz entfernt) -- ein kleinerer
+# Kanal bedeutet mehr Breakout-Gelegenheiten, sollte also mehr Trades
+# liefern, OHNE die inzwischen bewaehrten Dimensionen (adx_min 15/20/25,
+# sl_atr_mult 3.0/3.5/4.0, trail_atr_mult fix 4.0 -- durchgehend
+# dominant seit S9j) aufzugeben.
+strategy: s9_donchian_trend
+symbols:
+  - XAUUSD
+timeframes: [H1]
+
+risk:
+  risk_per_trade_pct: 0.5
+  daily_loss_halt_pct: 0.0
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+params:
+  primary_tf: H1
+  don_len: 400
+  atr_len: 14
+  sl_atr_mult: 3.5
+  trail_atr_mult: 4.0
+  min_rr: 2.0
+  risk_pct: 0.0045
+  adx_min: 20.0
+
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    don_len: [300, 400, 500]
+    sl_atr_mult: [3.0, 3.5, 4.0]
+    adx_min: [15.0, 20.0, 25.0]
