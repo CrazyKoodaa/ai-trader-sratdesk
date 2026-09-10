@@ -1,0 +1,55 @@
+# S9r — DISCIPLINED single-shot: S9q's frozen grid + ONE new causal filter
+# (session_filter, London/NY window). Per reports/s9_xauusd_h1_metaoverfitting_finding.md
+# "Empfehlung 1": each further improvement hypothesis gets exactly ONE run,
+# result accepted as-is, no follow-up regrid based on this run's fold log.
+#
+# Everything except session_filter/session_start_utc/session_end_utc is
+# copied VERBATIM from configs/s9q_donchian_trend_h1_disciplined.yaml (the
+# already-disciplined baseline, 6/10 gates, PBO=0.000) -- don_len/sl_atr_mult/
+# trail_atr_mult/adx_min values are UNCHANGED, so any gate-count delta here
+# is attributable only to the new filter, not to a re-tuned core grid.
+#
+# session_filter values [off, on] and the window 07:00-21:00 UTC are not
+# derived from this session's fold logs -- 07:00-21:00 UTC is SPEC.md's own
+# established convention (S1 "Session 07-17 UTC", S5 "Session 07-21 UTC"),
+# reused here rather than fitted. Hypothesis: XAUUSD H1 breakouts during the
+# Asian session (00:00-07:00 UTC, thin liquidity) revert/fail more often
+# than London/NY breakouts -- excluding them should raise PF/lower MC-DD at
+# the cost of fewer trades (n may drop below 300; that is an honest possible
+# outcome, not grounds to loosen anything after seeing it).
+strategy: s9_donchian_trend
+symbols:
+  - XAUUSD
+timeframes: [H1]
+
+risk:
+  risk_per_trade_pct: 0.5
+  daily_loss_halt_pct: 0.0
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+params:
+  primary_tf: H1
+  don_len: 100
+  atr_len: 14
+  sl_atr_mult: 2.0
+  trail_atr_mult: 3.0
+  min_rr: 2.0
+  risk_pct: 0.005
+  adx_min: 0.0
+  session_filter: "off"
+  session_start_utc: "07:00"
+  session_end_utc: "21:00"
+
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    don_len: [50, 100, 200]
+    sl_atr_mult: [1.5, 2.0, 3.0]
+    trail_atr_mult: [2.0, 3.0, 4.0]
+    adx_min: [0.0, 25.0]
+    session_filter: ["off", "on"]

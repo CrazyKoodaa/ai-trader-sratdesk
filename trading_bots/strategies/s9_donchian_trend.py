@@ -23,6 +23,17 @@ DSR 0.18 vs. H4s 8.9%/0.87). ``adx_min`` filtert Bars mit ADX(``atr_len``)
 unter der Schwelle -- kausal (nur abgeschlossene Bars, core/indicators.py
 ist die kanonische ADX-Implementierung), je Fold WFO-selektiert statt
 hindsight-gesetzt.
+
+Optionaler Session-Filter (``session_filter``, Default "off",
+rueckwaertskompatibel): blendet Breakouts ausserhalb der London/NY-
+Handelszeit aus (kausale Hypothese: Asian-Session-Breakouts auf XAUUSD H1
+haben weniger Liquiditaet hinter sich und reissen haeufiger ab/reverten,
+statt zu laufen). Fenster-Default 07:00-21:00 UTC ist NICHT aus dieser
+Session abgeleitet, sondern SPEC.md's eigene Konvention (identisch zu S1
+"Session 07-17 UTC" / S5 "Session 07-21 UTC") -- wiederverwendet statt neu
+gewaehlt, um Hindsight-Tuning zu vermeiden. Nutzt core/time_engine.py
+``in_session`` (DST-sicher via zoneinfo, hier session="UTC" also ohne
+DST-Verschiebung).
 """
 from __future__ import annotations
 
@@ -30,6 +41,7 @@ import numpy as np
 import pandas as pd
 
 from core.indicators import adx as _adx
+from core.time_engine import in_session as _in_session
 from strategies.base import Signal, Strategy, atr as _atr
 
 
@@ -51,6 +63,10 @@ class S9DonchianTrend(Strategy):
         self.risk_pct = float(p.get("risk_pct", 0.005))
         self.adx_min = float(p.get("adx_min", 0.0))  # 0.0 = aus (Default, rueckwaertskompatibel)
 
+        self.session_filter = str(p.get("session_filter", "off")).strip().lower() in ("on", "true", "yes", "1")
+        self.session_start_utc = str(p.get("session_start_utc", "07:00"))
+        self.session_end_utc = str(p.get("session_end_utc", "21:00"))
+
         self._window = max(self.don_len, self.atr_len) + 5
 
     def on_bar(self, bars: dict[str, pd.DataFrame], i: int) -> Signal | None:
@@ -71,6 +87,9 @@ class S9DonchianTrend(Strategy):
         elif c < lower:
             direction = -1
         else:
+            return None
+
+        if self.session_filter and not _in_session(ts, "UTC", self.session_start_utc, self.session_end_utc):
             return None
 
         atr_series = _atr(win, self.atr_len)

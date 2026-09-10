@@ -235,6 +235,52 @@ def test_adx_filter_allows_when_above_threshold():
 
 
 # --------------------------------------------------------------------------- #
+# Session-Filter (session_filter) -- London/NY-Fenster, kausal via
+# core/time_engine.in_session (s. Docstring der Strategie)
+# --------------------------------------------------------------------------- #
+
+def _shift_to_hour(df: pd.DataFrame, target_hour: int) -> pd.DataFrame:
+    """Verschiebt den gesamten Index um volle Stunden, sodass die LETZTE Bar
+    exakt auf ``target_hour`` UTC faellt (OHLC/Deltas bleiben unveraendert --
+    nur die absolute Uhrzeit der Serie wird gedreht)."""
+    last_hour = df.index[-1].hour
+    delta_hours = (target_hour - last_hour) % 24
+    return df.set_axis(df.index + pd.Timedelta(hours=int(delta_hours)))
+
+
+def test_session_filter_off_by_default():
+    strat = S9DonchianTrend(base_params())
+    assert strat.session_filter is False
+
+
+def test_session_filter_off_fires_regardless_of_hour():
+    df = _shift_to_hour(make_long_breakout(), 2)  # 02:00 UTC -- ausserhalb 07:00-21:00
+    strat = S9DonchianTrend(base_params())  # session_filter default aus
+    assert strat.on_bar({"H1": df}, len(df) - 1) is not None
+
+
+def test_session_filter_on_blocks_outside_window():
+    df = _shift_to_hour(make_long_breakout(), 2)  # 02:00 UTC (Asian-Session)
+    strat = S9DonchianTrend(base_params(session_filter="on"))
+    assert strat.on_bar({"H1": df}, len(df) - 1) is None
+
+
+def test_session_filter_on_allows_inside_window():
+    df = _shift_to_hour(make_long_breakout(), 14)  # 14:00 UTC (London/NY-Overlap)
+    strat = S9DonchianTrend(base_params(session_filter="on"))
+    sig = strat.on_bar({"H1": df}, len(df) - 1)
+    assert sig is not None
+    assert sig.direction == 1
+
+
+def test_session_filter_custom_window():
+    df = _shift_to_hour(make_long_breakout(), 9)  # 09:00 UTC
+    strat = S9DonchianTrend(base_params(
+        session_filter="on", session_start_utc="10:00", session_end_utc="18:00"))
+    assert strat.on_bar({"H1": df}, len(df) - 1) is None  # 09:00 < 10:00 Start
+
+
+# --------------------------------------------------------------------------- #
 # Determinismus (SPEC §1)
 # --------------------------------------------------------------------------- #
 
