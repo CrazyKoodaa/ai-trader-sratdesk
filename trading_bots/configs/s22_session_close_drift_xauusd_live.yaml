@@ -1,0 +1,74 @@
+# S22 — Session-Close-Drift (XAUUSD, H1), LIVE/DEMO-Deploy.
+#
+# Erster XAUUSD-Kandidat in diesem Projekt mit 10/10 Validierungs-Gates
+# (reports/s22_session_close_drift_xauusd_h1.md,
+# reports/wfa_s22b_session_close_drift_xauusd_h1_slgrid/wfa_gates.json):
+# PF(1x)=2.064, PF(3x)=1.013, DSR=1.000, PBO=0.086, MC-DD=2.30%, n=1760
+# OOS-Trades ueber 20 Folds (2015-2026).
+#
+# Parameter-Wahl (ABWEICHUNG von der sonst in diesem Projekt ueblichen
+# "letzter-Fold"-Praxis, s. configs/s21b_goldreaper_momentum_stack_live.yaml
+# Kommentar): dort bewusst der ZULETZT gewaehlte Fold genommen (Momentum-
+# Strategie, Regime-Naehe zaehlt). S22 ist eine reine Kalender-Saisonalitaet
+# ohne Regime-Bezug -- hier ist der MODUS ueber alle 20 unabhaengigen Folds
+# (entry_hour_utc=19, hold_hours=2, sl_atr_mult=3.0, Sieger in 11/20 Folds,
+# s. reports/wfa_s22b_session_close_drift_xauusd_h1_slgrid.log) die robustere
+# Wahl als der jeweils letzte Fold (dessen eigenes OOS-Fenster, Jul-Sep 2026,
+# nur 2 Monate/wenige Trades umfasst und zufaellig PF=0.00 zeigte -- ein
+# Einzelfenster-Rauschen, keine strukturelle Schwaeche, s. Fold-Log).
+strategy: s22_session_close_drift
+symbols:
+  - XAUUSD
+timeframes: [H1]
+
+risk:
+  # Reduziert ggue. dem validierten Backtest (0.5%) fuer den Live-Erststart
+  # (Projekt-Konvention: neue Live-Bots starten kleiner, auch nach vollem
+  # Gate-Pass, s. S21b/S10 -- Live-Ausfuehrung kann Ueberraschungen zeigen,
+  # die der Backtest nicht zeigt). Nach einigen Wochen sauberem Live-Betrieb
+  # auf 0.005 (Backtest-Wert) anhebbar.
+  risk_per_trade_pct: 0.3
+  daily_loss_halt_pct: 0.0
+  eod_flat: false          # wie validiert -- s. Docstring/Report: Freitag-
+  friday_flat: false       # Entries koennen ueber das Wochenende halten
+                            # (echtes, im Backtest korrekt bepreistes Risiko,
+                            # s. reports/s22_session_close_drift_xauusd_h1.md
+                            # Abschnitt 7 -- NICHT hier nachtraeglich gepatcht,
+                            # um vom validierten Setup nicht abzuweichen)
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+params:
+  primary_tf: H1
+  entry_hour_utc: 19
+  hold_hours: 2
+  atr_len: 14
+  sl_atr_mult: 3.0
+  risk_pct: 0.003           # = risk.risk_per_trade_pct oben (siehe s21b: beide synchron halten)
+
+# --- Live (pymt5linux) ---
+# Magic-Registry (configs/*.yaml live.magic + dashboard.py LIVE_CONFIGS):
+# S1=20260901 S2=20260902 S3=20260903 S4=20260904/20260912(XAU) S5=20260905
+# S6=20260906 S7=20260907 S8=20260913 S10-NZDUSD=20260910
+# S21b-GoldReaper=20260911 S17-DavidV2=20260914 S22-SessionCloseDrift=20260915 (neu)
+# Andere Bots auf demselben Konto: David V2 (extern) Magic 100042.
+# Bruecke: WINEPREFIX=~/.mt5 wine "C:\Python313\python.exe" -m pymt5linux
+#          --host localhost --port 8001 "C:\Python313\python.exe" (s. AGENTS.md)
+live:
+  host: localhost
+  port: 8001
+  magic: 20260915
+  poll_seconds: 15                # H1-Strategie, wie S4-XAU/S21b
+  health_interval_seconds: 45
+  heartbeat_seconds: 300
+  history_bars: 200               # > atr_len(14) + Puffer (Strategie-_window=19)
+  logs_dir: logs
+  deviation: 20
+  flatten_on_stop: false          # SIGINT/SIGTERM schliesst NICHT automatisch
+  # SICHERHEITSSCHALTER: Bot verweigert den Start auf einem Echtgeldkonto,
+  # solange dies nicht explizit auf true gesetzt wird (core/live.py:
+  # _enforce_account_safety). Verifiziert 2026-09-10: verbundenes Konto
+  # 111885336 @ MetaQuotes-Demo, trade_mode=0 (DEMO) -- sicher fuer diesen
+  # Default.
+  allow_real_account: false

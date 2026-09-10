@@ -1,0 +1,49 @@
+# S22 — Session-Close-Drift (XAUUSD, H1) — reine Kalender-/Uhrzeit-Wette,
+# entdeckt per deskriptivem Scan (s. strategies/s22_session_close_drift.py
+# Docstring fuer die volle Herleitung + Transparenz-Hinweis zur
+# Hindsight-Entdeckung). Long-only Entry zu ``entry_hour_utc``, Exit nach
+# ``hold_hours`` oder ATR-Stop.
+#
+# WFO-Grid bewusst MAXIMAL BREIT gewaehlt, um die Entdeckungsverzerrung so
+# ehrlich wie moeglich zu testen: ALLE 24 UTC-Stunden als Kandidaten (nicht
+# nur die im Scan auffaellige Stunde 22) -- das Ergebnis steht und faellt
+# mit WFE/PBO/DSR, nicht mit der Deskriptiv-Statistik.
+#
+# UPDATE nach dem ersten Lauf (reports/wfa_s22_session_close_drift_xauusd_h1,
+# 9/10 Gates, einzig PF(3x)=0.995 knapp unter 1.0): sl_atr_mult war im
+# ersten Lauf auf 2.0 fixiert (Kommentar oben, NUR wegen Grid-Groesse/
+# Rechenzeit vorab so geplant -- der erste Lauf brauchte am Ende nur ~90s,
+# das war unnoetige Vorsicht). Jetzt als dritte Dimension nachgeholt, Werte
+# aus Konvention (wie S9q: 1.5/2.0/3.0), NICHT aus dem Ergebnis des ersten
+# Laufs abgeleitet -- entry_hour_utc/hold_hours-Grid UNVERAENDERT. Falls
+# dieser Lauf schlechter/gleich ausfaellt: das Ergebnis steht so, wie es
+# ist, keine dritte Runde.
+strategy: s22_session_close_drift
+symbols:
+  - XAUUSD
+timeframes: [H1]
+
+risk:
+  risk_per_trade_pct: 0.5
+  daily_loss_halt_pct: 0.0
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+params:
+  primary_tf: H1
+  entry_hour_utc: 22
+  hold_hours: 2
+  atr_len: 14
+  sl_atr_mult: 2.0
+  risk_pct: 0.005
+
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    entry_hour_utc: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+    hold_hours: [1, 2, 4]
+    sl_atr_mult: [1.5, 2.0, 3.0]

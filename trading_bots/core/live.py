@@ -58,6 +58,8 @@ _STRATEGY_REGISTRY = {
     "s19_lizard_swing_breakout": ("strategies.s19_lizard_swing_breakout", "S19LizardSwingBreakout"),
     "s20_sgh_momentum_breakout": ("strategies.s20_sgh_momentum_breakout", "S20SghMomentumBreakout"),
     "s21_goldreaper_momentum_stack": ("strategies.s21_goldreaper_momentum_stack", "S21GoldReaperMomentumStack"),
+    "s22_session_close_drift": ("strategies.s22_session_close_drift", "S22SessionCloseDrift"),
+    "s23_engulfing_reversal": ("strategies.s23_engulfing_reversal", "S23EngulfingReversal"),
     "analyze_98946a741100": ("strategies.analyze_98946a741100", "AnalyzeUniversalMacdTrend"),
     "analyze_2166fb052559": ("strategies.analyze_2166fb052559", "AnalyzeXauVelocityF7"),
     "analyze_a3d5ea031833": ("strategies.analyze_a3d5ea031833", "AnalyzeXauVelocityF7Full"),

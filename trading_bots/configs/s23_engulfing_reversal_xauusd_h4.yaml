@@ -1,0 +1,46 @@
+# S23 — Engulfing-Reversal an Donchian-Extremen (XAUUSD, H4) — neuer
+# Signal-Mechanismus (s. strategies/s23_engulfing_reversal.py Docstring):
+# Struktur-Extrem (Donchian) + echtes 2-Kerzen-Engulfing + Volumen-
+# Bestaetigung, alle drei zusammen. H4 gewaehlt als Primaer-TF (wie S14/S15
+# -- reales Tick-Volumen in data/XAUUSD_H4.parquet, S14s eigene Erfahrung:
+# "H4 bleibt die richtige Zeitebene", H1 verwaesserte den Edge dort).
+strategy: s23_engulfing_reversal
+symbols:
+  - XAUUSD
+timeframes: [H4]
+
+risk:
+  risk_per_trade_pct: 0.5
+  daily_loss_halt_pct: 0.0
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+costs:
+  XAUUSD:
+    spread_points: 35
+    commission_per_lot_rt: 0.0
+    slippage_multiplier: 1.0
+
+params:
+  primary_tf: H4
+  don_len: 20
+  atr_len: 14
+  vol_len: 20
+  vol_mult: 1.5
+  sl_atr_buffer: 0.3
+  sl_atr_mult_floor: 1.0
+  trail_atr_mult: 2.5
+  min_rr: 2.0
+  risk_pct: 0.005
+
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    don_len: [10, 20, 40]
+    vol_mult: [1.2, 1.5, 2.0]
+    sl_atr_buffer: [0.2, 0.3, 0.5]
+    min_rr: [1.5, 2.0, 2.5]

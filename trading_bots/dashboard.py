@@ -714,6 +714,10 @@ LIVE_CONFIGS = [
     {"key": "s10_ema_cross_trend", "path": "configs/s10_ema_cross_nzdusd_live.yaml", "symbols": ["NZDUSD"], "magic": 20260910},
     {"key": "s21_goldreaper_momentum_stack", "path": "configs/s21b_goldreaper_momentum_stack_live.yaml", "symbols": ["XAUUSD"], "magic": 20260911},
     {"key": "s17_david_v2_trend_pullback", "path": "configs/s17_david_v2_trend_pullback_live.yaml", "symbols": ["XAUUSD"], "magic": 20260914},
+    # 2026-09-10: erster XAUUSD-Kandidat mit 10/10 Gates (s. reports/
+    # s22_session_close_drift_xauusd_h1.md) — bewusst NICHT in
+    # DEFAULT_ENABLED_KEYS (User aktiviert per Dashboard-Toggle selbst).
+    {"key": "s22_session_close_drift", "path": "configs/s22_session_close_drift_xauusd_live.yaml", "symbols": ["XAUUSD"], "magic": 20260915},
 ]
 
 # Nur diese Keys starten default-aktiviert (aktuell/frueher tatsaechlich
