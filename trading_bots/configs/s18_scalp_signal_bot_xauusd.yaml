@@ -1,0 +1,60 @@
+# S18 — "Scalp Signal Bot 5min v3.0.1" Portierung (XAUUSD, M5) —
+# strategies/s18_scalp_signal_bot.py hat symbol="XAUUSD" schon als
+# Klassendefault (deutet auf urspruengliche Zielwahl hin), aber noch
+# keine Config/keinen WFA-Lauf in diesem Projekt.
+#
+# Struktur-Sweep (Pivot-Hoch/Tief) + Liquidity-Sweep + Reclaim -> Break of
+# Structure. SL = Sweep-Preis +/- Puffer, TP = risk_r x SL-Abstand
+# (Default 1:1). window_days NICHT gesetzt -> volle Historie ("Version B"
+# im Docstring, nicht das Original-Default-7-Tage-Fenster "Version A").
+#
+# Defaults = Strategie-eigene Klassendefaults, nicht aus dieser Session
+# hergeleitet.
+strategy: s18_scalp_signal_bot
+symbols:
+  - XAUUSD
+timeframes: [M5]
+
+risk:
+  risk_per_trade_pct: 0.5
+  daily_loss_halt_pct: 0.0
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+costs:
+  XAUUSD:
+    spread_points: 35
+    commission_per_lot_rt: 0.0
+    slippage_multiplier: 1.0
+
+params:
+  primary_tf: M5
+  pivot_len: 3
+  sweep_lookback: 60
+  sweep_max_age_bars: 12
+  sweep_delay_bars: 1
+  sweep_confirm_mode: close_above
+  use_sweep_entry_delay: true
+  use_reclaim_logic: true
+  cluster_lookback_bars: 20
+  min_sweep_cluster: 2
+  use_atr_buffer: false
+  atr_len: 14
+  atr_mult: 0.15
+  tick_size: 0.01
+  tick_buffer: 10
+  use_long: true
+  use_short: true
+  risk_r: 1.0
+  risk_pct: 0.005
+
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    pivot_len: [2, 3, 5]
+    sweep_max_age_bars: [8, 12, 20]
+    risk_r: [1.0, 1.5, 2.0]

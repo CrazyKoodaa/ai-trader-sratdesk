@@ -10,6 +10,10 @@ Ablauf je Bar des primaeren (Execution-)Timeframes — ``config.timeframes[0]``:
    oder eine feinere Aufloesung (``m1``/``m5``, je nach geladenen Daten): dort
    wird die Bar-fuer-Bar-Reihenfolge von Fill/SL/TP tatsaechlich aufgeloest,
    statt bei einer Kollision in der groben Bar zu raten.
+2c-0. Break-Even-Stop (optional, via ``Signal.meta["be_at_r"]``): einmalig,
+    sobald die guenstige Exkursion ``be_at_r`` x urspruenglicher SL-Abstand
+    erreicht, SL -> Entry +/- ``be_buffer``. Ratchet-only, gleiche
+    Kein-Lookahead-Regel wie Trailing-Stop unten.
 2c. Trailing-Stop (optional, via ``Signal.meta["trail_atr_mult"]``): Chandelier-
     Stil, Ratchet-only (Stop wird nie gelockert), aktualisiert mit der gerade
     geschlossenen Bar, wirkt ab der naechsten Bar — kein Lookahead.
@@ -138,6 +142,17 @@ class _Position:
     # (s. Backtester._resolve_sl_tp). Ohne den SL-Lock waere das wirkungsgleich
     # mit "gar kein TP" — ein Rueckschlag koennte den Gewinn wieder auffressen.
     tp_converts_to_trail: bool = False
+    # Break-Even-Stop (optional via Signal.meta["be_at_r"]): 0 = aus. Sobald
+    # die guenstige Exkursion (Bar High/Low) ``be_at_r`` x den URSPRUENGLICHEN
+    # SL-Abstand (bei Entry, NICHT den ggf. schon nachgezogenen aktuellen SL)
+    # erreicht, wird der SL EINMALIG auf Entry +/- ``be_buffer`` gezogen
+    # (Ratchet: nur wenn das eine Verbesserung ist). Kombinierbar mit
+    # Trailing-Stop (beide ratchet-only, s. run() Schritt 2c) — welcher davon
+    # tatsaechlich den SL haelt, ist einfach der jeweils guenstigere Wert.
+    be_at_r: float = 0.0
+    be_buffer: float = 0.0
+    be_triggered: bool = False
+    initial_risk_dist: float = 0.0
 
 
 @dataclass
@@ -265,6 +280,9 @@ class Backtester:
             trail_atr_len=int(meta.get("trail_atr_len", 14) or 14),
             trail_extreme=fill,
             tp_converts_to_trail=bool(meta.get("tp_converts_to_trail", False)),
+            be_at_r=float(meta.get("be_at_r", 0.0) or 0.0),
+            be_buffer=float(meta.get("be_buffer", 0.0) or 0.0),
+            initial_risk_dist=abs(fill - sl),
         )
 
     # -- Exit ---------------------------------------------------------------------
@@ -578,6 +596,29 @@ class Backtester:
                         # Exit-Zeit = Bar-Close (Touch-Zeitpunkt intrabar unbekannt)
                         trades.append(self._close_position(pos, raw, t_close, reason, is_market))
                 positions = survivors
+
+            # 2c-0) Break-Even-Stop (optional via Signal.meta["be_at_r"]) —
+            # gleiches Causal-Prinzip wie Trailing-Stop unten: nutzt diese
+            # (jetzt geschlossene) Bar, wirkt ab der naechsten. Einmalig pro
+            # Position (``be_triggered``), Ratchet-only (nur wenn der neue SL
+            # eine Verbesserung waere) — kann daher NIE hinter einen bereits
+            # weiter nachgezogenen Trailing-Stop zurueckfallen.
+            for pos in positions:
+                if pos.be_at_r <= 0 or pos.be_triggered or pos.initial_risk_dist <= 0:
+                    continue
+                trigger_dist = pos.be_at_r * pos.initial_risk_dist
+                if pos.direction > 0:
+                    if h >= pos.entry + trigger_dist:
+                        candidate = pos.entry + pos.be_buffer
+                        if candidate > pos.sl:
+                            pos.sl = candidate
+                        pos.be_triggered = True
+                else:
+                    if l <= pos.entry - trigger_dist:
+                        candidate = pos.entry - pos.be_buffer
+                        if candidate < pos.sl:
+                            pos.sl = candidate
+                        pos.be_triggered = True
 
             # 2c) Trailing-Stop-Update — NACH der SL/TP-Pruefung dieser Bar,
             # mit dieser (jetzt geschlossenen) Bar; wirkt erst ab der naechsten

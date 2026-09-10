@@ -752,3 +752,94 @@ class TestTrailingStop:
         res = Backtester(NoTrailStrategy(), cfg, {"M5": make_df(self.BARS)}).run()
         assert len(res.trades) == 1
         assert res.trades.iloc[0]["meta"]["exit_reason"] == "end_of_data"
+
+
+# ---------------------------------------------------------------------------
+# Break-Even-Stop (meta["be_at_r"])
+# ---------------------------------------------------------------------------
+class BeStrategy:
+    """Long-Signal bei i==2, weit entfernter SL=90 (Entry@100 -> Risiko=10),
+    optional be_at_r/be_buffer aus ``be_meta``."""
+    name = "be"
+    required_timeframes = ["M5"]
+
+    def __init__(self, params=None, be_meta=None):
+        self.params = params or {}
+        self.be_meta = be_meta or {}
+
+    def on_bar(self, bars, i):
+        if i == 2:
+            return Signal(time=bars["M5"].index[i], symbol="TEST", direction=1,
+                          entry_type="market", entry_price=None,
+                          stop_loss=90.0, take_profit=None, risk_pct=1.0,
+                          meta=dict(self.be_meta))
+        return None
+
+
+class TestBreakEvenStop:
+    # Entry @100 (Open i3), SL=90 (Risiko=10). be_at_r=1.0 -> Trigger bei
+    # High >= 100+1.0*10=110. i4 High=112 loest die Bewegung aus; SL wird
+    # NACH der SL/TP-Pruefung von i4 auf Entry (100, be_buffer=0) gezogen
+    # -- wirkt erst ab i5. i5 Low=99 <= 100 -> Exit @ 100 (Breakeven), NICHT
+    # beim urspruenglichen SL=90 (das waere ein Verlust gewesen, da 99 > 90
+    # gar keinen SL-Touch ausgeloest haette -- die Position waere ohne BE an
+    # dieser Stelle offen geblieben, s. test_be_disabled_by_default_no_move).
+    BARS = [
+        (100, 101, 99, 100),   # i0
+        (100, 101, 99, 100),   # i1
+        (100, 101, 99, 100),   # i2 -> Signal
+        (100, 101, 99, 100),   # i3 Entry @ Open=100
+        (100, 112, 100, 110),  # i4 High=112 >= 110 -> BE triggert, SL->100 ab i5
+        (110, 111, 99, 100),   # i5 Low=99 <= 100 -> Exit @ 100 (BE), nicht 90
+    ]
+
+    def test_be_moves_sl_to_entry_once_triggered(self):
+        cfg = base_config(CostModel(0.0))
+        strat = BeStrategy(be_meta={"be_at_r": 1.0})
+        res = Backtester(strat, cfg, {"M5": make_df(self.BARS)}).run()
+        assert len(res.trades) == 1
+        tr = res.trades.iloc[0]
+        assert tr["meta"]["exit_reason"] == "sl"
+        assert tr["exit"] == pytest.approx(100.0)  # Breakeven, nicht 90
+        assert tr["pnl"] == pytest.approx(0.0)      # kostenfrei -> exakt 0
+
+    def test_be_buffer_offsets_from_entry(self):
+        cfg = base_config(CostModel(0.0))
+        strat = BeStrategy(be_meta={"be_at_r": 1.0, "be_buffer": 0.5})
+        res = Backtester(strat, cfg, {"M5": make_df(self.BARS)}).run()
+        assert len(res.trades) == 1
+        tr = res.trades.iloc[0]
+        assert tr["exit"] == pytest.approx(100.5)  # Entry + Buffer
+        assert tr["pnl"] > 0  # kleiner Gewinn statt exaktem Breakeven
+
+    def test_be_disabled_by_default_no_move(self):
+        # Gleiches Szenario OHNE be_at_r -> SL bleibt bei 90, i5s Low=99
+        # beruehrt 90 nicht -> Position bleibt offen (end_of_data statt sl).
+        cfg = base_config(CostModel(0.0))
+        strat = BeStrategy(be_meta={})
+        res = Backtester(strat, cfg, {"M5": make_df(self.BARS)}).run()
+        assert len(res.trades) == 1
+        tr = res.trades.iloc[0]
+        assert tr["meta"]["exit_reason"] == "end_of_data"
+
+    def test_be_is_ratchet_only_never_worsens_active_trail(self):
+        # Trailing-Stop UND Break-Even gleichzeitig aktiv: der Trail zieht
+        # bei i4 (TR-Ausbruch) den SL bereits ueber das BE-Niveau hinaus --
+        # der BE-Schritt (der zeitlich zuerst laeuft, s. Code-Kommentar
+        # "2c-0") darf das NICHT zurueckziehen (Ratchet-Vergleich).
+        bars = [
+            (100, 101, 99, 100),   # i0 (ATR2-Seed)
+            (100, 101, 99, 100),   # i1 (ATR2-Seed)
+            (100, 101, 99, 100),   # i2 -> Signal
+            (100, 101, 99, 100),   # i3 Entry @100; trail=101-2=99 ab i4
+            (100, 112, 100, 110),  # i4 TR=12 -> ATR=(2*1+12)/2=7; trail=112-7=105
+                                    #    UND High=112>=110 -> BE will SL auf 100 setzen
+            (110, 111, 96, 100),   # i5 Low=96 -- ueber 100 (BE) UND unter 105 (Trail) läge
+                                    #    dazwischen; Trail(105) ist strenger -> Exit dort
+        ]
+        cfg = base_config(CostModel(0.0))
+        strat = BeStrategy(be_meta={"be_at_r": 1.0, "trail_atr_mult": 1.0, "trail_atr_len": 2})
+        res = Backtester(strat, cfg, {"M5": make_df(bars)}).run()
+        assert len(res.trades) == 1
+        tr = res.trades.iloc[0]
+        assert tr["exit"] == pytest.approx(105.0)  # Trail (staerker), nicht BE (100)

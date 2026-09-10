@@ -1,0 +1,52 @@
+# S13 — VWAP-Abweichungs-Fade-Scalp (XAUUSD, M5) — bisher nur EURJPY-
+# Default in strategies/s13_vwap_fade_scalp.py, noch keine XAUUSD-
+# Config/kein WFA-Lauf in diesem Projekt. Preis weicht >= dev_atr_mult x
+# ATR vom Tages-VWAP ab -> Fade zurueck Richtung VWAP, fixer ATR-Stop/TP,
+# Session-Fenster 07:00-20:00 UTC (Strategie-Default).
+#
+# XAUUSD_M5 (data/) hat tick_volume=0 durchgaengig (bekannte, bereits in
+# S8/S12/S13-Docstrings dokumentierte Projekt-Einschraenkung) -> VWAP
+# faellt automatisch auf TWAP zurueck (im Code selbst schon so behandelt,
+# kein neuer Bug).
+#
+# Defaults = Strategie-eigene Klassendefaults, nicht aus dieser Session
+# hergeleitet.
+strategy: s13_vwap_fade_scalp
+symbols:
+  - XAUUSD
+timeframes: [M5]
+
+risk:
+  risk_per_trade_pct: 0.5
+  daily_loss_halt_pct: 0.0
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+costs:
+  XAUUSD:
+    spread_points: 35
+    commission_per_lot_rt: 0.0
+    slippage_multiplier: 1.0
+
+params:
+  primary_tf: M5
+  dev_atr_mult: 1.5
+  atr_len: 14
+  sl_atr_mult: 1.0
+  tp_atr_mult: 1.0
+  time_exit_bars: 12
+  cooldown_bars: 3
+  sess_start: "07:00"
+  sess_end: "20:00"
+  risk_pct: 0.005
+
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    dev_atr_mult: [1.0, 1.5, 2.0]
+    sl_atr_mult: [0.75, 1.0, 1.5]
+    tp_atr_mult: [1.0, 1.5, 2.0]

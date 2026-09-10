@@ -66,6 +66,12 @@ class S13VwapFadeScalp(Strategy):
         self.sess_start = p.get("sess_start", "07:00")
         self.sess_end = p.get("sess_end", "20:00")
         self.risk_pct = float(p.get("risk_pct", 0.005))
+        # Optional Break-Even/Trail (core/backtester.py meta["be_at_r"]/
+        # ["trail_atr_mult"], Default 0.0 = aus, rueckwaertskompatibel):
+        # laesst Gewinner laufen statt am fixen tp_atr_mult-Ziel zu kappen.
+        self.be_at_r = float(p.get("be_at_r", 0.0))
+        self.be_buffer_atr = float(p.get("be_buffer_atr", 0.0))
+        self.trail_atr_mult = float(p.get("trail_atr_mult", 0.0))
 
         self._atr = _WilderATR(self.atr_len)
         self._day = None
@@ -117,10 +123,17 @@ class S13VwapFadeScalp(Strategy):
         sl = c - direction * self.sl_atr_mult * atr_val
         tp = c + direction * self.tp_atr_mult * atr_val
         self._cool_until = ts + pd.Timedelta(minutes=self._bar_minutes * self.cooldown_bars)
+        meta = {"time_exit_bars": self.time_exit_bars, "vwap": vwap, "dev_atr": dev, "atr": atr_val}
+        if self.be_at_r > 0:
+            meta["be_at_r"] = self.be_at_r
+            meta["be_buffer"] = self.be_buffer_atr * atr_val
+        if self.trail_atr_mult > 0:
+            meta["trail_atr_mult"] = self.trail_atr_mult
+            meta["trail_atr_len"] = self.atr_len
         return Signal(
             time=ts, symbol=self.symbol, direction=direction,
             entry_type="market", entry_price=None,
             stop_loss=sl, take_profit=tp, risk_pct=self.risk_pct,
-            meta={"time_exit_bars": self.time_exit_bars, "vwap": vwap, "dev_atr": dev, "atr": atr_val},
+            meta=meta,
             expires_bars=0,
         )

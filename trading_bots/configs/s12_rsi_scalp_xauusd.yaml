@@ -1,0 +1,49 @@
+# S12 — RSI-Extrem-Scalp (XAUUSD, M5) — bisher nur EURJPY-Default in
+# strategies/s12_rsi_scalp.py, noch keine XAUUSD-Config/kein WFA-Lauf in
+# diesem Projekt. Mean-Reversion-Scalp: kurzes RSI faellt unter
+# rsi_oversold -> Long / steigt ueber rsi_overbought -> Short, fixer
+# ATR-Stop/TP (kein Trailing), Time-Exit als Sicherheitsnetz.
+#
+# Defaults = Strategie-eigene Klassendefaults (rsi_len=5, 20/80,
+# sl=1.0xATR, tp=1.2xATR, time_exit=12 Bars, cooldown=3 Bars) --
+# NICHT aus dieser Session hergeleitet.
+strategy: s12_rsi_scalp
+symbols:
+  - XAUUSD
+timeframes: [M5]
+
+risk:
+  risk_per_trade_pct: 0.5
+  daily_loss_halt_pct: 0.0
+  eod_flat: false
+  friday_flat: false
+  max_concurrent: 1
+  streak_limiter: 0
+  prop_profile: none
+
+costs:
+  XAUUSD:
+    spread_points: 35
+    commission_per_lot_rt: 0.0
+    slippage_multiplier: 1.0
+
+params:
+  primary_tf: M5
+  rsi_len: 5
+  rsi_oversold: 20.0
+  rsi_overbought: 80.0
+  atr_len: 14
+  sl_atr_mult: 1.0
+  tp_atr_mult: 1.2
+  time_exit_bars: 12
+  cooldown_bars: 3
+  risk_pct: 0.005
+
+wfo:
+  is_months: 24
+  oos_months: 6
+  param_space:
+    rsi_len: [3, 5, 7]
+    rsi_oversold: [15.0, 20.0, 25.0]
+    sl_atr_mult: [0.75, 1.0, 1.5]
+    tp_atr_mult: [1.0, 1.2, 1.5]
